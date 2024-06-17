@@ -1,0 +1,79 @@
+/* 
+    Explicación de Unidades de Medida Utilizadas
+    px (píxeles): Unidad de medida absoluta, no se ha usado en este ejemplo pero se puede usar para tamaños fijos.
+    em: Relativo al tamaño de fuente del elemento padre. Usado en font-size de card-title y padding de card-button.
+    rem: Relativo al tamaño de fuente raíz (generalmente el tamaño de fuente del html). Usado en margin-bottom de card-title y card-description.
+    %: Relativo al tamaño del elemento contenedor. Usado en width de card.
+    vw/vh: Relativo al viewport. Usado en height de body para centrar la tarjeta verticalmente.
+*/
+html{
+    font-size:16px
+}
+
+body, h1, p{
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    text-shadow: 0 0px 3px rgb(0, 0, 0);
+    font-size: 2rem;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+/* Estilos para la tarjeta */
+.card {
+    width: 80%;
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.295);
+    padding: 3rem;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.5em; /* em basado en el tamaño de fuente del elemento padre */
+    margin-bottom: 1rem; /* rem basado en el tamaño de fuente raíz */
+}
+
+.card-description {
+    font-size: 1rem;
+    margin-bottom: 2rem; /* rem */
+}
+
+.card-button {
+    font-size: 1rem;
+    padding: 0.5em 2em; /* em */
+    background-color: #ffffffc4;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    border: solid 2px #464646;
+}
+
+.card-button:hover {
+    background-color: #464646;
+    color: #fff;
+}
+
+.card img {
+    border-radius: 5%;
+    width: 100%; 
+    height: auto;
+    max-width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card img:hover {
+    box-shadow: 0 4px 8px rgba(136, 10, 10, 0.719);
+}
+
