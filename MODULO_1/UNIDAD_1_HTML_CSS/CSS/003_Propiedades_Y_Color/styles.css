@@ -1,0 +1,49 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.cta-container {
+    background-image: url('https://cdn.pixabay.com/photo/2020/09/04/12/32/kayak-5543935_960_720.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.cta-text h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 4px 2px rgba(129, 31, 31, 0.959);
+}
+
+.cta-text p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: white;
+    text-shadow: 4px 2px rgba(129, 31, 31, 0.959);
+}
+
+.cta-button {
+    background-color: #110e3ac5;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-shadow: 4px 2px rgba(129, 31, 31, 0.959);
+}
+
+.cta-button:hover {
+    background-color: #965f11c5;
+}
