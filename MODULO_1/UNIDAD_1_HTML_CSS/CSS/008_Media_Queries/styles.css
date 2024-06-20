@@ -1,0 +1,233 @@
+/* Reset básico */
+body, h1, p, button {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f4f8;
+}
+
+/* 
+    Contenedor principal de la tarjeta de perfil. 
+    Utiliza flexbox para alinear los elementos en columna de forma predeterminada.
+*/
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Estilos para la imagen de perfil */
+.profile-image img {
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    width:110px
+}
+
+/* Contenedor para la información del perfil */
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilos para el nombre del perfil */
+.profile-name {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+/* Estilos para la descripción del perfil */
+.profile-description {
+    color: rgb(100, 100, 100);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Estilos para el botón del perfil */
+.profile-button {
+    background-color: hsl(220, 90%, 56%);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-button:hover {
+    background-color: hsl(220, 90%, 46%);
+}
+
+/* Media Queries para adaptar el diseño a diferentes tamaños de pantalla */
+
+/* 
+    Móviles (Vertical): pantallas con un ancho máximo de 480px.
+    - Cambia el color de fondo de la tarjeta a rojo.
+    - Reduce el tamaño de fuente del nombre y la descripción.
+    - Cambia el color de fondo del botón a verde.
+*/
+@media (max-width: 480px) {
+    .profile-card {
+        background-color: #ff6b6b;
+    }
+    .profile-name {
+        font-size: 1.2rem;
+    }
+    .profile-description {
+        font-size: 0.8rem;
+    }
+    .profile-button {
+        background-color: #4ecdc4;
+    }
+}
+
+/* 
+    Móviles (Horizontal): pantallas con un ancho entre 481px y 767px.
+    - Cambia el color de fondo de la tarjeta a verde.
+    - Cambia la dirección del flexbox a fila, colocando la imagen a la izquierda y la información a la derecha.
+    - Alinea la información del perfil al principio de la línea.
+    - Cambia el color de fondo del botón a amarillo.
+*/
+@media (min-width: 481px) and (max-width: 767px) {
+    .profile-card {
+        background-color: #4ecdc4;
+        flex-direction: row;
+        text-align: left;
+    }
+    .profile-image {
+        margin-right: 1rem;
+    }
+    .profile-info {
+        align-items: flex-start;
+    }
+    .profile-button {
+        background-color: #ffe66d;
+    }
+}
+
+/* 
+    Tabletas (Vertical): pantallas con un ancho entre 768px y 1024px.
+    - Cambia el color de fondo de la tarjeta a amarillo.
+    - Aumenta el tamaño de fuente del nombre y la descripción.
+    - Cambia el color de fondo del botón a rojo.
+*/
+@media (min-width: 768px) and (max-width: 1024px) {
+    .profile-card {
+        background-color: #ffe66d; 
+    }
+    .profile-name {
+        font-size: 2rem;
+    }
+    .profile-description {
+        font-size: 1.2rem;
+    }
+    .profile-button {
+        background-color: #ff6b6b; 
+    }
+}
+
+/* 
+    Tabletas (Horizontal): pantallas con un ancho entre 1025px y 1279px.
+    - Cambia el color de fondo de la tarjeta a azul oscuro.
+    - Cambia la dirección del flexbox a fila, colocando la imagen a la izquierda y la información a la derecha, con espacio entre ellos.
+    - Alinea la información del perfil al principio de la línea.
+    - Cambia el color de fondo del botón a rojo.
+*/
+@media (min-width: 1025px) and (max-width: 1279px) {
+    .profile-card {
+        background-color: #1a535c;
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+    }
+    .profile-image {
+        margin-right: 2rem;
+    }
+    .profile-info {
+        align-items: flex-start;
+    }
+    .profile-button {
+        background-color: #ff6b6b;
+    }
+}
+
+/* 
+    Desktops: pantallas con un ancho entre 1280px y 1919px.
+    - Cambia el color de fondo de la tarjeta a verde.
+    - Cambia la dirección del flexbox a columna, colocando la imagen arriba y la información abajo, centrados.
+    - Aumenta el tamaño de fuente del nombre y la descripción.
+    - Cambia el color de fondo del botón a amarillo.
+*/
+@media (min-width: 1280px) and (max-width: 1919px) {
+    .profile-card {
+        background-color: #4ecdc4;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .profile-name {
+        font-size: 2.5rem;
+    }
+    .profile-description {
+        font-size: 1.5rem;
+    }
+    .profile-button {
+        background-color: #ffe66d; 
+    }
+}
+
+/* 
+    Desktops Muy Grandes: pantallas con un ancho mínimo de 1920px.
+    - Cambia el color de fondo de la tarjeta a amarillo.
+    - Cambia la dirección del flexbox a fila, colocando la imagen a la izquierda y la información a la derecha, con espacio alrededor.
+    - Alinea la información del perfil al principio de la línea.
+    - Cambia el color de fondo del botón a azul oscuro.
+*/
+@media (min-width: 1920px) {
+    .profile-card {
+        background-color: #ffe66d; 
+        flex-direction: row;
+        justify-content: space-around;
+        text-align: left;
+    }
+    .profile-image {
+        margin-right: 2rem;
+    }
+    .profile-info {
+        align-items: flex-start;
+    }
+    .profile-button {
+        background-color: #1a535c; 
+    }
+}
+
+/* 
+    Retina: pantallas de alta resolución.
+    - Aumenta la intensidad de la sombra de la tarjeta.
+    - Agrega un borde al botón.
+*/
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .profile-card {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .profile-button {
+        border: 2px solid #fff;
+    }
+}
