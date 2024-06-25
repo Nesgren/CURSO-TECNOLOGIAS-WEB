@@ -1,0 +1,25 @@
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.gallery img {
+    float: left;
+    width: 30%;
+    min-width: 280px;
+    margin: 1%;
+}
+
+@media (max-width: 1200px) {
+    .gallery img {
+        width: 48%;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery img {
+        width: 100%;
+    }
+}

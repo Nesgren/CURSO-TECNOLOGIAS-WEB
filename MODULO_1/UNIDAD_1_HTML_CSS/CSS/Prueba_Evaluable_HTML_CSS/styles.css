@@ -1,0 +1,256 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #555;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    max-width: 30rem;
+}
+
+.profile-image img {
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    width: 110px;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-name,
+.profile-description,
+.profile-button {
+    transition: all 0.3s ease;
+}
+
+.profile-name {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.profile-description {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.profile-button {
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    cursor: pointer;
+}
+
+.profile-button:hover {
+    background-color: #333;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+header .logo img {
+    width: 5rem;
+    height: 5rem;
+    margin-right: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 1rem;
+    background-color: #b3bb6a;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.bienvenida {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42rem;
+    
+}
+
+.sidebar {
+    background-color: #ffffff;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 20%;
+    right: 1rem;
+    z-index: 1000;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li img {
+    width: 2rem;
+    height: 2rem;
+    padding: 0.6rem;
+    cursor: pointer;
+    border: solid 1px #333;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar ul li img:hover {
+    background-color: #b3bb6a;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.formulario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42rem;
+}
+
+form {
+    width: 100%;
+}
+
+.form-wrapper {
+    width: 50rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #eeeeed;
+    padding: 2rem;
+    margin: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #333;
+    outline: none;
+}
+
+.button-container {
+    text-align: right;
+}
+
+form button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #555;
+}
+
+@media (max-width: 768px) {
+    .profile-card {
+        width: 100%;
+    }
+
+    .sidebar {
+        display: none;
+    }
+}
