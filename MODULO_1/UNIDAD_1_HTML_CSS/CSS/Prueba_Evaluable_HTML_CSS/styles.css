@@ -77,6 +77,8 @@ h2 {
     gap: 20px;
     padding: 20px;
     box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
 }
 
 .container {
