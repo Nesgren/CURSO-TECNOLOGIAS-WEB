@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Botón de Alerta</title>
     <style>
         .alert-button {
-            background-color: #4CAF50;
+            background-color: #af4c4c;
             border: none;
             color: white;
             padding: 15px 32px;
@@ -18,14 +19,24 @@
             cursor: pointer;
             border-radius: 12px;
         }
+
         .alert-button:hover {
-            background-color: #45a049;
+            background-color: #a0457a;
         }
     </style>
 </head>
+
 <body>
 
-    <button class="alert-button" onclick="alert('¡HOLA MUNDO!')">Click Aquí</button>
+    <button class="alert-button" onclick="alert('¡Hola Mundo!')">Click Aquí</button>
+
+    <script>
+        var button = document.querySelector("button");
+        button.addEventListener("mouseleave", function () {
+            alert("¡Adios Mundo!");
+        });
+    </script>
 
 </body>
+
 </html>
