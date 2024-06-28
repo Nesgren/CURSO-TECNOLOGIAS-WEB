@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipos de datos y variables</title>
+</head>
+
+<body>
+    <script>
+    var numeroEntero = 5;
+    var numeroDecimal = 3.14;
+    var numeroNegativo = -10;
+
+    console.log("Número Entero:", numeroEntero);
+    console.log("Número Decimal:", numeroDecimal);
+    console.log("Número Negativo:", numeroNegativo);
+    console.log("Tipo: ", typeof numeroEntero);
+    console.log("Tipo: ", typeof numeroDecimal);
+    console.log("Tipo: ", typeof numeroNegativo);
+
+    document.write(`<p>Número Entero: ${numeroEntero} (Tipo de Dato: ${typeof numeroEntero})</p>`);
+    document.write(`<p>Número Decimal: ${numeroDecimal} (Tipo de Dato: ${typeof numeroDecimal})</p>`);
+    document.write(`<p>Número Negativo: ${numeroNegativo} (Tipo de Dato: ${typeof numeroNegativo})</p>`);
+
+    // String: Representa datos de texto
+    var saludo = 'Hola';
+    var despedida = "Mundo";
+
+    console.log("Saludo:", saludo);
+    console.log("Despedida:", despedida);
+    console.log("Tipo: ", typeof saludo);
+    console.log("Tipo: ", typeof despedida);
+
+    document.write(`<p>Saludo: ${saludo} (Tipo de Dato: ${typeof saludo})</p>`);
+    document.write(`<p>Despedida: ${despedida} (Tipo de Dato: ${typeof despedida})</p>`);
+
+    // Boolean: Representa un valor lógico (true o false)
+    var esVerdadero = true;
+    var esFalso = false;
+
+    console.log("Es Verdadero:", esVerdadero);
+    console.log("Es Falso:", esFalso);
+    console.log("Tipo: ", typeof esFalso);
+    console.log("Tipo: ", typeof esVerdadero);
+
+    document.write(`<p>Es Verdadero: ${esVerdadero} (Tipo de Dato: ${typeof esVerdadero})</p>`);
+    document.write(`<p>Es Falso: ${esFalso} (Tipo de Dato: ${typeof esFalso})</p>`);
+
+    // Null: Representa la ausencia intencional de cualquier valor
+    var valorNulo = null;
+
+    console.log("Valor Nulo:", valorNulo);
+    console.log("Tipo: ", typeof valorNulo);
+
+    document.write(`<p>Valor Nulo: ${valorNulo} (Tipo de Dato: ${typeof valorNulo})</p>`);
+
+    // Undefined: Representa un valor no definido
+    var valorNoDefinido;
+
+    console.log("Valor No Definido:", valorNoDefinido);
+    console.log("Tipo: ", typeof valorNoDefinido);
+
+    document.write(`<p>Valor No Definido: ${valorNoDefinido} (Tipo de Dato: ${typeof valorNoDefinido})</p>`);
+
+        // Tipos No Primitivos
+        // Array
+        var arr = ["pera", "manzana", "Plátano"];
+        console.log(arr)
+        console.log("Tipo: ", typeof arr)
+        let fruta1 = arr[0]
+        let fruta2 = arr[1]
+        let fruta3 = arr[2]
+        console.log(fruta1,fruta2,fruta3)
+
+        // Objeto
+        var obj = { 
+            "nombre": "Pepe", 
+            "apellido": "García" 
+        }
+        console.log(obj)
+        console.log("Tipo: ", typeof obj)
+        let nombre = obj.nombre;
+        let apellido = obj.apellido
+        console.leg = (nombre, apellido)
+    </script>
+</body>
+
+</html>
