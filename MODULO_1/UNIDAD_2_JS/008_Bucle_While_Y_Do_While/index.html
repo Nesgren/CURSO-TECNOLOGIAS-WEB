@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demostración de while y do while</title>
+</head>
+
+<body>
+    <script>
+        // --- WHILE -- //
+        let i = 0;
+        while (i < 10) {
+            console.log(i);
+            i++;
+        }
+        // --- DO WHILE -- //
+        do {
+            console.log(i);
+            i--;
+        } while (i > 0);
+
+        // Ejemplo con while
+        document.write("<strong>Ejemplo con while:</strong><br>");
+        let x = 10;
+        while (x <= 5) {
+            document.write("Dentro del bucle while: " + x + "<br>");
+            x++;
+        }
+        document.write("Después del bucle while: " + x + "<br><br>");
+
+        // Ejemplo con do while
+        document.write("<strong>Ejemplo con do while:</strong><br>");
+        let y = 10;
+        do {
+            document.write("Dentro del bucle do while: " + y + "<br>");
+            y++;
+        } while (y <= 5);
+        document.write("Después del bucle do while: " + y + "<br>");
+    </script>
+</body>
+
+</html>
