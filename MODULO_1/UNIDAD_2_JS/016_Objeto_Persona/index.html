@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objeto Persona</title>
+</head>
+
+<body>
+    <div id="mostrar-persona"></div>
+    <div id="persona-modificada"></div>
+
+    <script>
+        const persona = {
+            nombre: "Juan",
+            apellido: "Nadie",
+            edad: 50,
+            ojosColor: {
+                izquierdo: "Verde",
+                derecho: "Azul"
+            },
+            altura: 1.80
+        };
+
+        const imprimirDatos = ({ nombre, apellido, edad, altura, ojosColor: { izquierdo, derecho } }) => 
+            `Hola ${nombre} ${apellido}, tu edad es de 
+            ${edad} años y mides ${altura} m. 
+            Eres como Bowie porque tienes el ojo izquierdo ${izquierdo} y el derecho ${derecho}. Bienvenido!!`;
+        
+        document.getElementById("mostrar-persona").innerText = imprimirDatos(persona);
+        
+        persona.nombre = "Franco";
+        persona.ojosColor.derecho = "Marrón";
+        
+        document.getElementById("persona-modificada").innerText = imprimirDatos(persona);
+
+    </script>
+</body>
+
+</html>
