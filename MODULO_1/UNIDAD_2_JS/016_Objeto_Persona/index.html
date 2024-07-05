@@ -23,9 +23,11 @@
             altura: 1.80
         };
 
+        let alturaDosDecimales = persona.altura.toFixed(2)
+
         const imprimirDatos = ({ nombre, apellido, edad, altura, ojosColor: { izquierdo, derecho } }) => 
             `Hola ${nombre} ${apellido}, tu edad es de 
-            ${edad} años y mides ${altura} m. 
+            ${edad} años y mides ${alturaDosDecimales} m. 
             Eres como Bowie porque tienes el ojo izquierdo ${izquierdo} y el derecho ${derecho}. Bienvenido!!`;
         
         document.getElementById("mostrar-persona").innerText = imprimirDatos(persona);
