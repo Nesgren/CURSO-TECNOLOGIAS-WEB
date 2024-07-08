@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Edad</title>
+</head>
+<body>
+    <script>
+        let nacimientoUsuario = prompt('Introduce tu fecha de nacimiento en formato "AAAA-MM-DD"');
+        let fechaNacimiento = new Date(nacimientoUsuario);
+        let anoNacimiento = fechaNacimiento.getFullYear();
+        let mesNacimiento = fechaNacimiento.getMonth();
+        let diaNacimiento = fechaNacimiento.getDate();
+        let fechaActual = new Date();
+        let anoActual = fechaActual.getFullYear();
+        let mesActual = fechaActual.getMonth();
+        let diaActual = fechaActual.getDate();
+
+        let edadAnos = anoActual - anoNacimiento;
+        if (mesActual < mesNacimiento || (mesActual === mesNacimiento && diaActual < diaNacimiento)) {
+            edadAnos--;
+        }
+
+        alert("Tu edad es " + edadAnos + " años");
+    </script>
+</body>
+</html>
