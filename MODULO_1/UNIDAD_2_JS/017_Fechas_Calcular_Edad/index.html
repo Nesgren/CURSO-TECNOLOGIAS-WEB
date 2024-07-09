@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calcular Edad</title>
 </head>
+
 <body>
     <script>
         let nacimientoUsuario = prompt('Introduce tu fecha de nacimiento en formato "AAAA-MM-DD"');
+        // Validación de fecha
+        function esFechaValida(fecha) {
+            // Expresión regular para verificar el formato YYYY-MM-DD
+            const regex = /^\d{4}-\d{2}-\d{2}$/;
+
+            // Verificar si la fecha cumple con el formato
+            if (!regex.test(fecha)) {
+                return false;
+            }
+
+            // Intentar crear un objeto Date con la fecha
+            const date = new Date(fecha);
+
+            // Verificar si el objeto Date es válido
+            const timestamp = date.getTime();
+            if (typeof timestamp !== 'number' || Number.isNaN(timestamp)) {
+                return false;
+            }
+
+            // Verificar que los componentes coincidan con la fecha original
+            const [year, month, day] = fecha.split('-');
+            if (date.getFullYear() !== parseInt(year) ||
+                date.getMonth() + 1 !== parseInt(month) ||
+                date.getDate() !== parseInt(day)) {
+                return false;
+            }
+
+            return true;
+        }
         let fechaNacimiento = new Date(nacimientoUsuario);
         let anoNacimiento = fechaNacimiento.getFullYear();
         let mesNacimiento = fechaNacimiento.getMonth();
@@ -25,4 +56,5 @@
         alert("Tu edad es " + edadAnos + " años");
     </script>
 </body>
+
 </html>

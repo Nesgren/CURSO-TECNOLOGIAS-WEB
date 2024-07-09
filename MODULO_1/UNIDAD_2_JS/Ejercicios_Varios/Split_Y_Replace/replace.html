@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replace</title>
+</head>
+<body>
+    <div id="contenido">
+        Quiero viajar a Argentina
+    </div>
+    <button id="boton">Click para cambiar palabra</button>
+    <script>
+        const contenido = document.getElementById('contenido');
+        let frase = contenido.innerText.trim();
+        const boton = document.getElementById('boton');
+
+        function prompts() {
+            let palabraSustituir = prompt("Elige la palabra a sustituir");
+            let palabraSustituta = prompt("Elige la palabra sustituta");
+
+            let nuevaFrase = frase.replace(palabraSustituir, palabraSustituta);
+
+            contenido.innerHTML = nuevaFrase;
+
+            frase = nuevaFrase;
+        }
+
+        boton.addEventListener('click', function() {
+            prompts();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cual es el mayor de 2 numeros?</title>
+</head>
+<body>
+    <div id="resultado">
+
+    </div>
+    <script>
+        let numero1 = prompt('Ingresa un numero')
+        let numero2 = prompt('Ingresa segundo numero')
+        let mayor;
+        if (numero1 < numero2){
+            let mayor = numero2
+        }else if (numero2 < numero1){
+            mayor = numero1
+        }else if (numero1 == numero2){
+            alert("los numero son iguales, pon numeros distintos")
+            window.location.reload();
+        }else{
+            alert("Estas seguro de que haz puesto dos numeros?")
+        }
+        let elemento = document.getElementById('resultado');
+        let html = `has ingresado los numeros ${numero1} y ${numero2} y el mayor es el ${mayor}`;
+        elemento.innerHTML=html;
+    </script>
+</body>
+</html>

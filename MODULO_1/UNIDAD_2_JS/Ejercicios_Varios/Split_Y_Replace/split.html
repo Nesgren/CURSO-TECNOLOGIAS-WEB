@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split</title>
+</head>
+<body>
+    <ul id="lista">
+
+    </ul>
+    <script>
+        const frase = prompt("Escribe tu frase");
+        const fraseArray = frase.split(" ");
+        const lista = document.getElementById('lista');
+        for (i = 0; i < fraseArray.length; i++){
+            let elementoLista = document.createElement("li");
+            elementoLista.textContent = fraseArray[i];
+            lista.appendChild(elementoLista);
+        }
+    </script>
+</body>
+</html>
