@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Añade, Elimina y Escoge</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Añade, Elimina y Escoge tu plato!</h1>
+    <div class="menu-container">
+        <div class="menu-section">
+            <h2>Entrantes</h2>
+            <ol id="listaEntrantes">
+                <li>Ensaladilla</li>
+                <li>Calamares</li>
+                <li>Empanadas</li>
+            </ol>
+            <div class="buttons">
+                <input type="button" onclick="anadirEntrante()" value="Añadir Entrante">
+                <input type="button" onclick="borrarEntrante()" value="Borrar Entrante">
+                <input type="button" onclick="escogerEntrante()" value="Escoger Entrante">
+            </div>
+        </div>
+        <div class="menu-section">
+            <h2>Plato principal</h2>
+            <ol id="listaPlatos">
+                <li>Milanesa</li>
+                <li>Entraña</li>
+                <li>Raviolis</li>
+            </ol>
+            <div class="buttons">
+                <input type="button" onclick="anadirPlato()" value="Añadir Plato">
+                <input type="button" onclick="borrarPlato()" value="Borrar Plato">
+                <input type="button" onclick="escogerPlato()" value="Escoger Plato">
+            </div>
+        </div>
+        <div class="menu-section">
+            <h2>Postre</h2>
+            <ol id="listaPostres">
+                <li>Chocotorta</li>
+                <li>Panqueque de dulce de leche</li>
+                <li>Helado</li>
+            </ol>
+            <div class="buttons">
+                <input type="button" onclick="anadirPostre()" value="Añadir Postre">
+                <input type="button" onclick="borrarPostre()" value="Borrar Postre">
+                <input type="button" onclick="escogerPostre()" value="Escoger Postre">
+            </div>
+        </div>
+    </div>
+    <div class="order-summary">
+        <h2>Tu pedido:</h2>
+        <p><strong>Entrante:</strong> <span id="entPedido"></span></p>
+        <p><strong>Plato:</strong> <span id="platoPedido"></span></p>
+        <p><strong>Postre:</strong> <span id="postrePedido"></span></p>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
