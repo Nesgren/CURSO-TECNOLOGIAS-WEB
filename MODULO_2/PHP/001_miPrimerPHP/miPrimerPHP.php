@@ -9,7 +9,7 @@
 
 <body>
     <?php
-    echo "¡Hola, soy un script de PHP!";
+    echo "¡Hola, soy un script de PHP! subido desde GitHub";
     ?>
 </body>
 
