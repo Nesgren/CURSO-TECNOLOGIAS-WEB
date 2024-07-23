@@ -5,7 +5,7 @@
     }
 </style>
 
-<p>Hola <?php echo $nombre; ?>.</p>
-<p>Usted tiene <?php echo $edad; ?> años.</p>
-<p>Su color favorito es <?php echo $color; ?>.</p>
+Hola <?php echo $nombre; ?>.
+Usted tiene <?php echo $edad; ?> años.
+Su color favorito es <?php echo $color; ?>.
 <div class="colored-div" style="background-color: <?php echo $color; ?>;"></div>
