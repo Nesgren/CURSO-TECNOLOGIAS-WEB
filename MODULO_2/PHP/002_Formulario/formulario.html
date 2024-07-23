@@ -1,25 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .colored-div {
-            width: 100px;
-            height: 100px;
-        }
-    </style>
+    <title>Formulario</title>
 </head>
-
 <body>
     <form action="procesar.php" method="post">
-        <p>Su nombre: <input type="text" name="nombre" /></p>
-        <p>Su edad: <input type="text" name="edad" /></p>
-        <p>Su color favorito: <input type="color" name="color" /></p>
-        <p><input type="submit" /></p>
+        <p>Su nombre: <input type="text" name="nombre" required /></p>
+        <p>Su edad: <input type="number" name="edad" required /></p>
+        <p>Su color favorito: <input type="color" name="color" required /></p>
+        <p><input type="submit" value="Enviar" /></p>
     </form>
 </body>
-
 </html>
