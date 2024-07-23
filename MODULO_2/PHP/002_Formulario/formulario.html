@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
+    <link rel="stylesheet" href="formulario.css">
 </head>
+
 <body>
+    <div id="contenedor"></div>
     <form action="procesar.php" method="get">
         <p>Su nombre: <input type="text" name="nombre" required /></p>
         <p>Su edad: <input type="number" name="edad" required /></p>
         <p>Su color favorito: <input type="color" name="color" required /></p>
         <p><input type="submit" value="Enviar" /></p>
     </form>
+    </div>
 </body>
+
 </html>
