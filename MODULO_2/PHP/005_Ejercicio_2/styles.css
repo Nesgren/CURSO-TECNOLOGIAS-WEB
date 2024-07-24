@@ -16,7 +16,7 @@ h1 {
 }
 
 form {
-    max-width: 500px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 20px;
     border: 2px solid #7861fb;
@@ -38,7 +38,7 @@ input[type="number"] {
     background-color: #1e1e1e;
     color: #f5f5f5;
     font-size: 16px;
-    margin-bottom: 20px;
+    margin: 20px auto;
 }
 
 p {

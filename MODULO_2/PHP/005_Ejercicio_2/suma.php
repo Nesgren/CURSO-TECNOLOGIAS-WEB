@@ -9,7 +9,7 @@
 </pre>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +18,6 @@
 </head>
 <body>
     <h1>Area</h1>
-    <p>El area del rectangulo es: <?php echo $area ?></p>
+    <p>El area es: <?php echo $area ?></p>
 </body>
 </html>
