@@ -17,13 +17,14 @@
     $comentarios = htmlspecialchars($_GET['comentarios']);
 
     echo "<h1>Datos Enviados</h1>";
-    echo "<p><strong>Nombre:</strong> " . $nombre . "</p>";
-    echo "<p><strong>Correo Electrónico:</strong> " . $email . "</p>";
-    echo "<p><strong>Opción Seleccionada:</strong> " . $opciones . "</p>";
-    echo "<p><strong>Otra Opción Seleccionada:</strong> " . $opciones2 . "</p>";
-    echo "<p><strong>¿Te gusta nuestro sitio web?:</strong> " . $gusta_sitio . "</p>";
-    echo "<p><strong>Suscripción al boletín:</strong> " . $suscripcion . "</p>";
-    echo "<p><strong>Comentarios:</strong> " . $comentarios . "</p>";
+    echo "<p><strong>Nombre:</strong> " . $nombre . " (" . gettype($nombre) . ")</p>";
+    echo "<p><strong>Correo Electrónico:</strong> " . $email . " (" . gettype($email) . ")</p>";
+    echo "<p><strong>Opción Seleccionada:</strong> " . $opciones . " (" . gettype($opciones) . ")</p>";
+    echo "<p><strong>Otra Opción Seleccionada:</strong> " . $opciones2 . " (" . gettype($opciones2) . ")</p>";
+    echo "<p><strong>¿Te gusta nuestro sitio web?:</strong> " . $gusta_sitio . " (" . gettype($gusta_sitio) . ")</p>";
+    echo "<p><strong>Suscripción al boletín:</strong> " . $suscripcion . " (" . gettype($suscripcion) . ")</p>";
+    echo "<p><strong>Comentarios:</strong> " . $comentarios . " (" . gettype($comentarios) . ")</p>";
+
     ?>
 </body>
 </html>
