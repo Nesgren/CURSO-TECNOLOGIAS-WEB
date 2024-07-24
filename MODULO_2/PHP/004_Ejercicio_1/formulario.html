@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Formulario de Contacto</h1>
-    <form action="procesar.php" method="post">
+    <form action="procesar.php" method="get">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required><br><br>
 
@@ -22,6 +22,23 @@
             <option value="opcion2">Opción 2</option>
             <option value="opcion3">Opción 3</option>
         </select><br><br>
+
+        <label for="opciones2">Elige otra opción:</label>
+        <select id="opciones2" name="opciones2" required>
+            <option value="">Seleccione...</option>
+            <option value="opcionA">Opción A</option>
+            <option value="opcionB">Opción B</option>
+            <option value="opcionC">Opción C</option>
+        </select><br><br>
+
+        <label>¿Te gusta nuestro sitio web?</label><br>
+        <input type="radio" id="gusta_si" name="gusta_sitio" value="si" required>
+        <label for="gusta_si">Sí</label><br>
+        <input type="radio" id="gusta_no" name="gusta_sitio" value="no">
+        <label for="gusta_no">No</label><br><br>
+
+        <label for="suscripcion">Suscribirse al boletín:</label>
+        <input type="checkbox" id="suscripcion" name="suscripcion" value="si"><br><br>
 
         <label for="comentarios">Comentarios:</label><br>
         <textarea id="comentarios" name="comentarios" rows="4" cols="50"></textarea><br><br>
