@@ -27,7 +27,7 @@
             <p><?php echo $resultado_mayor; ?></p>
             <p>La suma de los dos números es: <?php echo $suma; ?></p>
         </div>
-        <a href="index.html" class="back-button">Volver al Formulario</a>
+        <button><a href="index.html" class="back-button">Volver al Formulario</a></button>
     </div>
 </body>
 </html>
