@@ -8,8 +8,8 @@
 </head>
 <body>
 <?php
-    $num1 = $_POST('num1');
-    $num2 = $_POST('num2');
+    $num1 = htmlspecialchars($_POST['num1']);
+    $num2 = htmlspecialchars($_POST['num2']);
 
     if ($num1 > $num2) {
         $resultado_mayor = "El primer número ($num1) es mayor que el segundo número ($num2).";
@@ -24,8 +24,8 @@
 <div class="container">
         <h2>Resultados</h2>
         <div class="result">
-            <p><?php echo htmlspecialchars($resultado_mayor); ?></p>
-            <p>La suma de los dos números es: <?php echo htmlspecialchars($suma); ?></p>
+            <p><?php echo $resultado_mayor; ?></p>
+            <p>La suma de los dos números es: <?php echo $suma; ?></p>
         </div>
         <a href="index.html" class="back-button">Volver al Formulario</a>
     </div>
