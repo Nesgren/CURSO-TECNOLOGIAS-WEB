@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingresa datos</title>
+    <title>Resultados</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <?php
-    $num1 = $_POST['num1'];
-    $num2 = $_POST['num2'];
+    $num1 = $_POST('num1');
+    $num2 = $_POST('num2');
 
     if ($num1 > $num2) {
         $resultado_mayor = "El primer número ($num1) es mayor que el segundo número ($num2).";
