@@ -46,7 +46,7 @@ p {
     margin-bottom: 10px;
 }
 
-button {
+button [type="submit"] {
     background-color: #7861fb;
     border: none;
     color: white;
