@@ -11,7 +11,9 @@
         $cantidad = $_POST['cantidad'];
         $precio = $_POST['precio'];
         $descuento = 0;
-
+        if ($cantidad <= 0) {
+            echo "<p>Algo salió mal</p>";
+        }
         switch ($cantidad) {
             case 1:
                 $descuento = 0;
@@ -28,9 +30,6 @@
             case ($cantidad >= 5):
                 $descuento = 0.25;
                 break;
-        }
-        if ($cantidad <= 0) {
-            echo "<p>Algo salió mal</p>";
         }
         $total = $cantidad * $precio * (1 - $descuento);
         echo "<p>Total a pagar por {$cantidad} entradas: $" . ($total) . "</p>";
