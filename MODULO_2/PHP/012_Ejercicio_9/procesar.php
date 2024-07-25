@@ -1,6 +1,7 @@
 <?php
 if ($_POST == true) {
     $numeroMes = $_POST['numeroMes'];
+    $error = "";
 
     if ($numeroMes < 1 || $numeroMes > 12) {
         $error = "Número de mes inválido. Por favor, introduce un número entre 1 y 12.";
