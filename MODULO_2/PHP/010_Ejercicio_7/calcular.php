@@ -24,12 +24,11 @@
             $descuento = 0.25;
         } else {
             echo "<p>Algo salió mal</p>";
-            $descuento = 0;
         }
 
         $total = $cantidad * $precio * (1 - $descuento);
         if ($descuento > 0) {
-            echo "<p>Total a pagar por {$cantidad} entradas: $" . number_format($total) . "</p>";
+            echo "<p>Total a pagar por {$cantidad} entradas: $" . ($total) . "</p>";
         }
     ?>
     <a href="index.html">Volver a la página de compra</a>
