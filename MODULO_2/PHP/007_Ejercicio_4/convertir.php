@@ -31,7 +31,7 @@ if ($grade >= 19 && $grade <= 20) {
     <div class="container">
         <h1>Resultado de Conversión</h1>
         <p>La calificación numérica de <?php echo htmlspecialchars($grade); ?> se convierte en la letra: <strong><?php echo $letter; ?></strong></p>
-        <button href="index.html">Volver</button>
+        <button><a href="index.html">Volver</a></button>
     </div>
 </body>
 
