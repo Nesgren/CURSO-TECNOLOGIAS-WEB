@@ -28,6 +28,8 @@
             case ($cantidad >= 5):
                 $descuento = 0.25;
                 break;
+            default:
+                echo "<p>algo salio mal</p>";
         }
         $total = $cantidad * $precio * (1 - $descuento);
         echo "<p>Total a pagar por {$cantidad} entradas: $" . ($total) . "</p>";
