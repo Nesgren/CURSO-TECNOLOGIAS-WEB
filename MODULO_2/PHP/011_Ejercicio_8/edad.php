@@ -11,7 +11,7 @@
         <h1>Resultado</h1>
         <?php
         if (isset($_POST['edad'])) {
-            $edad = intval($_POST['edad']);
+            $edad = $_POST['edad'];
             if ($edad < 30) {
                 echo "<p>Eres una persona <strong>joven</strong>.</p>";
             } else {
