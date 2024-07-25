@@ -13,6 +13,9 @@
         $descuento = 0;
 
         switch ($cantidad) {
+            case 1:
+                $descuento = 0;
+                break;
             case 2:
                 $descuento = 0.10;
                 break;
@@ -22,8 +25,7 @@
             case 4:
                 $descuento = 0.20;
                 break;
-            case 5:
-            default:
+            case ($cantidad >= 5):
                 $descuento = 0.25;
                 break;
         }
