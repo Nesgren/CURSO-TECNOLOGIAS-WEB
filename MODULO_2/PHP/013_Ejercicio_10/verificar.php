@@ -14,6 +14,6 @@ if ($dni < 0 || $dni > 99999999) {
     if ($letra_correcta == $letra_usuario) {
         echo "<p>El número y la letra del DNI son correctos.</p>";
     } else {
-        echo "<p>La letra que ha indicado no es correcta. La letra correcta es $letra_correcta.</p>";
+        echo "<p>La letra que ha indicado no es correcta.</p>";
     }
 }
