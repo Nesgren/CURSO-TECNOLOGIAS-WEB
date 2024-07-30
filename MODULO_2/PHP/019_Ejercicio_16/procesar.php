@@ -9,28 +9,20 @@
 <body>
     <div class="container">
         <h1>Resultados del Formulario</h1>
-
         <div class="resultado">
             <?php
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                echo "<p><strong>Nombre:</strong> " . htmlspecialchars($_POST['nombre']) . "</p>";
-                echo "<p><strong>Apellido:</strong> " . htmlspecialchars($_POST['apellido']) . "</p>";
-                echo "<p><strong>Edad:</strong> " . (isset($_POST['edad']) ? htmlspecialchars($_POST['edad']) : "No especificado") . "</p>";
+                $nombre = htmlspecialchars($_POST['nombre']);
+                $apellido = htmlspecialchars($_POST['apellido']);
+                $edad = isset($_POST['edad']) ? htmlspecialchars($_POST['edad']) : "No especificado";
+                $intereses = isset($_POST['intereses']);
+                $comentarios = htmlspecialchars($_POST['comentarios']);
                 
-                echo "<p><strong>Intereses:</strong> ";
-                if (isset($_POST['intereses'])) {
-                    $intereses = $_POST['intereses'];
-                    $interesesTexto = '';
-                    foreach ($intereses as $interes) {
-                        $interesesTexto . htmlspecialchars($interes) . ", ";
-                    }
-                    echo $interesesTexto;
-                } else {
-                    echo "Ninguno seleccionado";
-                }
-                echo "</p>";
-
-                echo "<p><strong>Comentarios:</strong> " . htmlspecialchars($_POST['comentarios']) . "</p>";
+                echo "<p><strong>Nombre:</strong> $nombre</p>";
+                echo "<p><strong>Apellido:</strong> $apellido</p>";
+                echo "<p><strong>Edad:</strong> $edad</p>";
+                echo "<p><strong>Intereses:</strong> $intereses</p>";
+                echo "<p><strong>Comentarios:</strong> $comentarios</p>";
             } else {
                 echo "<p>No se recibieron datos del formulario.</p>";
             }

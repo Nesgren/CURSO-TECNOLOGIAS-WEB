@@ -9,7 +9,6 @@
 <body>
     <div class="container">
         <h1>Formulario de Registro</h1>
-
         <form action="procesar.php" method="POST">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
@@ -17,27 +16,22 @@
             <label for="apellido">Apellido:</label>
             <input type="text" id="apellido" name="apellido" required>
 
-            <label>Edad:</label>
-            <input type="radio" id="menor18" name="edad" value="Menos de 18">
-            <label for="menor18">Menos de 18</label>
-            <input type="radio" id="entre18y30" name="edad" value="18 a 30">
-            <label for="entre18y30">18 a 30</label>
-            <input type="radio" id="mayor30" name="edad" value="Más de 30">
-            <label for="mayor30">Más de 30</label>
+            <fieldset>
+                <legend>Edad:</legend>
+                <label><input type="radio" name="edad" value="Menos de 18"> Menos de 18</label>
+                <label><input type="radio" name="edad" value="18 a 30"> 18 a 30</label>
+                <label><input type="radio" name="edad" value="Más de 30"> Más de 30</label>
+            </fieldset>
 
-            <label>Intereses:</label>
-            <input type="checkbox" id="deporte" name="intereses[]" value="Deporte">
-            <label for="deporte">Deporte</label>
-            <input type="checkbox" id="musica" name="intereses[]" value="Música">
-            <label for="musica">Música</label>
-            <input type="checkbox" id="lectura" name="intereses[]" value="Lectura">
-            <label for="lectura">Lectura</label>
+            <fieldset>
+                <legend>Intereses:</legend>
+                <label><input type="checkbox" name="intereses[]" value="Deporte"> Deporte</label>
+                <label><input type="checkbox" name="intereses[]" value="Música"> Música</label>
+                <label><input type="checkbox" name="intereses[]" value="Lectura"> Lectura</label>
+                <label><input type="checkbox" name="intereses[]" value="Cine"> Cine</label>
+                <label><input type="checkbox" name="intereses[]" value="Viajes"> Viajes</label>
+                <label><input type="checkbox" name="intereses[]" value="Tecnología"> Tecnología</label>
+            </fieldset>
 
             <label for="comentarios">Comentarios:</label>
-            <textarea id="comentarios" name="comentarios" rows="4"></textarea>
-
-            <button type="submit">Enviar</button>
-        </form>
-    </div>
-</body>
-</html>
+            <textarea id="
