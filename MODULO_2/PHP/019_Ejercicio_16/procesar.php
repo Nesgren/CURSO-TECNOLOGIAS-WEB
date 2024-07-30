@@ -11,7 +11,7 @@
         <h1>Resultados del Formulario</h1>
         <div class="resultado">
             <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 $nombre = htmlspecialchars($_POST['nombre']);
                 $apellido = htmlspecialchars($_POST['apellido']);
                 $edad = isset($_POST['edad']) ? htmlspecialchars($_POST['edad']) : "No especificado";
@@ -20,13 +20,8 @@
                 if (isset($_POST['intereses'])) {
                     $intereses = $_POST['intereses'];
                     $interesesTexto = '';
-                    $primerInteres = true;
                     foreach ($intereses as $interes) {
-                        if (!$primerInteres) {
-                            $interesesTexto .= ", ";
-                        }
-                        $interesesTexto .= htmlspecialchars($interes);
-                        $primerInteres = false;
+                        $interesesTexto .= htmlspecialchars($interes) . "<br>";
                     }
                 }
 
@@ -35,7 +30,7 @@
                 echo "<p><strong>Nombre:</strong> $nombre</p>";
                 echo "<p><strong>Apellido:</strong> $apellido</p>";
                 echo "<p><strong>Edad:</strong> $edad</p>";
-                echo "<p><strong>Intereses:</strong> $interesesTexto</p>";
+                echo "<p><strong>Intereses:</strong><br>$interesesTexto</p>";
                 echo "<p><strong>Comentarios:</strong> $comentarios</p>";
             } else {
                 echo "<p>No se recibieron datos del formulario.</p>";
