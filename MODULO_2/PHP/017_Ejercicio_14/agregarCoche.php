@@ -32,7 +32,7 @@
             echo "<p>Método de solicitud no permitido.</p>";
         }
         ?>
-        <a href="index.html" class="link">Volver a la lista de coches</a>
+        <a href="index.php" class="link">Volver a la lista de coches</a>
     </div>
 </body>
 </html>
