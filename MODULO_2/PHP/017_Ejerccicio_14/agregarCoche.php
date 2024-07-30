@@ -7,7 +7,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nuevaMatricula = $_POST['matricula'];
 
     if (!empty($nuevaMarca) && !empty($nuevoModelo) && !empty($nuevoAno) && !empty($nuevoColor) && !empty($nuevaMatricula)) {
-        // Aquí podrías guardar la información en una base de datos o un archivo
         echo "<h1>Nuevo coche agregado con éxito</h1>";
         echo "<p>Marca: " . htmlspecialchars($nuevaMarca) . "</p>";
         echo "<p>Modelo: " . htmlspecialchars($nuevoModelo) . "</p>";
