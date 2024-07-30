@@ -15,13 +15,27 @@
                 $nombre = htmlspecialchars($_POST['nombre']);
                 $apellido = htmlspecialchars($_POST['apellido']);
                 $edad = isset($_POST['edad']) ? htmlspecialchars($_POST['edad']) : "No especificado";
-                $intereses = isset($_POST['intereses']);
+                
+                $interesesTexto = "Ninguno seleccionado";
+                if (isset($_POST['intereses'])) {
+                    $intereses = $_POST['intereses'];
+                    $interesesTexto = '';
+                    $primerInteres = true;
+                    foreach ($intereses as $interes) {
+                        if (!$primerInteres) {
+                            $interesesTexto .= ", ";
+                        }
+                        $interesesTexto .= htmlspecialchars($interes);
+                        $primerInteres = false;
+                    }
+                }
+
                 $comentarios = htmlspecialchars($_POST['comentarios']);
                 
                 echo "<p><strong>Nombre:</strong> $nombre</p>";
                 echo "<p><strong>Apellido:</strong> $apellido</p>";
                 echo "<p><strong>Edad:</strong> $edad</p>";
-                echo "<p><strong>Intereses:</strong> $intereses</p>";
+                echo "<p><strong>Intereses:</strong> $interesesTexto</p>";
                 echo "<p><strong>Comentarios:</strong> $comentarios</p>";
             } else {
                 echo "<p>No se recibieron datos del formulario.</p>";
