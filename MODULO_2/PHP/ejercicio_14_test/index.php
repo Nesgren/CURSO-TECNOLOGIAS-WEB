@@ -104,7 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <button type="submit">Agregar Coche</button>
         </form>
-        <a href="index.html" class="link">Volver a la lista de coches</a>
     </div>
 </body>
 
