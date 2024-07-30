@@ -45,6 +45,7 @@ foreach ($coches as $coche) {
     echo "Año: " . $coche['año'] . '<br>';
     echo "Color: " . $coche['color'] . '<br>';
     echo "Matrícula: " . $coche['matricula'] . '<br>';
+    echo '<hr>';
 }
 
 echo "</pre>";
