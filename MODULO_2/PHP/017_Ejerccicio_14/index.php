@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Listado de Coches</title>
-</head>
-
-<body>
-    <div class="container">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Listado de Coches</title>
+    </head>
+    
+    <body>
+        <div class="container">
+        <h1>Agregar un nuevo coche</h1>
+        <form action="agregarCoche.php" method="POST">
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" name="marca" required>
+        
+            <label for="modelo">Modelo:</label>
+            <input type="text" id="modelo" name="modelo" required>
+        
+            <label for="ano">Año:</label>
+            <input type="number" id="ano" name="ano" required>
+        
+            <label for="color">Color:</label>
+            <input type="text" id="color" name="color" required>
+        
+            <label for="matricula">Matrícula:</label>
+            <input type="text" id="matricula" name="matricula" required>
+        
+            <button type="submit">Agregar Coche</button>
+        </form>
         <h1>Listado de Coches</h1>
         <?php
         $coches = [
@@ -61,25 +80,6 @@
         }
         ?>
 
-        <h1>Agregar un nuevo coche</h1>
-        <form action="agregarCoche.php" method="POST">
-            <label for="marca">Marca:</label>
-            <input type="text" id="marca" name="marca" required>
-
-            <label for="modelo">Modelo:</label>
-            <input type="text" id="modelo" name="modelo" required>
-
-            <label for="ano">Año:</label>
-            <input type="number" id="ano" name="ano" required>
-
-            <label for="color">Color:</label>
-            <input type="text" id="color" name="color" required>
-
-            <label for="matricula">Matrícula:</label>
-            <input type="text" id="matricula" name="matricula" required>
-
-            <button type="submit">Agregar Coche</button>
-        </form>
     </div>
 </body>
 
