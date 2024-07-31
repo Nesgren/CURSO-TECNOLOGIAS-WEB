@@ -22,8 +22,8 @@
                 <label for="segundo_apellido">Segundo Apellido:</label>
                 <input type="text" id="segundo_apellido" name="segundo_apellido">
             </div>
-            <div class="activities">
-                <h3>Actividades:</h3>
+            <fieldset class="activities">
+                <legend>Actividades</legend>
                 <div class="form-group">
                     <label for="actividad1">Actividad 1:</label>
                     <input type="text" id="actividad1" name="actividad_nombre[]" required>
@@ -48,22 +48,23 @@
                     <label for="comentario3">Comentario:</label>
                     <input type="text" id="comentario3" name="actividad_comentario[]" required>
                 </div>
-            </div>
+            </fieldset>
             <div class="form-group">
                 <label for="actitud">Actitud en clase:</label>
                 <select id="actitud" name="actitud" required>
+                    <option value="">Seleccionar...</option>
                     <option value="Buena">Buena</option>
                     <option value="Normal">Normal</option>
                     <option value="Mala">Mala</option>
                 </select>
             </div>
-            <div class="form-group">
-                <h3>Idiomas que habla:</h3>
-                <label><input type="checkbox" name="idiomas[]" value="Catalán"> Catalán</label>
-                <label><input type="checkbox" name="idiomas[]" value="Castellano"> Castellano</label>
-                <label><input type="checkbox" name="idiomas[]" value="Francés"> Francés</label>
-                <label><input type="checkbox" name="idiomas[]" value="Inglés"> Inglés</label>
-            </div>
+            <fieldset class="form-group">
+                <legend>Idiomas que habla</legend>
+                <label class="checkbox-group"><input type="checkbox" name="idiomas[]" value="Catalán"> Catalán</label>
+                <label class="checkbox-group"><input type="checkbox" name="idiomas[]" value="Castellano"> Castellano</label>
+                <label class="checkbox-group"><input type="checkbox" name="idiomas[]" value="Francés"> Francés</label>
+                <label class="checkbox-group"><input type="checkbox" name="idiomas[]" value="Inglés"> Inglés</label>
+            </fieldset>
             <button type="submit">Enviar</button>
         </form>
     </div>

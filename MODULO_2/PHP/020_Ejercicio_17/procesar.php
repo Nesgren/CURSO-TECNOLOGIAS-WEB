@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expediente de Alumo</title>
+    <title>Expediente del Alumno</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <?php
     $nombre = htmlspecialchars($_POST['nombre']);
@@ -17,20 +15,21 @@
     $idiomas = isset($_POST['idiomas']) ? $_POST['idiomas'] : [];
     $actividades = [];
 
-    if (isset($_POST['actividad_nombre'], $_POST['actividad_nota'], $_POST['actividad_comentario'])) {
+    if (!empty($_POST['actividad_nombre']) && !empty($_POST['actividad_nota']) && !empty($_POST['actividad_comentario'])) {
         $nombres = $_POST['actividad_nombre'];
         $notas = $_POST['actividad_nota'];
         $comentarios = $_POST['actividad_comentario'];
 
-        for ($i = 0; $i < count($nombres); $i++) {
+        foreach ($nombres as $index => $nombre_actividad) {
             $actividades[] = [
-                'nombre' => htmlspecialchars($nombres[$i]),
-                'nota' => htmlspecialchars($notas[$i]),
-                'comentario' => htmlspecialchars($comentarios[$i])
+                'nombre' => htmlspecialchars($nombre_actividad),
+                'nota' => htmlspecialchars($notas[$index]),
+                'comentario' => htmlspecialchars($comentarios[$index])
             ];
         }
     }
 
+    echo "<div class='results-container'>";
     echo "<h1>Expediente del Alumno</h1>";
     echo "<p><strong>Nombre:</strong> $nombre</p>";
     echo "<p><strong>Primer Apellido:</strong> $primer_apellido</p>";
@@ -52,7 +51,7 @@
     } else {
         echo "<p>No se seleccionaron idiomas.</p>";
     }
+    echo "</div>";
     ?>
 </body>
-
 </html>
