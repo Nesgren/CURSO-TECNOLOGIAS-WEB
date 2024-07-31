@@ -1,40 +1,57 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
+    padding: 20px;
     background-color: #f4f4f4;
     color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
 }
 
 form {
     background: #fff;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
 }
 
 fieldset {
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 15px;
     margin-bottom: 20px;
+    border-radius: 5px;
 }
 
 legend {
     font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
 }
 
 label {
     display: block;
     margin-bottom: 5px;
+    font-size: 1em;
 }
 
 input[type="text"],
 input[type="number"],
 textarea {
-    width: calc(100% - 20px);
-    padding: 8px;
-    margin-bottom: 10px;
-    border-radius: 4px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
     border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+    height: 100px;
 }
 
 input[type="submit"] {
@@ -44,6 +61,7 @@ input[type="submit"] {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1em;
 }
 
 input[type="submit"]:hover {
@@ -51,5 +69,32 @@ input[type="submit"]:hover {
 }
 
 .actividad {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.actividad label {
+    margin-bottom: 8px;
+}
+
+fieldset input[type="radio"],
+fieldset input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+fieldset .checkbox-group label {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+ul {
+    padding-left: 20px;
 }
