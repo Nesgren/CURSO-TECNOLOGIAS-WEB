@@ -3,70 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expediente de Alumno</title>
+    <title>Formulario de Expediente de Alumnos</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="form-container">
-        <h1>Formulario de Expediente de Alumno</h1>
-        <form action="procesar.php" method="post">
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+    <h1>Formulario de Expediente de Alumnos</h1>
+    <form action="procesar.php" method="post">
+        <fieldset>
+            <legend>Datos Personales</legend>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required><br>
+            
+            <label for="apellido1">Primer Apellido:</label>
+            <input type="text" id="apellido1" name="apellido1" required><br>
+            
+            <label for="apellido2">Segundo Apellido:</label>
+            <input type="text" id="apellido2" name="apellido2"><br>
+        </fieldset>
+
+        <fieldset>
+            <legend>Actividades</legend>
+            <div class="actividad">
+                <label>Nombre del Ejercicio:</label>
+                <input type="text" name="actividad[0][nombre]" required><br>
+                
+                <label>Nota:</label>
+                <input type="number" name="actividad[0][nota]" min="0" max="10" required><br>
+                
+                <label>Comentario:</label>
+                <textarea name="actividad[0][comentario]"></textarea><br>
             </div>
-            <div class="form-group">
-                <label for="primer_apellido">Primer Apellido:</label>
-                <input type="text" id="primer_apellido" name="primer_apellido" required>
+            <div class="actividad">
+                <label>Nombre del Ejercicio:</label>
+                <input type="text" name="actividad[1][nombre]" required><br>
+                
+                <label>Nota:</label>
+                <input type="number" name="actividad[1][nota]" min="0" max="10" required><br>
+                
+                <label>Comentario:</label>
+                <textarea name="actividad[1][comentario]"></textarea><br>
             </div>
-            <div class="form-group">
-                <label for="segundo_apellido">Segundo Apellido:</label>
-                <input type="text" id="segundo_apellido" name="segundo_apellido">
+            <div class="actividad">
+                <label>Nombre del Ejercicio:</label>
+                <input type="text" name="actividad[2][nombre]" required><br>
+                
+                <label>Nota:</label>
+                <input type="number" name="actividad[2][nota]" min="0" max="10" required><br>
+                
+                <label>Comentario:</label>
+                <textarea name="actividad[2][comentario]"></textarea><br>
             </div>
-            <fieldset class="activities">
-                <legend>Actividades</legend>
-                <div class="form-group">
-                    <label for="actividad1">Actividad 1:</label>
-                    <input type="text" id="actividad1" name="actividad_nombre[]" required>
-                    <label for="nota1">Nota:</label>
-                    <input type="number" id="nota1" name="actividad_nota[]" min="0" max="10" required>
-                    <label for="comentario1">Comentario:</label>
-                    <input type="text" id="comentario1" name="actividad_comentario[]" required>
-                </div>
-                <div class="form-group">
-                    <label for="actividad2">Actividad 2:</label>
-                    <input type="text" id="actividad2" name="actividad_nombre[]" required>
-                    <label for="nota2">Nota:</label>
-                    <input type="number" id="nota2" name="actividad_nota[]" min="0" max="10" required>
-                    <label for="comentario2">Comentario:</label>
-                    <input type="text" id="comentario2" name="actividad_comentario[]" required>
-                </div>
-                <div class="form-group">
-                    <label for="actividad3">Actividad 3:</label>
-                    <input type="text" id="actividad3" name="actividad_nombre[]" required>
-                    <label for="nota3">Nota:</label>
-                    <input type="number" id="nota3" name="actividad_nota[]" min="0" max="10" required>
-                    <label for="comentario3">Comentario:</label>
-                    <input type="text" id="comentario3" name="actividad_comentario[]" required>
-                </div>
-            </fieldset>
-            <div class="form-group">
-                <label for="actitud">Actitud en clase:</label>
-                <select id="actitud" name="actitud" required>
-                    <option value="">Seleccionar...</option>
-                    <option value="Buena">Buena</option>
-                    <option value="Normal">Normal</option>
-                    <option value="Mala">Mala</option>
-                </select>
-            </div>
-            <fieldset class="form-group">
-                <legend>Idiomas que habla</legend>
-                <label class="checkbox-group"><input type="checkbox" name="idiomas[]" value="Catalán"> Catalán</label>
-                <label class="checkbox-group"><input type="checkbox" name="idiomas[]" value="Castellano"> Castellano</label>
-                <label class="checkbox-group"><input type="checkbox" name="idiomas[]" value="Francés"> Francés</label>
-                <label class="checkbox-group"><input type="checkbox" name="idiomas[]" value="Inglés"> Inglés</label>
-            </fieldset>
-            <button type="submit">Enviar</button>
-        </form>
-    </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Actitud del Alumno en Clase</legend>
+            <label>
+                <input type="radio" name="actitud" value="Buena" required> Buena
+            </label>
+            <label>
+                <input type="radio" name="actitud" value="Normal" required> Normal
+            </label>
+            <label>
+                <input type="radio" name="actitud" value="Mala" required> Mala
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Idiomas que Habla</legend>
+            <label>
+                <input type="checkbox" name="idiomas[]" value="Catalan"> Catalán
+            </label>
+            <label>
+                <input type="checkbox" name="idiomas[]" value="Castellano"> Castellano
+            </label>
+            <label>
+                <input type="checkbox" name="idiomas[]" value="Frances"> Francés
+            </label>
+            <label>
+                <input type="checkbox" name="idiomas[]" value="Ingles"> Inglés
+            </label>
+        </fieldset>
+
+        <input type="submit" value="Enviar">
+    </form>
 </body>
 </html>
