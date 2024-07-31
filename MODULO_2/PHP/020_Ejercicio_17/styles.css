@@ -30,7 +30,8 @@ fieldset {
 legend {
     font-weight: bold;
     font-size: 1.2em;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    display: block;
 }
 
 label {
@@ -42,12 +43,12 @@ label {
 input[type="text"],
 input[type="number"],
 textarea {
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 15px;
     border-radius: 5px;
     border: 1px solid #ccc;
-    box-sizing: border-box;
+    box-sizing: border-box; 
 }
 
 textarea {
@@ -71,13 +72,14 @@ input[type="submit"]:hover {
 
 .actividad {
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
 
 .actividad label {
     margin-bottom: 8px;
+    display: block;
 }
 
 fieldset input[type="radio"],
@@ -85,7 +87,7 @@ fieldset input[type="checkbox"] {
     margin-right: 10px;
 }
 
-fieldset .checkbox-group label {
+.checkbox-group label {
     display: inline-block;
     margin-right: 20px;
 }
@@ -98,4 +100,8 @@ hr {
 
 ul {
     padding-left: 20px;
+}
+
+ul li {
+    margin-bottom: 5px;
 }
