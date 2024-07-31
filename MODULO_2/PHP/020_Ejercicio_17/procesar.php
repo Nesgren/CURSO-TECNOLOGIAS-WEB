@@ -34,13 +34,16 @@
     echo "<p><strong>Nombre:</strong> $nombre</p>";
     echo "<p><strong>Primer Apellido:</strong> $primer_apellido</p>";
     echo "<p><strong>Segundo Apellido:</strong> $segundo_apellido</p>";
+    echo "<hr>";
     echo "<h2>Actividades</h2>";
     foreach ($actividades as $actividad) {
         echo "<p><strong>Nombre del ejercicio:</strong> {$actividad['nombre']}</p>";
         echo "<p><strong>Nota:</strong> {$actividad['nota']}</p>";
         echo "<p><strong>Comentario:</strong> {$actividad['comentario']}</p><br>";
     }
+    echo "<hr>";
     echo "<p><strong>Actitud en clase:</strong> $actitud</p>";
+    echo "<hr>";
     echo "<h2>Idiomas que habla</h2>";
     if (!empty($idiomas)) {
         echo "<ul>";
