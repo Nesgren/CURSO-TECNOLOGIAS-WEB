@@ -3,13 +3,13 @@
 function construirHead($titulo = 'Título por defecto', $metaDescripcion = '', $idioma = 'es') {
     $contenidoHead = '';
 
-    $contenidoHead .= "<title>$titulo</title>\n";
+    $contenidoHead .= "<title>$titulo</title><br>";
 
-    $contenidoHead .= '<meta name="description" content="' . $metaDescripcion . '">' . "\n";
+    $contenidoHead .= '<meta name="description" content="' . $metaDescripcion . '">' . "<br>";
 
-    $contenidoHead .= '<link rel="stylesheet" href="/css/styles.css">' . "\n";
+    $contenidoHead .= '<link rel="stylesheet" href="/css/styles.css">' . "<br>";
 
-    $contenidoHead .= '<script src="/js/main.js"></script>' . "\n";
+    $contenidoHead .= '<script src="/js/main.js"></script>' . "<br>";
 
     return $contenidoHead;
 }
