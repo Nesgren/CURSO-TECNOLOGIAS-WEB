@@ -5,11 +5,11 @@ function construirHead($titulo = 'Título por defecto', $metaDescripcion = '', $
 
     $contenidoHead .= "<title>$titulo</title><br>";
 
-    $contenidoHead .= '<meta name="description" content="' . $metaDescripcion . '">' . "<br>";
+    $contenidoHead .= '<meta name="description" content="' . $metaDescripcion . '">' . "\n";
 
-    $contenidoHead .= '<link rel="stylesheet" href="./styles.css">' . "<br>";
+    $contenidoHead .= '<link rel="stylesheet" href="./styles.css">' . "\n";
 
-    $contenidoHead .= '<script src="/js/main.js"></script>' . "<br>";
+    $contenidoHead .= '<script src="./main.js"></script>' . "\n";
 
     return $contenidoHead;
 }
