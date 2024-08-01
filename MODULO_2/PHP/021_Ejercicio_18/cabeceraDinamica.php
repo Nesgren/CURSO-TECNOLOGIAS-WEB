@@ -7,7 +7,7 @@ function construirHead($titulo = 'Título por defecto', $metaDescripcion = '', $
 
     $contenidoHead .= '<meta name="description" content="' . $metaDescripcion . '">' . "<br>";
 
-    $contenidoHead .= '<link rel="stylesheet" href="/css/styles.css">' . "<br>";
+    $contenidoHead .= '<link rel="stylesheet" href="./styles.css">' . "<br>";
 
     $contenidoHead .= '<script src="/js/main.js"></script>' . "<br>";
 
@@ -30,6 +30,6 @@ $contenidoDinamicoHead = construirHead(
     <?php echo $contenidoDinamicoHead; ?>
 </head>
 <body>
-    <h1>Contenido de la página</h1>
+    <h1>Titulo</h1>
 </body>
 </html>
