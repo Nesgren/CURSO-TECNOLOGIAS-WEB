@@ -3,7 +3,7 @@
 function construirHead($titulo = 'Título por defecto', $metaDescripcion = '', $idioma = 'es') {
     $contenidoHead = '';
 
-    $contenidoHead .= "<title>$titulo</title><br>";
+    $contenidoHead .= "<title>$titulo</title> " . "\n";
 
     $contenidoHead .= '<meta name="description" content="' . $metaDescripcion . '">' . "\n";
 
