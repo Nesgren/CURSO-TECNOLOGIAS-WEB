@@ -15,17 +15,17 @@ try {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
-    
     $mail->setFrom('galatea937orin@hotmail.com', 'Franco');
     $mail->addAddress('francozuccorononno@gmail.com', 'Franco Zuccorononno');
 
     $mail->isHTML(true);
-    $mail->Subject = 'Test';
-    $mail->Body = '<h1>Este es el cuerpo del correo en HTML</h1><p>Este es un párrafo.</p>';
-    $mail->AltBody = 'Este es el cuerpo del correo en texto plano para clientes de correo que no soportan HTML';
+    $mail->Subject = $_POST['subject'];
+    $mail->Body = $_POST['message'];
+    $mail->AltBody = strip_tags($_POST['message']);
 
     $mail->send();
     echo 'El mensaje ha sido enviado con éxito';
 } catch (Exception $e) {
     echo "El mensaje no pudo ser enviado. Error de PHPMailer: {$mail->ErrorInfo}";
 }
+?>
