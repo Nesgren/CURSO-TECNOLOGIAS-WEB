@@ -10,13 +10,17 @@ $actividades = $_POST['actividad'];
 $actitud = htmlspecialchars($_POST['actitud']);
 $idiomas = isset($_POST['idiomas']) ? $_POST['idiomas'] : [];
 
+$css = file_get_contents('styles.css');
+
 $html = "
 <!DOCTYPE html>
 <html lang='es'>
 <head>
     <meta charset='UTF-8'>
     <title>Expediente del Alumno</title>
-    <link rel='stylesheet' href='styles.css'>
+    <style>
+        $css
+    </style>
 </head>
 <body>
     <h1>Expediente del Alumno</h1>
@@ -54,7 +58,6 @@ $html .= "
 </html>";
 
 $dompdf = new Dompdf();
-$dompdf->getOptions()->setChroot('/path/to/common/assets-directory');
 $dompdf->loadHtml($html);
 
 $dompdf->setPaper('A4', 'portrait');
