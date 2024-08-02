@@ -2,7 +2,6 @@
 require '../../../vendor/autoload.php';
 
 use Dompdf\Dompdf;
-use Dompdf\Options;
 
 $nombre = htmlspecialchars($_POST['nombre']);
 $apellido1 = htmlspecialchars($_POST['apellido1']);
@@ -62,5 +61,5 @@ $dompdf->setPaper('A4', 'portrait');
 
 $dompdf->render();
 
-$dompdf->stream("expediente_alumno.pdf", ["Attachment" => false]);
+$dompdf->stream();
 ?>
