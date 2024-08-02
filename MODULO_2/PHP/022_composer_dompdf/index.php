@@ -1,5 +1,5 @@
 <?php
-require '../../vendor/autoload.php';
+require '../../../vendor/autoload.php';
 // reference the Dompdf namespace
 use Dompdf\Dompdf;
 
