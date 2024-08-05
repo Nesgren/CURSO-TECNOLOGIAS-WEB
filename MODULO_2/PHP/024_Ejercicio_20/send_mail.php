@@ -3,6 +3,8 @@ require '../../../../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
 
 try {
     $mail = new PHPMailer(true);
@@ -12,8 +14,8 @@ try {
     $mail->SMTPAuth = true;
     $mail->Username = 'sirena5584liriope@gmail.com'; 
     $mail->Password = 'o5584Ac106W';
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
+    $mail->SMTPSecure = 'ssl';
+    $mail->Port = 465;
 
     $mail->setFrom('galatea937orin@hotmail.com', 'Franco');
     $mail->addAddress('francozuccorononno@gmail.com', 'Franco Zuccorononno');
