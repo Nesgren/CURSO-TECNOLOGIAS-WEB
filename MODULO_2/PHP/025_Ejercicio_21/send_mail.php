@@ -3,16 +3,34 @@ require '../../../../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
 use Dompdf\Dompdf;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    $subject = $_POST['subject'];
-    $message = $_POST['message'];
+    $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
+    $apellido1 = isset($_POST['apellido1']) ? $_POST['apellido1'] : '';
+    $apellido2 = isset($_POST['apellido2']) ? $_POST['apellido2'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $actitud = isset($_POST['actitud']) ? $_POST['actitud'] : '';
+    $idiomas = isset($_POST['idiomas']) ? $_POST['idiomas'] : [];
+    $actividades = isset($_POST['actividad']) ? $_POST['actividad'] : [];
+
+    $salida  = '<h1>Datos del expediente</h1>';
+    $salida .= '<strong>Nombre:</strong> ' . $nombre . ' ' . $apellido1 . ' ' . $apellido2 . '<br>';
+    $salida .= '<strong>Actitud:</strong> ' . $actitud . '<br>';
+    $salida .= '<strong>Idiomas:</strong> ';
+    foreach ($idiomas as $idioma) {
+        $salida .= $idioma . ' ';
+    }
+    $salida .= '<br><hr>';
+    $salida .= '<strong>Actividades:</strong><br>';
+    foreach ($actividades as $actividad) {
+        $salida .= '<strong>Nombre del Ejercicio:</strong> ' . $actividad['nombre'] . '<br>';
+        $salida .= '<strong>Nota:</strong> ' . $actividad['nota'] . '<br>';
+        $salida .= '<strong>Comentario:</strong> ' . $actividad['comentario'] . '<br><br>';
+    }
 
     $dompdf = new Dompdf();
-    $dompdf->loadHtml($message);
+    $dompdf->loadHtml($salida);
     $dompdf->setPaper('A4', 'landscape');
     $dompdf->render();
     $output = $dompdf->output();
@@ -25,8 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->isSMTP();
         $mail->Host = 'smtp-relay.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'francozuccorononno@gmail.com'; 
-        $mail->Password = '';
+        $mail->Username = 'testnascor@gmail.com';
+        $mail->Password = 'TestNascor123';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
 
@@ -35,9 +53,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->addReplyTo('francozuccorononno@hotmail.com', 'Información');
 
         $mail->isHTML(true);
-        $mail->Subject = $subject;
-        $mail->Body = $message;
-        $mail->AltBody = strip_tags($message);
+        $mail->Subject = 'Expediente académico';
+        $mail->Body = $salida;
+        $mail->AltBody = strip_tags($salida);
 
         $mail->addAttachment('./pdfs/' . $nombreArchivo);
 
