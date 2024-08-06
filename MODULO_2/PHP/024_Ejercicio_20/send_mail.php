@@ -12,8 +12,8 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp-relay.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'sirena5584liriope@gmail.com'; 
-    $mail->Password = 'o5584Ac106W';
+    $mail->Username = 'francozuccorononno@gmail.com'; 
+    $mail->Password = 'nmpo jlvy ajxh vept';
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
 
