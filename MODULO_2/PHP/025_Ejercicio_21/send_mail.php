@@ -30,9 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
 
-        $mail->setFrom('galatea937orin@hotmail.com', 'Franco');
+        $mail->setFrom('francozuccorononno@hotmail.com', 'Franco');
         $mail->addAddress($email);
-        $mail->addReplyTo('galatea937orin@hotmail.com', 'Información');
+        $mail->addReplyTo('francozuccorononno@hotmail.com', 'Información');
 
         $mail->isHTML(true);
         $mail->Subject = $subject;

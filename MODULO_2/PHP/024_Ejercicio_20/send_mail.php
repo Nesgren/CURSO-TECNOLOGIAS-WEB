@@ -17,7 +17,7 @@ try {
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
 
-    $mail->setFrom('galatea937orin@hotmail.com', 'Franco');
+    $mail->setFrom('francozuccorononno@hotmail.com', 'Franco');
     $mail->addAddress('francozuccorononno@gmail.com', 'Franco Zuccorononno');
 
     $mail->isHTML(true);
