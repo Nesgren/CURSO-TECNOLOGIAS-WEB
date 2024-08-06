@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->Host = 'smtp-relay.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'francozuccorononno@gmail.com'; 
-        $mail->Password = 'nmpo jlvy ajxh vept';
+        $mail->Password = '';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
 
