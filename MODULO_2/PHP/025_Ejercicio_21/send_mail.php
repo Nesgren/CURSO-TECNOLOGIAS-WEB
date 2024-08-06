@@ -15,19 +15,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idiomas = isset($_POST['idiomas']) ? $_POST['idiomas'] : [];
     $actividades = isset($_POST['actividad']) ? $_POST['actividad'] : [];
 
+    if (empty($email)) {
+        echo 'El email no puede estar vacío.';
+        exit;
+    }
+
     $salida  = '<h1>Datos del expediente</h1>';
-    $salida .= '<strong>Nombre:</strong> ' . $nombre . ' ' . $apellido1 . ' ' . $apellido2 . '<br>';
-    $salida .= '<strong>Actitud:</strong> ' . $actitud . '<br>';
+    $salida .= '<strong>Nombre:</strong> ' . htmlspecialchars($nombre) . ' ' . htmlspecialchars($apellido1) . ' ' . htmlspecialchars($apellido2) . '<br>';
+    $salida .= '<strong>Actitud:</strong> ' . htmlspecialchars($actitud) . '<br>';
     $salida .= '<strong>Idiomas:</strong> ';
     foreach ($idiomas as $idioma) {
-        $salida .= $idioma . ' ';
+        $salida .= htmlspecialchars($idioma) . ' ';
     }
     $salida .= '<br><hr>';
     $salida .= '<strong>Actividades:</strong><br>';
     foreach ($actividades as $actividad) {
-        $salida .= '<strong>Nombre del Ejercicio:</strong> ' . $actividad['nombre'] . '<br>';
-        $salida .= '<strong>Nota:</strong> ' . $actividad['nota'] . '<br>';
-        $salida .= '<strong>Comentario:</strong> ' . $actividad['comentario'] . '<br><br>';
+        $salida .= '<strong>Nombre del Ejercicio:</strong> ' . htmlspecialchars($actividad['nombre']) . '<br>';
+        $salida .= '<strong>Nota:</strong> ' . htmlspecialchars($actividad['nota']) . '<br>';
+        $salida .= '<strong>Comentario:</strong> ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
     }
 
     $dompdf = new Dompdf();
