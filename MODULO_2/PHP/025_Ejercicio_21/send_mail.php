@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->SMTPAuth = true;
         $mail->Username = 'testnascor@gmail.com';
         $mail->Password = 'TestNascor123';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
 
         $mail->setFrom('francozuccorononno@hotmail.com', 'Franco');
