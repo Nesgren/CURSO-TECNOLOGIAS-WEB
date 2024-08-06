@@ -42,6 +42,7 @@ label {
 
 input[type="text"],
 input[type="number"],
+input[type="email"],
 textarea {
     width: calc(100% - 20px);
     padding: 10px;
