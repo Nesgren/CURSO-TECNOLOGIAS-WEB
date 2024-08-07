@@ -4,6 +4,7 @@ require '../../../../vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
 session_start();
 
@@ -39,7 +40,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $styles = file_get_contents('styles.css');
 
-    $pdfHtml  = '<!DOCTYPE html><html><head><style>' . $styles . '</style></head><body>';
+    $pdfHtml  = '<!DOCTYPE html><html><head><style>';
+    $pdfHtml .= 'body { font-family: Arial, sans-serif; font-size: 10px; margin: 0; padding: 0; }';
+    $pdfHtml .= 'h1 { font-size: 14px; }';
+    $pdfHtml .= 'fieldset { border: none; padding: 0; margin: 0; }';
+    $pdfHtml .= 'strong { display: block; margin-top: 5px; }';
+    $pdfHtml .= 'img { max-width: 100%; height: auto; }';
+    $pdfHtml .= '</style></head><body>';
     $pdfHtml .= '<h1>Datos del expediente</h1>';
     $pdfHtml .= '<strong>Nombre:</strong> ' . htmlspecialchars($nombre) . ' ' . htmlspecialchars($apellido1) . ' ' . htmlspecialchars($apellido2) . '<br>';
     $pdfHtml .= '<strong>Actitud:</strong> ' . htmlspecialchars($actitud) . '<br>';
@@ -55,16 +62,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pdfHtml .= '<strong>Comentario:</strong> ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
     }
     $pdfHtml .= '<strong>Foto:</strong><br>';
-    $pdfHtml .= '<img src="data:image/jpeg;base64,' . htmlspecialchars($photoBase64) . '" alt="Foto del Alumno" style="max-width: 200px;"><br>';
+    $pdfHtml .= '<img src="data:image/jpeg;base64,' . htmlspecialchars($photoBase64) . '" alt="Foto del Alumno"><br>';
     $pdfHtml .= '</body></html>';
 
-    if (!is_dir('./pdfs')) {
-        mkdir('./pdfs', 0777, true);
-    }
+    $options = new Options();
+    $options->set('isHtml5ParserEnabled', true);
+    $options->set('isPhpEnabled', false);
+    $options->set('defaultFont', 'Arial');
 
-    $dompdf = new Dompdf();
+    $dompdf = new Dompdf($options);
     $dompdf->loadHtml($pdfHtml);
-    $dompdf->setPaper('A4', 'landscape');
+    $dompdf->setPaper('A4', 'portrait');
     $dompdf->render();
     $output = $dompdf->output();
     $nombreArchivo = 'expediente-' . time() . '.pdf';
