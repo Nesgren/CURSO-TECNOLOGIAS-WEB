@@ -7,6 +7,7 @@ use PHPMailer\PHPMailer\SMTP;
 use Dompdf\Dompdf;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    session_start();
     $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
     $apellido1 = isset($_POST['apellido1']) ? $_POST['apellido1'] : '';
     $apellido2 = isset($_POST['apellido2']) ? $_POST['apellido2'] : '';
@@ -36,13 +37,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $salida .= '<strong>Comentario:</strong> ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
     }
 
+    if (!is_dir('./pdfs')) {
+        mkdir('./pdfs', 0777, true);
+    }
+
     $dompdf = new Dompdf();
     $dompdf->loadHtml($salida);
     $dompdf->setPaper('A4', 'landscape');
     $dompdf->render();
     $output = $dompdf->output();
     $nombreArchivo = 'expediente-' . time() . '.pdf';
-    file_put_contents('./pdfs/' . $nombreArchivo, $output);
+    $pdfFilePath = './pdfs/' . $nombreArchivo;
+    file_put_contents($pdfFilePath, $output);
 
     $mail = new PHPMailer(true);
 
@@ -64,7 +70,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->Body = $salida;
         $mail->AltBody = strip_tags($salida);
 
-        $mail->addAttachment('./pdfs/' . $nombreArchivo);
+        if (file_exists($pdfFilePath)) {
+            $mail->addAttachment($pdfFilePath);
+        } else {
+            throw new Exception('PDF file not found: ' . $pdfFilePath);
+        }
 
         if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Enviar') {
             if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
@@ -78,6 +88,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
 
                 $allowedfileExtensions = array('jpg', 'gif', 'png', 'zip', 'txt', 'xls', 'doc');
+
+                if (!is_dir('./uploaded_files')) {
+                    mkdir('./uploaded_files', 0777, true);
+                }
 
                 if (in_array($fileExtension, $allowedfileExtensions)) {
                     $uploadFileDir = './uploaded_files/';
@@ -102,6 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo 'El mensaje ha sido enviado con éxito';
     } catch (Exception $e) {
         echo "El mensaje no pudo ser enviado. Error de PHPMailer: {$mail->ErrorInfo}";
+        echo "Debug info: " . $e->getMessage();
     }
 
     $_SESSION['message'] = $message;
