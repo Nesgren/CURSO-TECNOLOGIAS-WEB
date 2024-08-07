@@ -23,30 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
+    $photoUrl = '';
     if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
         $fileTmpPath = $_FILES['uploadedFile']['tmp_name'];
         $fileName = $_FILES['uploadedFile']['name'];
-        $fileSize = $_FILES['uploadedFile']['size'];
         $fileType = $_FILES['uploadedFile']['type'];
-        $fileNameCmps = explode(".", $fileName);
-        $fileExtension = strtolower(end($fileNameCmps));
 
-        $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-        $uploadFileDir = './uploaded_files/';
-
-        if (!is_dir($uploadFileDir)) {
-            mkdir($uploadFileDir, 0777, true);
-        }
-
-        $dest_path = $uploadFileDir . $newFileName;
-
-        if (move_uploaded_file($fileTmpPath, $dest_path)) {
-            $photoUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/MODULO_2/PHP/027_Ejercicio_23/uploaded_files/' . $newFileName;
-            $_SESSION['photoPath'] = $photoUrl;
-        } else {
-            echo 'Hubo un error moviendo el archivo al directorio de subida.';
-            exit;
-        }
+        $fileData = file_get_contents($fileTmpPath);
+        $fileBase64 = base64_encode($fileData);
+        $photoUrl = 'data:' . $fileType . ';base64,' . $fileBase64;
     } else {
         echo 'Hubo un error en la subida de la foto.';
         exit;
@@ -70,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $salida .= '<strong>Comentario:</strong> ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
     }
     $salida .= '<strong>Foto:</strong><br>';
-    $salida .= '<img src="' . $photoUrl . '" alt="Foto del Alumno" style="max-width: 200px;"><br>';
+    $salida .= '<img src="' . htmlspecialchars($photoUrl) . '" alt="Foto del Alumno" style="max-width: 200px;"><br>';
     $salida .= '</body></html>';
 
     if (!is_dir('./pdfs')) {
