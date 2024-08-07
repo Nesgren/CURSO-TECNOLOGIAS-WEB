@@ -41,8 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $dest_path = $uploadFileDir . $newFileName;
 
         if (move_uploaded_file($fileTmpPath, $dest_path)) {
-            $photoPath = $dest_path;
-            $_SESSION['photoPath'] = $photoPath;
+            $photoUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/MODULO_2/PHP/027_Ejercicio_23/uploaded_files/' . $newFileName;
+            $_SESSION['photoPath'] = $photoUrl;
         } else {
             echo 'Hubo un error moviendo el archivo al directorio de subida.';
             exit;
@@ -53,9 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $styles = file_get_contents('styles.css');
-
-    // Determina la URL pública para la foto
-    $photoUrl = 'http://' . $_SERVER['HTTP_HOST'] . 'httpdocs/MODULO_2/PHP/027_Ejercicio_23/uploaded_files' . $newFileName;
 
     $salida  = '<!DOCTYPE html><html><head><style>' . $styles . '</style></head><body>';
     $salida .= '<h1>Datos del expediente</h1>';
@@ -75,7 +72,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $salida .= '<strong>Foto:</strong><br>';
     $salida .= '<img src="' . $photoUrl . '" alt="Foto del Alumno" style="max-width: 200px;"><br>';
     $salida .= '</body></html>';
-
 
     if (!is_dir('./pdfs')) {
         mkdir('./pdfs', 0777, true);
@@ -126,3 +122,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['message'] = $message;
     header("Location: index.php");
 }
+?>
