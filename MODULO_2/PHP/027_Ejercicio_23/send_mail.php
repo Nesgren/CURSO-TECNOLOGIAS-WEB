@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $fileName = $_FILES['uploadedFile']['name'];
         $fileType = $_FILES['uploadedFile']['type'];
 
+        // Leer la imagen y convertir a base64
         $fileData = file_get_contents($fileTmpPath);
         $fileBase64 = base64_encode($fileData);
         $photoUrl = 'data:' . $fileType . ';base64,' . $fileBase64;
@@ -37,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
+    // Incluir CSS en línea
     $styles = file_get_contents('styles.css');
 
     $salida  = '<!DOCTYPE html><html><head><style>' . $styles . '</style></head><body>';
