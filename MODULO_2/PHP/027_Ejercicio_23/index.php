@@ -26,51 +26,74 @@
 
         <fieldset>
             <legend>Actividades</legend>
-            <?php for ($i = 0; $i < 3; $i++): ?>
             <div class="actividad">
                 <label>Nombre del Ejercicio:</label>
-                <input type="text" name="actividad[<?php echo $i; ?>][nombre]" required><br>
+                <input type="text" name="actividad[0][nombre]" required><br>
                 
                 <label>Nota:</label>
-                <input type="number" name="actividad[<?php echo $i; ?>][nota]" min="0" max="10" required><br>
+                <input type="number" name="actividad[0][nota]" min="0" max="10" required><br>
                 
                 <label>Comentario:</label>
-                <textarea name="actividad[<?php echo $i; ?>][comentario]"></textarea><br>
+                <textarea name="actividad[0][comentario]"></textarea><br>
             </div>
-            <?php endfor; ?>
+            <div class="actividad">
+                <label>Nombre del Ejercicio:</label>
+                <input type="text" name="actividad[1][nombre]" required><br>
+                
+                <label>Nota:</label>
+                <input type="number" name="actividad[1][nota]" min="0" max="10" required><br>
+                
+                <label>Comentario:</label>
+                <textarea name="actividad[1][comentario]"></textarea><br>
+            </div>
+            <div class="actividad">
+                <label>Nombre del Ejercicio:</label>
+                <input type="text" name="actividad[2][nombre]" required><br>
+                
+                <label>Nota:</label>
+                <input type="number" name="actividad[2][nota]" min="0" max="10" required><br>
+                
+                <label>Comentario:</label>
+                <textarea name="actividad[2][comentario]"></textarea><br>
+            </div>
         </fieldset>
 
         <fieldset>
             <legend>Actitud del Alumno en Clase</legend>
-            <label><input type="radio" name="actitud" value="Buena" required> Buena</label>
-            <label><input type="radio" name="actitud" value="Normal" required> Normal</label>
-            <label><input type="radio" name="actitud" value="Mala" required> Mala</label>
+            <label>
+                <input type="radio" name="actitud" value="Buena" required> Buena
+            </label>
+            <label>
+                <input type="radio" name="actitud" value="Normal" required> Normal
+            </label>
+            <label>
+                <input type="radio" name="actitud" value="Mala" required> Mala
+            </label>
         </fieldset>
 
         <fieldset>
             <legend>Idiomas que Habla</legend>
-            <label><input type="checkbox" name="idiomas[]" value="Catalan"> Catalán</label>
-            <label><input type="checkbox" name="idiomas[]" value="Castellano"> Castellano</label>
-            <label><input type="checkbox" name="idiomas[]" value="Frances"> Francés</label>
-            <label><input type="checkbox" name="idiomas[]" value="Ingles"> Inglés</label>
+            <label>
+                <input type="checkbox" name="idiomas[]" value="Catalan"> Catalán
+            </label>
+            <label>
+                <input type="checkbox" name="idiomas[]" value="Castellano"> Castellano
+            </label>
+            <label>
+                <input type="checkbox" name="idiomas[]" value="Frances"> Francés
+            </label>
+            <label>
+                <input type="checkbox" name="idiomas[]" value="Ingles"> Inglés
+            </label>
         </fieldset>
 
         <fieldset>
             <legend>Subida de Archivos</legend>
-            <span>Sube una foto:</span>
-            <input type="file" id="uploadedFile" name="uploadedFile" accept="image/*" required><br>
+            <span>Sube un Archivo:</span>
+            <input type="file" name="uploadedFile" /><br>
         </fieldset>
 
         <input type="submit" name="uploadBtn" value="Enviar">
     </form>
-
-    <?php
-    session_start();
-    if (isset($_SESSION['photoPath'])) {
-        echo '<h2>Vista previa de la foto:</h2>';
-        echo '<img src="' . $_SESSION['photoPath'] . '" alt="Foto del Alumno" style="max-width: 200px;">';
-        unset($_SESSION['photoPath']);
-    }
-    ?>
 </body>
 </html>
