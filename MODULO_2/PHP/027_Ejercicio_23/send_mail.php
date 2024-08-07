@@ -6,8 +6,9 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 use Dompdf\Dompdf;
 
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    session_start();
     $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : '';
     $apellido1 = isset($_POST['apellido1']) ? $_POST['apellido1'] : '';
     $apellido2 = isset($_POST['apellido2']) ? $_POST['apellido2'] : '';
@@ -15,14 +16,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $actitud = isset($_POST['actitud']) ? $_POST['actitud'] : '';
     $idiomas = isset($_POST['idiomas']) ? $_POST['idiomas'] : [];
     $actividades = isset($_POST['actividad']) ? $_POST['actividad'] : [];
-    $message = ''; 
+    $message = '';
 
     if (empty($email)) {
         echo 'El email no puede estar vacío.';
         exit;
     }
 
-    $salida  = '<h1>Datos del expediente</h1>';
+    if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
+        $fileTmpPath = $_FILES['uploadedFile']['tmp_name'];
+        $fileName = $_FILES['uploadedFile']['name'];
+        $fileSize = $_FILES['uploadedFile']['size'];
+        $fileType = $_FILES['uploadedFile']['type'];
+        $fileNameCmps = explode(".", $fileName);
+        $fileExtension = strtolower(end($fileNameCmps));
+
+        $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+        $uploadFileDir = './uploaded_files/';
+
+        if (!is_dir($uploadFileDir)) {
+            mkdir($uploadFileDir, 0777, true);
+        }
+
+        $dest_path = $uploadFileDir . $newFileName;
+
+        if (move_uploaded_file($fileTmpPath, $dest_path)) {
+            $photoPath = $dest_path;
+            $_SESSION['photoPath'] = $photoPath;
+        } else {
+            echo 'Hubo un error moviendo el archivo al directorio de subida.';
+            exit;
+        }
+    } else {
+        echo 'Hubo un error en la subida de la foto.';
+        exit;
+    }
+
+    $styles = file_get_contents('styles.css');
+
+    $salida  = '<!DOCTYPE html><html><head><style>' . $styles . '</style></head><body>';
+    $salida .= '<h1>Datos del expediente</h1>';
     $salida .= '<strong>Nombre:</strong> ' . htmlspecialchars($nombre) . ' ' . htmlspecialchars($apellido1) . ' ' . htmlspecialchars($apellido2) . '<br>';
     $salida .= '<strong>Actitud:</strong> ' . htmlspecialchars($actitud) . '<br>';
     $salida .= '<strong>Idiomas:</strong> ';
@@ -36,6 +69,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $salida .= '<strong>Nota:</strong> ' . htmlspecialchars($actividad['nota']) . '<br>';
         $salida .= '<strong>Comentario:</strong> ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
     }
+    $salida .= '<strong>Foto:</strong><br>';
+    $salida .= '<img src="' . $photoPath . '" alt="Foto del Alumno" style="max-width: 200px;"><br>';
+    $salida .= '</body></html>';
 
     if (!is_dir('./pdfs')) {
         mkdir('./pdfs', 0777, true);
@@ -74,42 +110,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->addAttachment($pdfFilePath);
         } else {
             throw new Exception('PDF file not found: ' . $pdfFilePath);
-        }
-
-        if (isset($_POST['uploadBtn']) && $_POST['uploadBtn'] == 'Enviar') {
-            if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
-                $fileTmpPath = $_FILES['uploadedFile']['tmp_name'];
-                $fileName = $_FILES['uploadedFile']['name'];
-                $fileSize = $_FILES['uploadedFile']['size'];
-                $fileType = $_FILES['uploadedFile']['type'];
-                $fileNameCmps = explode(".", $fileName);
-                $fileExtension = strtolower(end($fileNameCmps));
-
-                $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-
-                $allowedfileExtensions = array('jpg', 'gif', 'png', 'zip', 'txt', 'xls', 'doc');
-
-                if (!is_dir('./uploaded_files')) {
-                    mkdir('./uploaded_files', 0777, true);
-                }
-
-                if (in_array($fileExtension, $allowedfileExtensions)) {
-                    $uploadFileDir = './uploaded_files/';
-                    $dest_path = $uploadFileDir . $newFileName;
-
-                    if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                        $message ='File is successfully uploaded.';
-                        $mail->addAttachment($dest_path);
-                    } else {
-                        $message = 'There was some error moving the file to upload directory. Please make sure the upload directory is writable by web server.';
-                    }
-                } else {
-                    $message = 'Upload failed. Allowed file types: ' . implode(',', $allowedfileExtensions);
-                }
-            } else {
-                $message = 'There is some error in the file upload. Please check the following error.<br>';
-                $message .= 'Error:' . $_FILES['uploadedFile']['error'];
-            }
         }
 
         $mail->send();

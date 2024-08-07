@@ -89,11 +89,19 @@
 
         <fieldset>
             <legend>Subida de Archivos</legend>
-            <span>Sube un Archivo:</span>
-            <input type="file" name="uploadedFile" /><br>
+            <span>Sube una foto:</span>
+            <input type="file" name="uploadedFile" accept="image/*" required><br>
         </fieldset>
 
         <input type="submit" name="uploadBtn" value="Enviar">
     </form>
+
+    <?php
+    if (isset($_SESSION['photoPath'])) {
+        echo '<h2>Vista previa de la foto:</h2>';
+        echo '<img src="' . $_SESSION['photoPath'] . '" alt="Foto del Alumno" style="max-width: 200px;">';
+        unset($_SESSION['photoPath']);
+    }
+    ?>
 </body>
 </html>
