@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $dompdf = new Dompdf($options);
     $dompdf->loadHtml($pdfHtml);
-    $dompdf->setPaper('A4', 'landscape');
+    $dompdf->setPaper('A4', 'portrait');
     $dompdf->render();
     $output = $dompdf->output();
     $nombreArchivo = 'expediente-' . time() . '.pdf';
