@@ -41,8 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $dest_path = $uploadFileDir . $newFileName;
 
         if (move_uploaded_file($fileTmpPath, $dest_path)) {
-            $photoLocalPath = realpath($dest_path);
-            $_SESSION['photoPath'] = $photoLocalPath;
+            $photoUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/MODULO_2/PHP/027_Ejercicio_23/uploaded_files/' . $newFileName;
+            $_SESSION['photoPath'] = $photoUrl;
         } else {
             echo 'Hubo un error moviendo el archivo al directorio de subida.';
             exit;
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $salida .= '<strong>Comentario:</strong> ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
     }
     $salida .= '<strong>Foto:</strong><br>';
-    $salida .= '<img src="' . $photoLocalPath . '" alt="Foto del Alumno" style="max-width: 200px;"><br>';
+    $salida .= '<img src="' . $photoUrl . '" alt="Foto del Alumno" style="max-width: 200px;"><br>';
     $salida .= '</body></html>';
 
     if (!is_dir('./pdfs')) {
