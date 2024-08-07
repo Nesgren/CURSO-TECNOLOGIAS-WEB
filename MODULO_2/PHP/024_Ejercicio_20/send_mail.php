@@ -12,7 +12,7 @@ try {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'testnascor@gmail.com';
-    $mail->Password = 'TestNascor123';
+    $mail->Password = 'qdcb bdbu rnhn bbas';
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
 
