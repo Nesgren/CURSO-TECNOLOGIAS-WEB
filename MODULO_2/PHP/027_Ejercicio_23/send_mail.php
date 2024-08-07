@@ -54,6 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $styles = file_get_contents('styles.css');
 
+    // Determina la URL pública para la foto
+    $photoUrl = 'http://' . $_SERVER['HTTP_HOST'] . 'httpdocs/MODULO_2/PHP/027_Ejercicio_23/uploaded_files' . $newFileName;
+
     $salida  = '<!DOCTYPE html><html><head><style>' . $styles . '</style></head><body>';
     $salida .= '<h1>Datos del expediente</h1>';
     $salida .= '<strong>Nombre:</strong> ' . htmlspecialchars($nombre) . ' ' . htmlspecialchars($apellido1) . ' ' . htmlspecialchars($apellido2) . '<br>';
@@ -70,8 +73,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $salida .= '<strong>Comentario:</strong> ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
     }
     $salida .= '<strong>Foto:</strong><br>';
-    $salida .= '<img src="' . $photoPath . '" alt="Foto del Alumno" style="max-width: 200px;"><br>';
+    $salida .= '<img src="' . $photoUrl . '" alt="Foto del Alumno" style="max-width: 200px;"><br>';
     $salida .= '</body></html>';
+
 
     if (!is_dir('./pdfs')) {
         mkdir('./pdfs', 0777, true);
@@ -122,4 +126,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['message'] = $message;
     header("Location: index.php");
 }
-?>
