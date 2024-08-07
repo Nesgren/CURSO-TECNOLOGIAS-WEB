@@ -23,14 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $photoUrl = '';
+    $photoBase64 = '';
     if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
         $fileTmpPath = $_FILES['uploadedFile']['tmp_name'];
         $fileName = $_FILES['uploadedFile']['name'];
         $fileType = $_FILES['uploadedFile']['type'];
 
         $fileData = file_get_contents($fileTmpPath);
-        $fileBase64 = base64_encode($fileData);
-        $photoUrl = 'data:' . $fileType . ';base64,' . $fileBase64;
+        $photoBase64 = base64_encode($fileData);
+        $photoUrl = $fileName;
     } else {
         echo 'Hubo un error en la subida de la foto.';
         exit;
@@ -38,31 +39,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $styles = file_get_contents('styles.css');
 
-    $salida  = '<!DOCTYPE html><html><head><style>' . $styles . '</style></head><body>';
-    $salida .= '<h1>Datos del expediente</h1>';
-    $salida .= '<strong>Nombre:</strong> ' . htmlspecialchars($nombre) . ' ' . htmlspecialchars($apellido1) . ' ' . htmlspecialchars($apellido2) . '<br>';
-    $salida .= '<strong>Actitud:</strong> ' . htmlspecialchars($actitud) . '<br>';
-    $salida .= '<strong>Idiomas:</strong> ';
+    $pdfHtml  = '<!DOCTYPE html><html><head><style>' . $styles . '</style></head><body>';
+    $pdfHtml .= '<h1>Datos del expediente</h1>';
+    $pdfHtml .= '<strong>Nombre:</strong> ' . htmlspecialchars($nombre) . ' ' . htmlspecialchars($apellido1) . ' ' . htmlspecialchars($apellido2) . '<br>';
+    $pdfHtml .= '<strong>Actitud:</strong> ' . htmlspecialchars($actitud) . '<br>';
+    $pdfHtml .= '<strong>Idiomas:</strong> ';
     foreach ($idiomas as $idioma) {
-        $salida .= htmlspecialchars($idioma) . ' ';
+        $pdfHtml .= htmlspecialchars($idioma) . ' ';
     }
-    $salida .= '<br><hr>';
-    $salida .= '<strong>Actividades:</strong><br>';
+    $pdfHtml .= '<br><hr>';
+    $pdfHtml .= '<strong>Actividades:</strong><br>';
     foreach ($actividades as $actividad) {
-        $salida .= '<strong>Nombre del Ejercicio:</strong> ' . htmlspecialchars($actividad['nombre']) . '<br>';
-        $salida .= '<strong>Nota:</strong> ' . htmlspecialchars($actividad['nota']) . '<br>';
-        $salida .= '<strong>Comentario:</strong> ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
+        $pdfHtml .= '<strong>Nombre del Ejercicio:</strong> ' . htmlspecialchars($actividad['nombre']) . '<br>';
+        $pdfHtml .= '<strong>Nota:</strong> ' . htmlspecialchars($actividad['nota']) . '<br>';
+        $pdfHtml .= '<strong>Comentario:</strong> ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
     }
-    $salida .= '<strong>Foto:</strong><br>';
-    $salida .= '<img src="' . htmlspecialchars($photoUrl) . '" alt="Foto del Alumno" style="max-width: 200px;"><br>';
-    $salida .= '</body></html>';
+    $pdfHtml .= '<strong>Foto:</strong><br>';
+    $pdfHtml .= '<img src="data:image/jpeg;base64,' . htmlspecialchars($photoBase64) . '" alt="Foto del Alumno" style="max-width: 200px;"><br>';
+    $pdfHtml .= '</body></html>';
 
     if (!is_dir('./pdfs')) {
         mkdir('./pdfs', 0777, true);
     }
 
     $dompdf = new Dompdf();
-    $dompdf->loadHtml($salida);
+    $dompdf->loadHtml($pdfHtml);
     $dompdf->setPaper('A4', 'landscape');
     $dompdf->render();
     $output = $dompdf->output();
@@ -87,8 +88,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $mail->isHTML(true);
         $mail->Subject = 'Expediente académico';
-        $mail->Body = $salida;
-        $mail->AltBody = strip_tags($salida);
+
+        $mail->Body = '<h1>Datos del expediente</h1>';
+        $mail->Body .= '<strong>Nombre:</strong> ' . htmlspecialchars($nombre) . ' ' . htmlspecialchars($apellido1) . ' ' . htmlspecialchars($apellido2) . '<br>';
+        $mail->Body .= '<strong>Actitud:</strong> ' . htmlspecialchars($actitud) . '<br>';
+        $mail->Body .= '<strong>Idiomas:</strong> ';
+        foreach ($idiomas as $idioma) {
+            $mail->Body .= htmlspecialchars($idioma) . ' ';
+        }
+        $mail->Body .= '<br><hr>';
+        $mail->Body .= '<strong>Actividades:</strong><br>';
+        foreach ($actividades as $actividad) {
+            $mail->Body .= '<strong>Nombre del Ejercicio:</strong> ' . htmlspecialchars($actividad['nombre']) . '<br>';
+            $mail->Body .= '<strong>Nota:</strong> ' . htmlspecialchars($actividad['nota']) . '<br>';
+            $mail->Body .= '<strong>Comentario:</strong> ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
+        }
+        $mail->Body .= '<strong>Foto:</strong><br>';
+        $mail->Body .= '<img src="cid:photo_image" alt="Foto del Alumno" style="max-width: 200px;"><br>';
+
+        $mail->addEmbeddedImage($_FILES['uploadedFile']['tmp_name'], 'photo_image', $_FILES['uploadedFile']['name']);
 
         if (file_exists($pdfFilePath)) {
             $mail->addAttachment($pdfFilePath);
