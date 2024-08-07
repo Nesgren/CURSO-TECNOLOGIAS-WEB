@@ -69,6 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $options->set('isHtml5ParserEnabled', true);
     $options->set('isPhpEnabled', false);
     $options->set('defaultFont', 'Arial');
+    $options->set('isRemoteEnabled', true);
 
     $dompdf = new Dompdf($options);
     $dompdf->loadHtml($pdfHtml);
