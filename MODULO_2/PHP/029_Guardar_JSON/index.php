@@ -13,7 +13,7 @@
 		<label>Modelo:</label> 
 		<input type="text" name="modelo" required> 
 		<label>Año:</label> 
-		<input type="number" name="ano" min="1886" required> 
+		<input type="number" name="ano" required> 
 		<label>Color:</label> 
 		<input type="text" name="color" required> 
 		<input type="submit" value="Añadir coche">
