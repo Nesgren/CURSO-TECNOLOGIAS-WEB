@@ -5,7 +5,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-use Imagick;
 
 session_start();
 
@@ -32,16 +31,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         try {
             $imagick = new Imagick($fileTmpPath);
-
             $imagick->resizeImage(200, 0, Imagick::FILTER_LANCZOS, 1);
 
-            $uploadDir = 'https://franco.104cubes.com:8443/httpdocs/MODULO_2/PHP/028_Ejercicio_24/imgpeques/';
+            $uploadDir = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/imgpeques/';
             $savePath = $uploadDir . $fileName;
 
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
             $imagick->writeImage($savePath);
-
             $photoBase64 = base64_encode($imagick->getImageBlob());
-
             $imagick->clear();
             $imagick->destroy();
 
