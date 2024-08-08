@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $imagick = new Imagick($fileTmpPath);
             $imagick->resizeImage(200, 0, Imagick::FILTER_LANCZOS, 1);
 
-            $uploadDir = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/imgpeques/';
+            $uploadDir = '/var/www/vhosts/franco.104cubes.com/httpdocs/MODULO_2/PHP/028_Ejercicio_24/imgpeques/';
             $savePath = $uploadDir . $fileName;
 
             if (!is_dir($uploadDir)) {
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $imagick->clear();
             $imagick->destroy();
 
-            $photoUrl = $fileName;
+            $photoUrl = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/imgpeques/' . $fileName;
         } catch (Exception $e) {
             echo 'Error procesando la imagen: ' . $e->getMessage();
             exit;
@@ -150,3 +150,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['message'] = $message;
     header("Location: index.php");
 }
+?>
