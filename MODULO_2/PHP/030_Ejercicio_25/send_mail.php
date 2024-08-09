@@ -36,7 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'Email' => $email,
         'Actitud' => $actitud,
         'Idiomas' => $idiomas,
-        'Actividades' => $actividades
+        'Actividades' => $actividades,
+        'Foto' => isset($photoUrl) ? $photoUrl : ''
     );
 
     $expedientes[] = $nuevoExpediente;
@@ -45,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $expedientesJSON = json_encode($expedientes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     file_put_contents($jsonFilePath, $expedientesJSON);
 
-    // Procesamiento de la imagen
+    // Procesamiento de la imagen y generación del PDF
     $photoUrl = '';
     $photoBase64 = '';
     if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
