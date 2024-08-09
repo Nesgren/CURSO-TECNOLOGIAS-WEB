@@ -20,7 +20,8 @@ form {
     width: 100%;
 }
 
-button {
+button,
+a.btn {
     background: #007bff;
     color: #fff;
     border: none;
@@ -32,6 +33,12 @@ button {
     text-decoration: none;
     display: inline-block;
 }
+
+button:hover,
+a.btn:hover {
+    background: #005abb;
+}
+
 
 button:hover, .btn:hover {
     background: #005abb;
