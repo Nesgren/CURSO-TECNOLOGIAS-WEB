@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Formulario de Expediente de Alumnos</h1>
-    <form action="send_mail.php" method="post" enctype="multipart/form-data">
+    <form action="expedientes.php" method="post" enctype="multipart/form-data">
         <fieldset>
             <legend>Datos Personales</legend>
             <label for="nombre">Nombre:</label>
