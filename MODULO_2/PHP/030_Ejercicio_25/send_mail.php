@@ -23,30 +23,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Guardar los datos en un archivo JSON
-    $expediente = [
-        'nombre' => $nombre,
-        'apellido1' => $apellido1,
-        'apellido2' => $apellido2,
-        'email' => $email,
-        'actitud' => $actitud,
-        'idiomas' => $idiomas,
-        'actividades' => $actividades,
-    ];
+    // Leer el archivo JSON existente
+    $jsonFilePath = 'expedienteAlumnos.json';
+    $fichero = file_exists($jsonFilePath) ? file_get_contents($jsonFilePath) : '';
+    $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
 
-    $json_data = json_encode($expediente, JSON_PRETTY_PRINT);
+    // Agregar el nuevo expediente al array de expedientes
+    $nuevoExpediente = array(
+        'Nombre' => $nombre,
+        'PrimerApellido' => $apellido1,
+        'SegundoApellido' => $apellido2,
+        'Email' => $email,
+        'Actitud' => $actitud,
+        'Idiomas' => $idiomas,
+        'Actividades' => $actividades
+    );
 
-    $jsonFilePath = './expedienteAlumnos.json';
+    $expedientes[] = $nuevoExpediente;
 
-    if (!file_exists($jsonFilePath)) {
-        file_put_contents($jsonFilePath, $json_data);
-    } else {
-        $current_data = json_decode(file_get_contents($jsonFilePath), true);
-        $current_data[] = $expediente;
-        file_put_contents($jsonFilePath, json_encode($current_data, JSON_PRETTY_PRINT));
-    }
+    // Guardar el array de expedientes actualizado en el archivo JSON
+    $expedientesJSON = json_encode($expedientes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    file_put_contents($jsonFilePath, $expedientesJSON);
 
-    // Código de procesamiento de la imagen
+    // Procesamiento de la imagen y generación del PDF
     $photoUrl = '';
     $photoBase64 = '';
     if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
@@ -79,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Código de generación del PDF
+    // Código de generación del PDF y envío de correo sigue igual
     $styles = file_get_contents('styles.css');
 
     $pdfHtml  = '<!DOCTYPE html><html><head><style>';
