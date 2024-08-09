@@ -20,7 +20,7 @@ form {
     width: 100%;
 }
 
-button, .btn {
+button {
     background: #007bff;
     color: #fff;
     border: none;
