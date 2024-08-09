@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $expedientesJSON = json_encode($expedientes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     file_put_contents($jsonFilePath, $expedientesJSON);
 
-    // Generación del PDF y envío de correo
+    // Generación del PDF
     $styles = file_get_contents('styles.css');
 
     $pdfHtml  = '<!DOCTYPE html><html><head><style>';
@@ -103,7 +103,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pdfHtml .= '<strong>Comentario:</strong> ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
     }
     $pdfHtml .= '<strong>Foto:</strong><br>';
-    $pdfHtml .= '<img src="data:image/jpeg;base64,' . htmlspecialchars($photoBase64) . '" alt="Foto del Alumno"><br>';
+    // Usar la URL directa para la imagen
+    $pdfHtml .= '<img src="' . htmlspecialchars($photoUrl) . '" alt="Foto del Alumno"><br>';
     $pdfHtml .= '</body></html>';
 
     $options = new Options();
