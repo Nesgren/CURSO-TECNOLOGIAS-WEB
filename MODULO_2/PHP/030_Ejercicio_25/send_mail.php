@@ -28,27 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fichero = file_exists($jsonFilePath) ? file_get_contents($jsonFilePath) : '';
     $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
 
-    // Agregar el nuevo expediente al array de expedientes
-    $nuevoExpediente = array(
-        'Nombre' => $nombre,
-        'PrimerApellido' => $apellido1,
-        'SegundoApellido' => $apellido2,
-        'Email' => $email,
-        'Actitud' => $actitud,
-        'Idiomas' => $idiomas,
-        'Actividades' => $actividades,
-        'Foto' => isset($photoUrl) ? $photoUrl : ''
-    );
-
-    $expedientes[] = $nuevoExpediente;
-
-    // Guardar el array de expedientes actualizado en el archivo JSON
-    $expedientesJSON = json_encode($expedientes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-    file_put_contents($jsonFilePath, $expedientesJSON);
-
     // Procesamiento de la imagen y generación del PDF
     $photoUrl = '';
-    $photoBase64 = '';
     if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
         $fileTmpPath = $_FILES['uploadedFile']['tmp_name'];
         $fileName = $_FILES['uploadedFile']['name'];
@@ -65,11 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             $imagick->writeImage($savePath);
-            $photoBase64 = base64_encode($imagick->getImageBlob());
             $imagick->clear();
             $imagick->destroy();
 
             $photoUrl = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/imgpeques/' . $fileName;
+
         } catch (Exception $e) {
             echo 'Error procesando la imagen: ' . $e->getMessage();
             exit;
@@ -79,7 +60,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Código de generación del PDF
+    // Agregar el nuevo expediente al array de expedientes
+    $nuevoExpediente = array(
+        'Nombre' => $nombre,
+        'PrimerApellido' => $apellido1,
+        'SegundoApellido' => $apellido2,
+        'Email' => $email,
+        'Actitud' => $actitud,
+        'Idiomas' => $idiomas,
+        'Actividades' => $actividades,
+        'Foto' => $photoUrl
+    );
+
+    $expedientes[] = $nuevoExpediente;
+
+    // Guardar el array de expedientes actualizado en el archivo JSON
+    $expedientesJSON = json_encode($expedientes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    file_put_contents($jsonFilePath, $expedientesJSON);
+
+    // Generación del PDF y envío de correo
     $styles = file_get_contents('styles.css');
 
     $pdfHtml  = '<!DOCTYPE html><html><head><style>';
