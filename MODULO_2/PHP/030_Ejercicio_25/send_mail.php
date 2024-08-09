@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $expedientesJSON = json_encode($expedientes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     file_put_contents($jsonFilePath, $expedientesJSON);
 
-    // Procesamiento de la imagen y generación del PDF
+    // Procesamiento de la imagen
     $photoUrl = '';
     $photoBase64 = '';
     if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Código de generación del PDF y envío de correo sigue igual
+    // Código de generación del PDF
     $styles = file_get_contents('styles.css');
 
     $pdfHtml  = '<!DOCTYPE html><html><head><style>';
