@@ -173,5 +173,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $_SESSION['message'] = $message;
-    header("Location: ver_expedientes.php");
+    header("Location: index.php");
 }

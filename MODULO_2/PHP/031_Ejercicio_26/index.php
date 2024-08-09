@@ -94,6 +94,7 @@
         </fieldset>
 
         <input type="submit" name="uploadBtn" value="Enviar">
+        <button><a href="expedientes.php">Ver Expedientes</a></button>
     </form>
 </body>
 </html>
