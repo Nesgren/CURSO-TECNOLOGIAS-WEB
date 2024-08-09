@@ -20,7 +20,7 @@ form {
     width: 100%;
 }
 
-button {
+button, .btn {
     background: #007bff;
     color: #fff;
     border: none;
@@ -28,6 +28,13 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover, .btn:hover {
+    background: #005abb;
 }
 
 fieldset {
