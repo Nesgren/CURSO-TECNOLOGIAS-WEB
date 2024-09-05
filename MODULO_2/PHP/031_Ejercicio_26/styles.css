@@ -167,6 +167,15 @@ table tr:hover {
     background: #f1f1f1;
 }
 
+.card-ejercicio {
+    background: #b1b1b1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+}
+
 @media (max-width: 768px) {
     table {
         display: block;
@@ -203,3 +212,5 @@ table tr:hover {
         text-align: left;
     }
 }
+
+

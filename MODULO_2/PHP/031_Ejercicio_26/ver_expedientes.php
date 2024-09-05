@@ -43,7 +43,7 @@ $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
                             <td data-label="Idiomas"><?php echo htmlspecialchars(implode(', ', $expediente['Idiomas'])); ?></td>
                             <td data-label="Actividades">
                                 <?php foreach ($expediente['Actividades'] as $actividad): ?>
-                                    <div>
+                                    <div class="card-ejercicio">
                                         <strong>Nombre del Ejercicio:</strong> <?php echo htmlspecialchars($actividad['nombre']); ?><br>
                                         <strong>Nota:</strong> <?php echo htmlspecialchars($actividad['nota']); ?><br>
                                         <strong>Comentario:</strong> <?php echo htmlspecialchars($actividad['comentario']); ?><br><br>
