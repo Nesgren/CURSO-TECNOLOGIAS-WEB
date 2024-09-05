@@ -28,7 +28,15 @@ if (!$alumno) {
 </head>
 <body>
     <h1>Expediente de <?php echo htmlspecialchars($alumno['Nombre']); ?></h1>
-    
+
+    <div class="alumno-detalle">
+        <?php if (!empty($alumno['Foto'])): ?>
+            <img src="<?php echo htmlspecialchars($alumno['Foto']); ?>" alt="Foto del Alumno" style="max-width: 200px; height: auto;">
+        <?php else: ?>
+            <p>No hay foto disponible</p>
+        <?php endif; ?>
+    </div>
+
     <p><strong>Nombre:</strong> <?php echo htmlspecialchars($alumno['Nombre']); ?></p>
     <p><strong>Primer Apellido:</strong> <?php echo htmlspecialchars($alumno['PrimerApellido']); ?></p>
     <p><strong>Segundo Apellido:</strong> <?php echo htmlspecialchars($alumno['SegundoApellido']); ?></p>
@@ -38,10 +46,10 @@ if (!$alumno) {
     
     <h2>Actividades:</h2>
     <?php foreach ($alumno['Actividades'] as $actividad): ?>
-        <div class="card">
-            <p><strong>Nombre del Ejercicio:</strong> <?php echo htmlspecialchars($actividad['nombre']); ?></p>
-            <p><strong>Nota:</strong> <?php echo htmlspecialchars($actividad['nota']); ?></p>
-            <p><strong>Comentario:</strong> <?php echo htmlspecialchars($actividad['comentario']); ?></p>
+        <div class="card-ejercicio">
+            <strong>Nombre del Ejercicio:</strong> <?php echo htmlspecialchars($actividad['nombre']); ?><br>
+            <strong>Nota:</strong> <?php echo htmlspecialchars($actividad['nota']); ?><br>
+            <strong>Comentario:</strong> <?php echo htmlspecialchars($actividad['comentario']); ?>
         </div>
     <?php endforeach; ?>
 

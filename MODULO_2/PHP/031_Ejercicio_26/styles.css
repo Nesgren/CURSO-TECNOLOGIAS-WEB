@@ -175,6 +175,21 @@ table tr:hover {
     margin-bottom: 20px;
 }
 
+.card-ejercicio {
+    background: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.alumno-detalle img {
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+
 @media (max-width: 768px) {
     table {
         display: block;
@@ -211,5 +226,4 @@ table tr:hover {
         text-align: left;
     }
 }
-
 

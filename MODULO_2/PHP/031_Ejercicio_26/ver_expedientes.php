@@ -42,7 +42,15 @@ $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
                             <td data-label="Email"><?php echo htmlspecialchars($expediente['Email']); ?></td>
                             <td data-label="Actitud"><?php echo htmlspecialchars($expediente['Actitud']); ?></td>
                             <td data-label="Idiomas"><?php echo htmlspecialchars(implode(', ', $expediente['Idiomas'])); ?></td>
-                            <td data-label="Actividades">Ver detalles</td>
+                            <td data-label="Actividades">
+                                <?php foreach ($expediente['Actividades'] as $actividad): ?>
+                                    <div class="card-ejercicio">
+                                        <strong>Nombre del Ejercicio:</strong> <?php echo htmlspecialchars($actividad['nombre']); ?><br>
+                                        <strong>Nota:</strong> <?php echo htmlspecialchars($actividad['nota']); ?><br>
+                                        <strong>Comentario:</strong> <?php echo htmlspecialchars($actividad['comentario']); ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            </td>
                             <td data-label="Foto">
                                 <?php if (!empty($expediente['Foto'])): ?>
                                     <img src="<?php echo htmlspecialchars($expediente['Foto']); ?>" alt="Foto del Alumno" style="max-width: 100px; height: auto;">
