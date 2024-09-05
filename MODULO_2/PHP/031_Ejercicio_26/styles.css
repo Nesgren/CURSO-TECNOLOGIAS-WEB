@@ -167,13 +167,12 @@ table tr:hover {
     background: #f1f1f1;
 }
 
-.card-ejercicio {
-    background: #b1b1b1;
+.card {
+    background: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    width: 100%;
+    margin-bottom: 20px;
 }
 
 @media (max-width: 768px) {
