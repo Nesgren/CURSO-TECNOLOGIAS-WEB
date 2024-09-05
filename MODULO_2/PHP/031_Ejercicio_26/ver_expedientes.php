@@ -26,7 +26,7 @@ $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
                     <th>Idiomas</th>
                     <th>Actividades</th>
                     <th>Foto</th>
-                    <th>Ver Detalle</th> <!-- Nueva columna -->
+                    <th>Ver Detalle</th>
                 </tr>
             </thead>
             <tbody>
