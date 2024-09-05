@@ -170,6 +170,9 @@ table td {
     vertical-align: middle;
     border-right: 1px solid #979797;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center
 }
 
 table th {
