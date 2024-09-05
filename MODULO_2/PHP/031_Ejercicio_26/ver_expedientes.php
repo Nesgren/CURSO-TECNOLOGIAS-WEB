@@ -26,23 +26,20 @@ $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
                     <th>Idiomas</th>
                     <th>Actividades</th>
                     <th>Foto</th>
+                    <th>Ver Detalle</th> <!-- Nueva columna -->
                 </tr>
             </thead>
             <tbody>
                 <?php if (!empty($expedientes)): ?>
                     <?php foreach ($expedientes as $expediente): ?>
                         <tr>
-                            <td data-label="Nombre">
-                                <a href="detalleExpediente.php?email=<?php echo urlencode($expediente['Email']); ?>">
-                                    <?php echo htmlspecialchars($expediente['Nombre']); ?>
-                                </a>
-                            </td>
+                            <td data-label="Nombre"><?php echo htmlspecialchars($expediente['Nombre']); ?></td>
                             <td data-label="Primer Apellido"><?php echo htmlspecialchars($expediente['PrimerApellido']); ?></td>
                             <td data-label="Segundo Apellido"><?php echo htmlspecialchars($expediente['SegundoApellido']); ?></td>
                             <td data-label="Email"><?php echo htmlspecialchars($expediente['Email']); ?></td>
                             <td data-label="Actitud"><?php echo htmlspecialchars($expediente['Actitud']); ?></td>
                             <td data-label="Idiomas"><?php echo htmlspecialchars(implode(', ', $expediente['Idiomas'])); ?></td>
-                            <td data-label="Actividades">
+                            <td data-label="Actividades" class="actividades-column">
                                 <?php foreach ($expediente['Actividades'] as $actividad): ?>
                                     <div class="card-ejercicio">
                                         <strong>Nombre del Ejercicio:</strong> <?php echo htmlspecialchars($actividad['nombre']); ?><br>
@@ -58,11 +55,14 @@ $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
                                     No disponible
                                 <?php endif; ?>
                             </td>
+                            <td data-label="Ver Detalle">
+                                <a href="detalleExpediente.php?email=<?php echo urlencode($expediente['Email']); ?>" class="btn">Ver detalle</a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="8">No hay expedientes disponibles.</td>
+                        <td colspan="9">No hay expedientes disponibles.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>
