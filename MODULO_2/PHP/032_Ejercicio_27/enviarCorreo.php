@@ -55,8 +55,15 @@ try {
 
     // Adjuntar la imagen y usar CID
     if (!empty($alumno['Foto'])) {
-        $mail->addAttachment($alumno['Foto'], 'foto_del_alumno.jpg');
-        $body .= '<img src="cid:foto_del_alumno.jpg" alt="Foto del Alumno" /><br>';
+        // La nueva ruta para la imagen
+        $fotoUrl = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/uploads/' . basename($alumno['Foto']);
+        
+        // Descargar la imagen para poder adjuntarla
+        $localImagePath = '/tmp/' . basename($fotoUrl); 
+        file_put_contents($localImagePath, file_get_contents($fotoUrl));
+
+        $mail->addEmbeddedImage($localImagePath, 'foto_alumno');
+        $body .= '<img src="cid:foto_alumno" alt="Foto del Alumno" style="max-width: 200px;" /><br>';
     } else {
         $body .= 'Foto no disponible.<br>';
     }

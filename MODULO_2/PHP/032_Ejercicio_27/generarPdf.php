@@ -43,10 +43,10 @@ foreach ($alumno['Actividades'] as $actividad) {
     $pdfHtml .= 'Comentario: ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
 }
 
-// Usar URL absoluta para la imagen
-$fotoUrl = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/uploads/' . ($alumno['Foto']);
+// Usar la URL absoluta para la imagen
+$fotoUrl = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/uploads/' . basename($alumno['Foto']);
 if (!empty($alumno['Foto'])) {
-    $pdfHtml .= '<img src="' . htmlspecialchars($fotoUrl) . '" alt="Foto del Alumno" /><br>';
+    $pdfHtml .= '<img src="' . htmlspecialchars($fotoUrl) . '" alt="Foto del Alumno" style="max-width: 200px; height: auto;" /><br>';
 } else {
     $pdfHtml .= 'Foto no disponible.<br>';
 }
