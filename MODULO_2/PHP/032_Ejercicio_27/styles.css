@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
@@ -102,7 +108,7 @@ legend {
 }
 
 label {
-    display: flex;
+    display: block;
     margin-bottom: 8px;
     font-weight: 600;
 }
