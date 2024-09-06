@@ -26,7 +26,7 @@ $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
                     <th>Idiomas</th>
                     <th>Actividades</th>
                     <th>Foto</th>
-                    <th>Ver Detalle</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,8 +55,10 @@ $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
                                     No disponible
                                 <?php endif; ?>
                             </td>
-                            <td data-label="Ver Detalle">
-                                <a href="detalleExpediente.php?email=<?php echo urlencode($expediente['Email']); ?>" class="btn">Ver detalle</a>
+                            <td data-label="Acciones">
+                                <a href="detalleExpediente.php?email=<?php echo urlencode($expediente['Email']); ?>" class="btn">Ver detalle</a><br>
+                                <a href="generarPdf.php?email=<?php echo urlencode($expediente['Email']); ?>" class="btn">Generar PDF</a><br>
+                                <a href="enviarCorreo.php?email=<?php echo urlencode($expediente['Email']); ?>" class="btn">Enviar por Correo</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
