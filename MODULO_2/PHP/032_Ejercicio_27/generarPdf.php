@@ -24,25 +24,30 @@ if (!$alumno) {
 }
 
 $options = new Options();
+$options->set('isHtml5ParserEnabled', true);
 $options->set('defaultFont', 'Arial');
-$dompdf = new Dompdf($options);
-$dompdf->loadHtml('<h1>Expediente de ' . htmlspecialchars($alumno['Nombre']) . '</h1>
-<p><strong>Nombre:</strong> ' . htmlspecialchars($alumno['Nombre']) . '</p>
-<p><strong>Primer Apellido:</strong> ' . htmlspecialchars($alumno['PrimerApellido']) . '</p>
-<p><strong>Segundo Apellido:</strong> ' . htmlspecialchars($alumno['SegundoApellido']) . '</p>
-<p><strong>Email:</strong> ' . htmlspecialchars($alumno['Email']) . '</p>
-<p><strong>Actitud:</strong> ' . htmlspecialchars($alumno['Actitud']) . '</p>
-<p><strong>Idiomas:</strong> ' . htmlspecialchars(implode(', ', $alumno['Idiomas'])) . '</p>
-<h2>Actividades</h2>');
+$options->set('isRemoteEnabled', true);
 
+$dompdf = new Dompdf($options);
+
+$pdfHtml = '<h1>Datos del expediente</h1>';
+$pdfHtml .= '<strong>Nombre:</strong> ' . htmlspecialchars($alumno['Nombre']) . ' ' . htmlspecialchars($alumno['PrimerApellido']) . ' ' . htmlspecialchars($alumno['SegundoApellido']) . '<br>';
+$pdfHtml .= '<strong>Email:</strong> ' . htmlspecialchars($alumno['Email']) . '<br>';
+$pdfHtml .= '<strong>Actitud:</strong> ' . htmlspecialchars($alumno['Actitud']) . '<br>';
+$pdfHtml .= '<strong>Idiomas:</strong> ' . htmlspecialchars(implode(', ', $alumno['Idiomas'])) . '<br>';
+$pdfHtml .= '<strong>Actividades:</strong><br>';
 foreach ($alumno['Actividades'] as $actividad) {
-    $dompdf->loadHtml('<div><strong>Nombre del Ejercicio:</strong> ' . htmlspecialchars($actividad['nombre']) . '<br>
-        <strong>Nota:</strong> ' . htmlspecialchars($actividad['nota']) . '<br>
-        <strong>Comentario:</strong> ' . htmlspecialchars($actividad['comentario']) . '</div>');
+    $pdfHtml .= 'Nombre del Ejercicio: ' . htmlspecialchars($actividad['nombre']) . '<br>';
+    $pdfHtml .= 'Nota: ' . htmlspecialchars($actividad['nota']) . '<br>';
+    $pdfHtml .= 'Comentario: ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
 }
 
+$pdfHtml .= '<strong>Foto:</strong><br>';
+if (!empty($alumno['Foto'])) {
+    $pdfHtml .= '<img src="' . htmlspecialchars($alumno['Foto']) . '" alt="Foto del Alumno">';
+}
+
+$dompdf->loadHtml($pdfHtml);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
-
-$dompdf->stream('expediente.pdf', array('Attachment' => 0));
-?>
+$dompdf->stream('expediente-' . $alumno['Email'] . '.pdf');
