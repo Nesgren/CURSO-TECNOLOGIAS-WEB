@@ -89,8 +89,8 @@
 
         <fieldset>
             <legend>Subida de Archivos</legend>
-            <span>Sube un Archivo:</span>
-            <input type="file" name="uploadedFile" /><br>
+            <label for="uploadedFile">Sube un Archivo:</label>
+            <input type="file" id="uploadedFile" name="uploadedFile" /><br>
         </fieldset>
 
         <input type="submit" name="uploadBtn" value="Enviar">

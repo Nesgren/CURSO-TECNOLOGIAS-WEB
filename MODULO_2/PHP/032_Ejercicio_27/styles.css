@@ -1,275 +1,121 @@
-/* Estilos básicos del cuerpo */
 body {
     font-family: Arial, sans-serif;
+    line-height: 1.6;
     margin: 0;
-    padding: 20px;
+    padding: 0;
     background-color: #f4f4f4;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    flex-direction: column;
 }
 
-/* Estilo del formulario */
-form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 100%;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-/* Botones y enlaces */
-button,
-a.btn {
-    background: #007bff;
+h1 {
+    background-color: #333;
     color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
+    padding: 10px 0;
     text-align: center;
-    text-decoration: none;
+}
+
+a.btn {
     display: inline-block;
-    transition: background 0.3s ease;
-}
-
-button:hover,
-a.btn:hover {
-    background: #005abb;
-}
-
-/* Estilo de fieldset */
-fieldset {
-    border: 1px solid #ddd;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-/* Estilo de legend */
-legend {
-    font-weight: bold;
-    font-size: 1.2em;
-    margin-bottom: 15px;
-    display: block;
-}
-
-/* Estilo de labels */
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 1em;
-}
-
-/* Estilo de inputs y textarea */
-input[type="text"],
-input[type="number"],
-input[type="email"],
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-textarea {
-    resize: vertical;
-    height: 100px;
-}
-
-/* Estilo del botón de submit */
-input[type="submit"] {
-    background: #007bff;
-    color: #fff;
-    border: none;
+    margin: 10px;
     padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
     border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background 0.3s ease;
 }
 
-input[type="submit"]:hover {
-    background: #005abb;
+a.btn:hover {
+    background-color: #0056b3;
 }
 
-/* Estilo de las tarjetas de actividad */
-.actividad {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-/* Estilo de labels dentro de actividad */
-.actividad label {
-    margin-bottom: 8px;
-    display: block;
-}
-
-/* Estilo de inputs de radio y checkbox */
-fieldset input[type="radio"],
-fieldset input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-/* Estilo del grupo de checkboxes */
-.checkbox-group label {
-    display: inline-block;
-    margin-right: 20px;
-}
-
-/* Estilo de hr */
-hr {
-    border: 0;
-    border-top: 1px solid #ddd;
-    margin: 20px 0;
-}
-
-/* Estilo de listas */
-ul {
-    padding-left: 20px;
-}
-
-ul li {
-    margin-bottom: 5px;
-}
-
-/* Contenedor de la tabla con scroll horizontal */
 .table-container {
-    width: 100%;
+    width: 90%;
+    margin: 20px auto;
     overflow-x: auto;
-    margin-bottom: 20px;
 }
 
-/* Estilo de tabla */
 table {
     width: 100%;
     border-collapse: collapse;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
+    background-color: #fff;
 }
 
-/* Estilo de th y td de tabla */
-table th,
-table td {
-    padding: 12px 15px;
-    text-align: center;
-    vertical-align: middle;
-    border-right: 1px solid #979797;
-    box-sizing: border-box;
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
 }
 
 table th {
-    background: #007bff;
-    color: #fff;
+    background-color: #f2f2f2;
+}
+
+.foto-alumno {
+    max-width: 100px;
+    height: auto;
+}
+
+.actividades-column {
+    width: 300px;
+}
+
+.card-ejercicio {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+form {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+legend {
     font-weight: bold;
 }
 
-table td:last-child,
-table th:last-child {
-    border-right: none;
+label {
+    display: block;
+    margin-bottom: 10px;
 }
 
-table tr:nth-child(even) {
-    background: #f9f9f9;
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 10px 0;
 }
 
-table tr:hover {
-    background: #f1f1f1;
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 5px;
 }
 
-/* Estilo de tarjeta */
-.card,
-.card-ejercicio {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    box-sizing: border-box;
+textarea {
+    height: 80px;
 }
 
-/* Estilo específico de card-ejercicio */
-.card-ejercicio {
-    padding: 15px;
-    margin-bottom: 15px;
-    max-width: 200px;
-    text-align: center;
-}
-
-/* Estilo de actividades-column */
-.actividades-column {
-    text-align: center;
-}
-
-/* Estilo de imagen en alumno-detalle */
-.alumno-detalle img {
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
-/* Estilos responsive */
 @media (max-width: 768px) {
-
-    /* Ajustes para la tabla en dispositivos móviles */
-    table {
-        display: block;
+    .table-container {
         width: 100%;
-        border: 0;
     }
 
-    thead {
-        display: none;
+    table {
+        font-size: 14px;
     }
 
-    tr {
-        display: block;
-        margin-bottom: 15px;
-    }
-
-    td {
-        display: block;
-        text-align: right;
-        position: relative;
-        padding-left: 50%;
-        border: none;
-        border-bottom: 1px solid #ddd;
-    }
-
-    td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 0;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        font-weight: bold;
-        color: #007bff;
-        text-align: left;
-    }
-
-    /* Ajustes para el tamaño de los formularios */
-    form {
-        padding: 15px;
-        margin: 10px;
-    }
-
-    /* Ajustes para tarjetas */
-    .card,
-    .card-ejercicio {
-        padding: 15px;
+    .foto-alumno {
+        max-width: 80px;
     }
 }

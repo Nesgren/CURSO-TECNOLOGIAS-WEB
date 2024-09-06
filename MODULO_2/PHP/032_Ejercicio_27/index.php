@@ -50,7 +50,7 @@ $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
                             </td>
                             <td data-label="Foto">
                                 <?php if (!empty($expediente['Foto'])): ?>
-                                    <img src="<?php echo htmlspecialchars($expediente['Foto']); ?>" alt="Foto del Alumno" style="max-width: 100px; height: auto;">
+                                    <img src="<?php echo htmlspecialchars($expediente['Foto']); ?>" alt="Foto del Alumno" class="foto-alumno">
                                 <?php else: ?>
                                     No disponible
                                 <?php endif; ?>
