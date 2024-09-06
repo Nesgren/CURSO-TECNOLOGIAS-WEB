@@ -3,27 +3,6 @@ require '../../../../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-
-$jsonFilePath = 'expedienteAlumnos.json';
-$fichero = file_exists($jsonFilePath) ? file_get_contents($jsonFilePath) : '';
-$expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
-
-$alumnoEmail = isset($_GET['email']) ? $_GET['email'] : '';
-$alumno = null;
-
-foreach ($expedientes as $expediente) {
-    if ($expediente['Email'] === $alumnoEmail) {
-        $alumno = $expediente;
-        break;
-    }
-}
-
-if (!$alumno) {
-    echo "No se encontró el expediente del alumno.";
-    exit;
-}
-
-require '../../../../vendor/autoload.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -42,7 +21,7 @@ foreach ($expedientes as $expediente) {
 }
 
 if (!$alumno) {
-    echo "No se encontró el expediente del alumno.";
+    echo "<script>alert('No se encontró el expediente del alumno.');</script>";
     exit;
 }
 
@@ -74,8 +53,6 @@ $dompdf->loadHtml($pdfHtml);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
-
-// Enviar el PDF por correo
 $mail = new PHPMailer(true);
 
 try {
@@ -97,11 +74,12 @@ try {
     $mail->Body .= 'Nombre: ' . htmlspecialchars($alumno['Nombre']) . '<br>';
     $mail->Body .= 'Idiomas: ' . htmlspecialchars(implode(', ', $alumno['Idiomas'])) . '<br>';
 
-    // Adjuntar el PDF generado
     $mail->addStringAttachment($dompdf->output(), 'expediente.pdf');
 
     $mail->send();
-    echo 'El correo ha sido enviado';
+
+    echo "<script>alert('El correo ha sido enviado correctamente.');</script>";
 } catch (Exception $e) {
-    echo "Error al enviar el correo: {$mail->ErrorInfo}";
+    echo "<script>alert('Error al enviar el correo: {$mail->ErrorInfo}');</script>";
 }
+?>
