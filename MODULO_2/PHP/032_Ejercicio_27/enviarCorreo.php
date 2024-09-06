@@ -45,12 +45,12 @@ if (!empty($alumno['Foto'])) {
 $mail = new PHPMailer(true);
 try {
     $mail->isSMTP();
-    $mail->Host = 'smtp.example.com'; // Cambia esto por el servidor SMTP
+    $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'testnascor@gmail.com';
     $mail->Password = 'xlzd sbdg wadv lmju';
-    $mail->SMTPSecure = 'tls';
-    $mail->Port = 587;
+    $mail->SMTPSecure = 'ssl';
+    $mail->Port = 465;
 
     $mail->setFrom('from@example.com', 'Tu Nombre');
     $mail->addAddress($alumno['Email']);
