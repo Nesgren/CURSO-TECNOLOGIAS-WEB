@@ -13,6 +13,20 @@ h1 {
     text-align: center;
 }
 
+.enviar {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.enviar:hover {
+    background-color: #0056b3;
+}
+
 a.btn {
     display: inline-block;
     margin: 10px;

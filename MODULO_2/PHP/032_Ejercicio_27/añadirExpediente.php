@@ -93,7 +93,7 @@
             <input type="file" id="uploadedFile" name="uploadedFile" /><br>
         </fieldset>
 
-        <input type="submit" name="uploadBtn" value="Enviar" class="btn">
+        <input type="submit" name="uploadBtn" value="Enviar" class="enviar">
         <a href="index.php" class="btn">Ver Expedientes</a>
     </form>
 </body>
