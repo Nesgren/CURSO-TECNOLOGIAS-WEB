@@ -69,6 +69,6 @@ $expediente = array_shift($expediente);
         <input type="submit" value="Actualizar Expediente">
     </form>
 
-    <a href="index.php">Volver a la lista</a>
+    <a href="index.php" class="btn">Volver a la lista</a>
 </body>
 </html>
