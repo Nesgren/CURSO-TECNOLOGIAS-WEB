@@ -64,7 +64,7 @@ try {
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
 
-    $mail->setFrom('tuCorreo@gmail.com', 'Nombre');
+    $mail->setFrom('testnascor@gmail.com', 'Test Nascor');
     $mail->addAddress($alumno['Email']);
 
     $mail->isHTML(true);
