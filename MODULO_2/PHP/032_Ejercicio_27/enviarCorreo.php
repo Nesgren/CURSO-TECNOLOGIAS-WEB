@@ -1,5 +1,6 @@
 <?php
-require 'vendor/autoload.php';
+require '../../../../vendor/autoload.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -23,7 +24,7 @@ if (!$alumno) {
 }
 
 <?php
-require 'vendor/autoload.php';
+require '../../../../vendor/autoload.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -83,8 +84,8 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'testnascor@gmail.com'; // Cambia esto por tus credenciales
-    $mail->Password = 'tu contraseña aquí';
+    $mail->Username = 'testnascor@gmail.com';
+    $mail->Password = 'xlzd sbdg wadv lmju';
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
 
