@@ -23,7 +23,6 @@ if (!$alumno) {
     exit;
 }
 
-<?php
 require '../../../../vendor/autoload.php';
 use Dompdf\Dompdf;
 use Dompdf\Options;
