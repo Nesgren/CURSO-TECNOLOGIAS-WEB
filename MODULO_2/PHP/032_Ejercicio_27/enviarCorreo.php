@@ -11,6 +11,7 @@ $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
 $expedienteId = isset($_GET['id']) ? $_GET['id'] : '';
 $alumno = null;
 
+// Buscar el expediente por id
 foreach ($expedientes as $expediente) {
     if ($expediente['id'] === $expedienteId) {
         $alumno = $expediente;

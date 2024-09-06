@@ -3,11 +3,12 @@ $jsonFilePath = 'expedienteAlumnos.json';
 $fichero = file_exists($jsonFilePath) ? file_get_contents($jsonFilePath) : '';
 $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
 
-$alumnoEmail = isset($_GET['email']) ? $_GET['email'] : '';
+$expedienteId = isset($_GET['id']) ? $_GET['id'] : '';
 $alumno = null;
 
+// Buscar el expediente por id
 foreach ($expedientes as $expediente) {
-    if ($expediente['Email'] === $alumnoEmail) {
+    if ($expediente['id'] === $expedienteId) {
         $alumno = $expediente;
         break;
     }
@@ -39,19 +40,18 @@ if (!$alumno) {
     <h2>Actividades</h2>
     <?php foreach ($alumno['Actividades'] as $actividad): ?>
         <div class="card-ejercicio">
-            <strong>Nombre del Ejercicio:</strong> <?php echo htmlspecialchars($actividad['nombre']); ?><br>
-            <strong>Nota:</strong> <?php echo htmlspecialchars($actividad['nota']); ?><br>
-            <strong>Comentario:</strong> <?php echo htmlspecialchars($actividad['comentario']); ?>
+            <p><strong>Nombre del Ejercicio:</strong> <?php echo htmlspecialchars($actividad['nombre']); ?></p>
+            <p><strong>Nota:</strong> <?php echo htmlspecialchars($actividad['nota']); ?></p>
+            <p><strong>Comentario:</strong> <?php echo htmlspecialchars($actividad['comentario']); ?></p>
         </div>
     <?php endforeach; ?>
 
-    <h2>Foto</h2>
     <?php if (!empty($alumno['Foto'])): ?>
-        <img src="<?php echo htmlspecialchars($alumno['Foto']); ?>" alt="Foto del Alumno" class="foto-alumno">
+        <img src="<?php echo htmlspecialchars($alumno['Foto']); ?>" alt="Foto del Alumno">
     <?php else: ?>
-        No disponible
+        <p>Foto no disponible.</p>
     <?php endif; ?>
-
-    <a href="index.php" class="btn">Volver a la Lista</a>
+    
+    <a href="index.php">Volver</a>
 </body>
 </html>
