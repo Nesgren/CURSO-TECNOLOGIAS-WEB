@@ -44,7 +44,7 @@ foreach ($alumno['Actividades'] as $actividad) {
 }
 
 // Usar la URL absoluta para la imagen
-$fotoUrl = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/uploads/' . basename($alumno['Foto']);
+$fotoUrl = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/uploads/' . str_replace('\\', '/', $alumno['Foto']);
 if (!empty($alumno['Foto'])) {
     $pdfHtml .= '<img src="' . htmlspecialchars($fotoUrl) . '" alt="Foto del Alumno" style="max-width: 200px; height: auto;" /><br>';
 } else {

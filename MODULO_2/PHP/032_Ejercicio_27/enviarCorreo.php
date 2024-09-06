@@ -56,7 +56,7 @@ try {
     // Adjuntar la imagen y usar CID
     if (!empty($alumno['Foto'])) {
         // La nueva ruta para la imagen
-        $fotoUrl = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/uploads/' . basename($alumno['Foto']);
+        $fotoUrl = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/uploads/' . str_replace('\\', '/', $alumno['Foto']);
         
         // Descargar la imagen para poder adjuntarla
         $localImagePath = '/tmp/' . basename($fotoUrl); 
