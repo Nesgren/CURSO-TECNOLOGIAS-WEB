@@ -8,11 +8,11 @@ $jsonFilePath = 'expedienteAlumnos.json';
 $fichero = file_exists($jsonFilePath) ? file_get_contents($jsonFilePath) : '';
 $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
 
-$alumnoId = isset($_GET['id']) ? $_GET['id'] : '';
+$expedienteId = isset($_GET['id']) ? $_GET['id'] : '';
 $alumno = null;
 
 foreach ($expedientes as $expediente) {
-    if ($expediente['ID'] === $alumnoId) {
+    if ($expediente['id'] === $expedienteId) {
         $alumno = $expediente;
         break;
     }
@@ -23,40 +23,47 @@ if (!$alumno) {
     exit;
 }
 
-$mail = new PHPMailer(true);
+// Crear el cuerpo del correo electrónico
+$body = '<h1>Datos del expediente</h1>';
+$body .= '<strong>Nombre:</strong> ' . htmlspecialchars($alumno['Nombre']) . ' ' . htmlspecialchars($alumno['PrimerApellido']) . ' ' . htmlspecialchars($alumno['SegundoApellido']) . '<br>';
+$body .= '<strong>Email:</strong> ' . htmlspecialchars($alumno['Email']) . '<br>';
+$body .= '<strong>Actitud:</strong> ' . htmlspecialchars($alumno['Actitud']) . '<br>';
+$body .= '<strong>Idiomas:</strong> ' . htmlspecialchars(implode(', ', $alumno['Idiomas'])) . '<br>';
+$body .= '<strong>Actividades:</strong><br>';
+foreach ($alumno['Actividades'] as $actividad) {
+    $body .= 'Nombre del Ejercicio: ' . htmlspecialchars($actividad['nombre']) . '<br>';
+    $body .= 'Nota: ' . htmlspecialchars($actividad['nota']) . '<br>';
+    $body .= 'Comentario: ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
+}
+if (!empty($alumno['Foto'])) {
+    $body .= '<img src="' . htmlspecialchars($alumno['Foto']) . '" alt="Foto del Alumno" /><br>';
+} else {
+    $body .= 'Foto no disponible.<br>';
+}
 
+// Configurar el correo electrónico
+$mail = new PHPMailer(true);
 try {
     $mail->isSMTP();
-    $mail->Host = 'smtp.example.com';
+    $mail->Host = 'smtp.example.com'; // Cambia esto por el servidor SMTP
     $mail->SMTPAuth = true;
     $mail->Username = 'testnascor@gmail.com';
     $mail->Password = 'xlzd sbdg wadv lmju';
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
 
-    $mail->setFrom('from@example.com', 'Your Name');
-    $mail->addAddress('to@example.com', 'Recipient Name'); // Cambia el destinatario aquí si es necesario
-
+    $mail->setFrom('from@example.com', 'Tu Nombre');
+    $mail->addAddress($alumno['Email']);
     $mail->isHTML(true);
-    $mail->Subject = 'Expediente Alumno';
-    $mail->Body = 'Aquí están los datos del expediente del alumno: <br>';
-    $mail->Body .= 'Nombre: ' . htmlspecialchars($alumno['Nombre']) . ' ' . htmlspecialchars($alumno['PrimerApellido']) . ' ' . htmlspecialchars($alumno['SegundoApellido']) . '<br>';
-    $mail->Body .= 'Email: ' . htmlspecialchars($alumno['Email']) . '<br>';
-    $mail->Body .= 'Actitud: ' . htmlspecialchars($alumno['Actitud']) . '<br>';
-    $mail->Body .= 'Idiomas: ' . htmlspecialchars(implode(', ', $alumno['Idiomas'])) . '<br>';
-    $mail->Body .= 'Actividades: <br>';
-    foreach ($alumno['Actividades'] as $actividad) {
-        $mail->Body .= 'Nombre del Ejercicio: ' . htmlspecialchars($actividad['nombre']) . '<br>';
-        $mail->Body .= 'Nota: ' . htmlspecialchars($actividad['nota']) . '<br>';
-        $mail->Body .= 'Comentario: ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
-    }
-    if (!empty($alumno['Foto'])) {
-        $mail->Body .= 'Foto: <br><img src="' . htmlspecialchars($alumno['Foto']) . '" alt="Foto del Alumno">';
-    }
+    $mail->Subject = 'Detalles del expediente';
+    $mail->Body    = $body;
 
     $mail->send();
-    echo "<script>alert('El correo ha sido enviado.');</script>";
+    echo "<script>alert('Correo enviado exitosamente.');</script>";
 } catch (Exception $e) {
-    echo "<script>alert('No se pudo enviar el correo. Error: " . $mail->ErrorInfo . "');</script>";
+    echo "<script>alert('No se pudo enviar el correo. Mailer Error: {$mail->ErrorInfo}');</script>";
 }
+
+header('Location: index.php');
+exit;
 ?>
