@@ -59,6 +59,7 @@ $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
                                 <a href="detalleExpediente.php?email=<?php echo urlencode($expediente['Email']); ?>" class="btn">Ver detalle</a><br>
                                 <a href="generarPdf.php?email=<?php echo urlencode($expediente['Email']); ?>" class="btn">Generar PDF</a><br>
                                 <a href="enviarCorreo.php?email=<?php echo urlencode($expediente['Email']); ?>" class="btn">Enviar por Correo</a>
+                                <a href="borrarExpediente.php?email=<?php echo urlencode($expediente['Email']); ?>" class="btn btn-delete" onclick="return confirm('¿Estás seguro de que quieres eliminar este expediente?');">Borrar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

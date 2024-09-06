@@ -78,6 +78,9 @@ try {
 
     $mail->send();
 
+    echo "<script>alert('El correo ha sido enviado correctamente.');</script>";
+    
 } catch (Exception $e) {
-   $mail->ErrorInfo;
+    echo "<script>alert('Error al enviar el correo: {$mail->ErrorInfo}');</script>";
 }
+?>
