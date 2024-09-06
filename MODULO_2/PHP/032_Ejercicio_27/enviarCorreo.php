@@ -73,7 +73,6 @@ if (!empty($alumno['Foto'])) {
 $dompdf->loadHtml($pdfHtml);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
-$dompdf->stream('expediente-' . $alumno['Email'] . '.pdf');
 
 
 // Enviar el PDF por correo
