@@ -53,6 +53,6 @@ if (!$alumno) {
         </div>
     <?php endforeach; ?>
 
-    <a href="ver_expedientes.php" class="btn">Volver a la lista de expedientes</a>
+    <a href="index.php" class="btn">Volver a la lista de expedientes</a>
 </body>
 </html>
