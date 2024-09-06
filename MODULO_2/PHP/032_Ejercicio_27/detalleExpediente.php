@@ -47,11 +47,11 @@ if (!$alumno) {
     <?php endforeach; ?>
 
     <?php if (!empty($alumno['Foto'])): ?>
-        <img src="<?php echo htmlspecialchars($alumno['Foto']); ?>" alt="Foto del Alumno">
+        <img src="<?php echo htmlspecialchars($alumno['Foto']); ?>" alt="Foto del Alumno" class="foto-alumno">
     <?php else: ?>
         <p>Foto no disponible.</p>
     <?php endif; ?>
     
-    <a href="index.php">Volver</a>
+    <a href="index.php" class="btn">Volver</a>
 </body>
 </html>
