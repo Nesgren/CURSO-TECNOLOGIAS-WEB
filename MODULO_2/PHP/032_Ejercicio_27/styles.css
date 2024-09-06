@@ -117,7 +117,7 @@ input[type="text"],
 input[type="email"],
 input[type="number"],
 textarea {
-    width: 90%;
+    max-width: 90%;
     padding: 10px;
     margin: 5px 0 15px;
     border: 1px solid #ddd;
@@ -132,7 +132,7 @@ input[type="checkbox"] {
 textarea {
     height: 100px;
     resize: vertical;
-    width: 90%;
+    max-width: 90%;
 }
 
 @media (max-width: 768px) {
