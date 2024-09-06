@@ -1,0 +1,33 @@
+[
+    {
+        "id": "66dae0aaadb80",
+        "Nombre": "Bruno",
+        "PrimerApellido": "Zuccorononno",
+        "SegundoApellido": "Sutera",
+        "Email": "francozuccorononno@gmail.com",
+        "Actitud": "Buena",
+        "Idiomas": [
+            "Catalan",
+            "Castellano",
+            "Ingles"
+        ],
+        "Actividades": [
+            {
+                "nombre": "Lengua",
+                "nota": "10",
+                "comentario": "Muy bien"
+            },
+            {
+                "nombre": "Fisica",
+                "nota": "10",
+                "comentario": "Muy bien"
+            },
+            {
+                "nombre": "Matematicas",
+                "nota": "10",
+                "comentario": "Muy bien"
+            }
+        ],
+        "Foto": "uploads\/duck-8519666_640.png"
+    }
+]
