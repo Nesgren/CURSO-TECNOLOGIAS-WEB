@@ -118,6 +118,7 @@ input[type="email"],
 input[type="number"],
 textarea {
     max-width: 90%;
+    box-sizing: border-box;
     padding: 10px;
     margin: 5px 0 15px;
     border: 1px solid #ddd;
