@@ -30,12 +30,24 @@ if (!$alumno) {
 <body>
     <h1>Expediente de <?php echo htmlspecialchars($alumno['Nombre']); ?></h1>
 
-    <p><strong>Nombre:</strong> <?php echo htmlspecialchars($alumno['Nombre']); ?></p>
-    <p><strong>Primer Apellido:</strong> <?php echo htmlspecialchars($alumno['PrimerApellido']); ?></p>
-    <p><strong>Segundo Apellido:</strong> <?php echo htmlspecialchars($alumno['SegundoApellido']); ?></p>
-    <p><strong>Email:</strong> <?php echo htmlspecialchars($alumno['Email']); ?></p>
-    <p><strong>Actitud:</strong> <?php echo htmlspecialchars($alumno['Actitud']); ?></p>
-    <p><strong>Idiomas:</strong> <?php echo htmlspecialchars(implode(', ', $alumno['Idiomas'])); ?></p>
+    <div class="alumno-detalle">
+        <div class="datos-alumno">
+            <p><strong>Nombre:</strong> <?php echo htmlspecialchars($alumno['Nombre']); ?></p>
+            <p><strong>Primer Apellido:</strong> <?php echo htmlspecialchars($alumno['PrimerApellido']); ?></p>
+            <p><strong>Segundo Apellido:</strong> <?php echo htmlspecialchars($alumno['SegundoApellido']); ?></p>
+            <p><strong>Email:</strong> <?php echo htmlspecialchars($alumno['Email']); ?></p>
+            <p><strong>Actitud:</strong> <?php echo htmlspecialchars($alumno['Actitud']); ?></p>
+            <p><strong>Idiomas:</strong> <?php echo htmlspecialchars(implode(', ', $alumno['Idiomas'])); ?></p>
+        </div>
+
+        <?php if (!empty($alumno['Foto'])): ?>
+            <div class="foto-alumno-container">
+                <img src="<?php echo htmlspecialchars($alumno['Foto']); ?>" alt="Foto del Alumno" class="foto-alumno">
+            </div>
+        <?php else: ?>
+            <p>Foto no disponible.</p>
+        <?php endif; ?>
+    </div>
 
     <h2>Actividades</h2>
     <?php foreach ($alumno['Actividades'] as $actividad): ?>
@@ -46,12 +58,6 @@ if (!$alumno) {
         </div>
     <?php endforeach; ?>
 
-    <?php if (!empty($alumno['Foto'])): ?>
-        <img src="<?php echo htmlspecialchars($alumno['Foto']); ?>" alt="Foto del Alumno" class="foto-alumno">
-    <?php else: ?>
-        <p>Foto no disponible.</p>
-    <?php endif; ?>
-    
     <a href="index.php" class="btn">Volver</a>
 </body>
 </html>

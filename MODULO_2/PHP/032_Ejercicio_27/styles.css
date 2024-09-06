@@ -135,6 +135,28 @@ textarea {
     max-width: 90%;
 }
 
+/* Contenedor para los detalles del alumno */
+.alumno-detalle {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.datos-alumno {
+    flex: 2;
+}
+
+.foto-alumno-container {
+    flex: 1;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     .table-container {
         width: 100%;
