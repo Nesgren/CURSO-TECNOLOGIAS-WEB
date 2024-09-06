@@ -35,6 +35,16 @@ a.btn {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    text-align: center;
+    line-height: 1;
+    vertical-align: middle;
+    width: auto;
+}
+
+input[type="submit"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 input[type="submit"]:hover, 
