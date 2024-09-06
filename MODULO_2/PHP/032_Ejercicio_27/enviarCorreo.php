@@ -36,11 +36,6 @@ foreach ($alumno['Actividades'] as $actividad) {
     $body .= 'Nota: ' . htmlspecialchars($actividad['nota']) . '<br>';
     $body .= 'Comentario: ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
 }
-if (!empty($alumno['Foto'])) {
-    $body .= '<img src="' . htmlspecialchars($alumno['Foto']) . '" alt="Foto del Alumno" /><br>';
-} else {
-    $body .= 'Foto no disponible.<br>';
-}
 
 // Configurar el correo electrónico
 $mail = new PHPMailer(true);
@@ -57,8 +52,16 @@ try {
     $mail->addAddress($alumno['Email']);
     $mail->isHTML(true);
     $mail->Subject = 'Detalles del expediente';
-    $mail->Body    = $body;
 
+    // Adjuntar la imagen y usar CID
+    if (!empty($alumno['Foto'])) {
+        $mail->addAttachment($alumno['Foto'], 'foto_del_alumno.jpg');
+        $body .= '<img src="cid:foto_del_alumno.jpg" alt="Foto del Alumno" /><br>';
+    } else {
+        $body .= 'Foto no disponible.<br>';
+    }
+
+    $mail->Body = $body;
     $mail->send();
     echo "<script>alert('Correo enviado exitosamente.');</script>";
 } catch (Exception $e) {

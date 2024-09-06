@@ -42,8 +42,11 @@ foreach ($alumno['Actividades'] as $actividad) {
     $pdfHtml .= 'Nota: ' . htmlspecialchars($actividad['nota']) . '<br>';
     $pdfHtml .= 'Comentario: ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
 }
+
+// Usar URL absoluta para la imagen
+$fotoUrl = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/uploads/' . basename($alumno['Foto']);
 if (!empty($alumno['Foto'])) {
-    $pdfHtml .= '<img src="' . htmlspecialchars($alumno['Foto']) . '" alt="Foto del Alumno" /><br>';
+    $pdfHtml .= '<img src="' . htmlspecialchars($fotoUrl) . '" alt="Foto del Alumno" /><br>';
 } else {
     $pdfHtml .= 'Foto no disponible.<br>';
 }
