@@ -18,6 +18,7 @@ $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
         <table>
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Primer Apellido</th>
                     <th>Segundo Apellido</th>
@@ -33,6 +34,7 @@ $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
                 <?php if (!empty($expedientes)): ?>
                     <?php foreach ($expedientes as $expediente): ?>
                         <tr>
+                            <td data-label="ID"><?php echo htmlspecialchars($expediente['ID']); ?></td>
                             <td data-label="Nombre"><?php echo htmlspecialchars($expediente['Nombre']); ?></td>
                             <td data-label="Primer Apellido"><?php echo htmlspecialchars($expediente['PrimerApellido']); ?></td>
                             <td data-label="Segundo Apellido"><?php echo htmlspecialchars($expediente['SegundoApellido']); ?></td>
@@ -56,16 +58,16 @@ $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
                                 <?php endif; ?>
                             </td>
                             <td data-label="Acciones">
-                                <a href="detalleExpediente.php?email=<?php echo urlencode($expediente['Email']); ?>" class="btn">Ver detalle</a><br>
-                                <a href="generarPdf.php?email=<?php echo urlencode($expediente['Email']); ?>" class="btn">Generar PDF</a><br>
-                                <a href="enviarCorreo.php?email=<?php echo urlencode($expediente['Email']); ?>" class="btn">Enviar por Correo</a>
-                                <a href="borrarExpediente.php?email=<?php echo urlencode($expediente['Email']); ?>" class="btn btn-delete" onclick="return confirm('¿Estás seguro de que quieres eliminar este expediente?');">Borrar</a>
+                                <a href="detalleExpediente.php?id=<?php echo urlencode($expediente['ID']); ?>" class="btn">Ver detalle</a><br>
+                                <a href="generarPdf.php?id=<?php echo urlencode($expediente['ID']); ?>" class="btn">Generar PDF</a><br>
+                                <a href="enviarCorreo.php?id=<?php echo urlencode($expediente['ID']); ?>" class="btn">Enviar por Correo</a>
+                                <a href="borrarExpediente.php?id=<?php echo urlencode($expediente['ID']); ?>" class="btn btn-delete" onclick="return confirm('¿Estás seguro de que quieres eliminar este expediente?');">Borrar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="9">No hay expedientes disponibles.</td>
+                        <td colspan="10">No hay expedientes disponibles.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>

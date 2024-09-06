@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Crear el nuevo expediente
     $nuevoExpediente = [
+        'ID' => uniqid(),
         'Nombre' => $nombre,
         'PrimerApellido' => $apellido1,
         'SegundoApellido' => $apellido2,

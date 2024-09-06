@@ -1,6 +1,8 @@
 <?php
 require '../../../../vendor/autoload.php';
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -8,18 +10,18 @@ $jsonFilePath = 'expedienteAlumnos.json';
 $fichero = file_exists($jsonFilePath) ? file_get_contents($jsonFilePath) : '';
 $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
 
-$alumnoEmail = isset($_GET['email']) ? $_GET['email'] : '';
+$alumnoId = isset($_GET['id']) ? $_GET['id'] : '';
 $alumno = null;
 
 foreach ($expedientes as $expediente) {
-    if ($expediente['Email'] === $alumnoEmail) {
+    if ($expediente['ID'] === $alumnoId) {
         $alumno = $expediente;
         break;
     }
 }
 
 if (!$alumno) {
-    echo "No se encontró el expediente del alumno.";
+    echo "<script>alert('No se encontró el expediente del alumno.');</script>";
     exit;
 }
 
@@ -50,4 +52,4 @@ if (!empty($alumno['Foto'])) {
 $dompdf->loadHtml($pdfHtml);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
-$dompdf->stream('expediente-' . $alumno['Email'] . '.pdf');
+$dompdf->stream('expediente-' . $alumnoId . '.pdf');

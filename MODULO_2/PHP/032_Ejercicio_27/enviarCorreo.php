@@ -3,18 +3,16 @@ require '../../../../vendor/autoload.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 
 $jsonFilePath = 'expedienteAlumnos.json';
 $fichero = file_exists($jsonFilePath) ? file_get_contents($jsonFilePath) : '';
 $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
 
-$alumnoEmail = isset($_GET['email']) ? $_GET['email'] : '';
+$alumnoId = isset($_GET['id']) ? $_GET['id'] : '';
 $alumno = null;
 
 foreach ($expedientes as $expediente) {
-    if ($expediente['Email'] === $alumnoEmail) {
+    if ($expediente['ID'] === $alumnoId) {
         $alumno = $expediente;
         break;
     }
@@ -25,62 +23,40 @@ if (!$alumno) {
     exit;
 }
 
-$options = new Options();
-$options->set('isHtml5ParserEnabled', true);
-$options->set('defaultFont', 'Arial');
-$options->set('isRemoteEnabled', true);
-
-$dompdf = new Dompdf($options);
-
-$pdfHtml = '<h1>Datos del expediente</h1>';
-$pdfHtml .= '<strong>Nombre:</strong> ' . htmlspecialchars($alumno['Nombre']) . ' ' . htmlspecialchars($alumno['PrimerApellido']) . ' ' . htmlspecialchars($alumno['SegundoApellido']) . '<br>';
-$pdfHtml .= '<strong>Email:</strong> ' . htmlspecialchars($alumno['Email']) . '<br>';
-$pdfHtml .= '<strong>Actitud:</strong> ' . htmlspecialchars($alumno['Actitud']) . '<br>';
-$pdfHtml .= '<strong>Idiomas:</strong> ' . htmlspecialchars(implode(', ', $alumno['Idiomas'])) . '<br>';
-$pdfHtml .= '<strong>Actividades:</strong><br>';
-foreach ($alumno['Actividades'] as $actividad) {
-    $pdfHtml .= 'Nombre del Ejercicio: ' . htmlspecialchars($actividad['nombre']) . '<br>';
-    $pdfHtml .= 'Nota: ' . htmlspecialchars($actividad['nota']) . '<br>';
-    $pdfHtml .= 'Comentario: ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
-}
-
-$pdfHtml .= '<strong>Foto:</strong><br>';
-if (!empty($alumno['Foto'])) {
-    $pdfHtml .= '<img src="' . htmlspecialchars($alumno['Foto']) . '" alt="Foto del Alumno">';
-}
-
-$dompdf->loadHtml($pdfHtml);
-$dompdf->setPaper('A4', 'portrait');
-$dompdf->render();
-
 $mail = new PHPMailer(true);
 
 try {
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
+    $mail->Host = 'smtp.example.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'testnascor@gmail.com';
     $mail->Password = 'xlzd sbdg wadv lmju';
-    $mail->SMTPSecure = 'ssl';
-    $mail->Port = 465;
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
 
-    $mail->setFrom('testnascor@gmail.com', 'Test Nascor');
-    $mail->addAddress($alumno['Email']);
+    $mail->setFrom('from@example.com', 'Your Name');
+    $mail->addAddress('to@example.com', 'Recipient Name'); // Cambia el destinatario aquí si es necesario
 
     $mail->isHTML(true);
-    $mail->Subject = 'Expediente académico de ' . htmlspecialchars($alumno['Nombre']);
-
-    $mail->Body = '<h1>Expediente académico</h1>';
-    $mail->Body .= 'Nombre: ' . htmlspecialchars($alumno['Nombre']) . '<br>';
+    $mail->Subject = 'Expediente Alumno';
+    $mail->Body = 'Aquí están los datos del expediente del alumno: <br>';
+    $mail->Body .= 'Nombre: ' . htmlspecialchars($alumno['Nombre']) . ' ' . htmlspecialchars($alumno['PrimerApellido']) . ' ' . htmlspecialchars($alumno['SegundoApellido']) . '<br>';
+    $mail->Body .= 'Email: ' . htmlspecialchars($alumno['Email']) . '<br>';
+    $mail->Body .= 'Actitud: ' . htmlspecialchars($alumno['Actitud']) . '<br>';
     $mail->Body .= 'Idiomas: ' . htmlspecialchars(implode(', ', $alumno['Idiomas'])) . '<br>';
-
-    $mail->addStringAttachment($dompdf->output(), 'expediente.pdf');
+    $mail->Body .= 'Actividades: <br>';
+    foreach ($alumno['Actividades'] as $actividad) {
+        $mail->Body .= 'Nombre del Ejercicio: ' . htmlspecialchars($actividad['nombre']) . '<br>';
+        $mail->Body .= 'Nota: ' . htmlspecialchars($actividad['nota']) . '<br>';
+        $mail->Body .= 'Comentario: ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
+    }
+    if (!empty($alumno['Foto'])) {
+        $mail->Body .= 'Foto: <br><img src="' . htmlspecialchars($alumno['Foto']) . '" alt="Foto del Alumno">';
+    }
 
     $mail->send();
-
-    echo "<script>alert('El correo ha sido enviado correctamente.');</script>";
-    
+    echo "<script>alert('El correo ha sido enviado.');</script>";
 } catch (Exception $e) {
-    echo "<script>alert('Error al enviar el correo: {$mail->ErrorInfo}');</script>";
+    echo "<script>alert('No se pudo enviar el correo. Error: " . $mail->ErrorInfo . "');</script>";
 }
 ?>
