@@ -69,6 +69,6 @@ $expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
         </table>
     </div>
 
-    <a href="index.php" class="btn">Volver al Formulario</a>
+    <a href="añadirExpediente.php" class="btn">Añadir Expediente</a>
 </body>
 </html>
