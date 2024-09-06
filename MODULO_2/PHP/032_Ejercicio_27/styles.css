@@ -1,48 +1,43 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    color: #333;
 }
 
 h1 {
     background-color: #333;
     color: #fff;
-    padding: 10px 0;
+    padding: 20px;
     text-align: center;
+    margin: 0;
+    font-size: 2.5rem;
 }
 
-input[type="submit"] {
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
+input[type="submit"], 
 a.btn {
     display: inline-block;
     margin: 10px;
-    padding: 10px 20px;
+    padding: 12px 24px;
     background-color: #007bff;
     color: #fff;
     text-decoration: none;
-    border-radius: 5px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+input[type="submit"]:hover, 
 a.btn:hover {
     background-color: #0056b3;
 }
 
 .table-container {
-    width: 90%;
+    width: 95%;
     margin: 20px auto;
     overflow-x: auto;
 }
@@ -53,20 +48,23 @@ table {
     background-color: #fff;
 }
 
-table th, table td {
+table th, 
+table td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px;
     text-align: center;
     vertical-align: middle;
 }
 
 table th {
     background-color: #f2f2f2;
+    font-weight: bold;
 }
 
 .foto-alumno {
-    max-width: 100px;
+    max-width: 120px;
     height: auto;
+    border-radius: 50%;
 }
 
 .actividades-column {
@@ -75,9 +73,11 @@ table th {
 
 .card-ejercicio {
     border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
     background-color: #f9f9f9;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 form {
@@ -85,22 +85,26 @@ form {
     margin: 20px auto;
     padding: 20px;
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 fieldset {
     border: 1px solid #ddd;
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 15px;
+    border-radius: 4px;
 }
 
 legend {
     font-weight: bold;
+    font-size: 1.2rem;
 }
 
 label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    font-weight: 600;
 }
 
 input[type="text"],
@@ -108,17 +112,20 @@ input[type="email"],
 input[type="number"],
 textarea {
     width: 100%;
-    padding: 8px;
-    margin: 5px 0 10px 0;
+    padding: 10px;
+    margin: 5px 0 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 input[type="radio"],
 input[type="checkbox"] {
-    margin-right: 5px;
+    margin-right: 8px;
 }
 
 textarea {
-    height: 80px;
+    height: 100px;
+    resize: vertical;
 }
 
 @media (max-width: 768px) {
@@ -131,6 +138,6 @@ textarea {
     }
 
     .foto-alumno {
-        max-width: 80px;
+        max-width: 100px;
     }
 }
