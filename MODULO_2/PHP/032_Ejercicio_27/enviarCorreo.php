@@ -44,24 +44,25 @@ try {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'testnascor@gmail.com';
-    $mail->Password = 'xlzd sbdg wadv lmju';
+    $mail->Password = 'xlzd sbdg wadv lmju'; 
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
 
     $mail->setFrom('from@example.com', 'Tu Nombre');
-    $mail->addAddress($alumno['Email']);
+    $mail->addAddress($alumno['Email']); // Dirección de correo del alumno
     $mail->isHTML(true);
     $mail->Subject = 'Detalles del expediente';
 
     // Adjuntar la imagen y usar CID
     if (!empty($alumno['Foto'])) {
-        // La nueva ruta para la imagen
+        // La URL de la imagen en el servidor remoto
         $fotoUrl = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/uploads/' . str_replace('\\', '/', $alumno['Foto']);
         
-        // Descargar la imagen para poder adjuntarla
-        $localImagePath = '/tmp/' . basename($fotoUrl); 
+        // Descargar la imagen desde la URL
+        $localImagePath = sys_get_temp_dir() . '/' . basename($fotoUrl); 
         file_put_contents($localImagePath, file_get_contents($fotoUrl));
 
+        // Adjuntar la imagen con un CID para usarla en el correo
         $mail->addEmbeddedImage($localImagePath, 'foto_alumno');
         $body .= '<img src="cid:foto_alumno" alt="Foto del Alumno" style="max-width: 200px;" /><br>';
     } else {

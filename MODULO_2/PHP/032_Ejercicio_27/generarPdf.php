@@ -43,10 +43,16 @@ foreach ($alumno['Actividades'] as $actividad) {
     $pdfHtml .= 'Comentario: ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
 }
 
-// Usar la URL absoluta para la imagen
-$fotoUrl = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/uploads/' . str_replace('\\', '/', $alumno['Foto']);
+// Codificar la imagen en base64 e incrustarla
 if (!empty($alumno['Foto'])) {
-    $pdfHtml .= '<img src="' . htmlspecialchars($fotoUrl) . '" alt="Foto del Alumno" style="max-width: 200px; height: auto;" /><br>';
+    $fotoPath = 'uploads/' . str_replace('\\', '/', $alumno['Foto']);
+    if (file_exists($fotoPath)) {
+        $fotoData = file_get_contents($fotoPath);
+        $base64Foto = base64_encode($fotoData);
+        $pdfHtml .= '<img src="data:image/jpeg;base64,' . $base64Foto . '" alt="Foto del Alumno" style="max-width: 200px; height: auto;" /><br>';
+    } else {
+        $pdfHtml .= 'Foto no disponible.<br>';
+    }
 } else {
     $pdfHtml .= 'Foto no disponible.<br>';
 }
