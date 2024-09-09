@@ -126,8 +126,9 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="number"],
+input[type="select"],
 textarea {
-    max-width: 90%;
+    min-width: 90%;
     box-sizing: border-box;
     padding: 10px;
     margin: 5px 0 15px;
@@ -136,14 +137,15 @@ textarea {
 }
 
 input[type="radio"],
-input[type="checkbox"] {
+input[type="checkbox"],
+input[type="select"] {
     margin-right: 8px;
 }
 
 textarea {
     height: 100px;
     resize: vertical;
-    max-width: 90%;
+    min-width: 90%;
 }
 
 /* Contenedor para los detalles del alumno */
