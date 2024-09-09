@@ -11,7 +11,7 @@ $pdfDirectory = './pdfs/';
 $mailHost = 'smtp.gmail.com';
 $mailUsername = 'testnascor@gmail.com';
 $mailPassword = 'wuzk wmxn qaxt dnpi';
-$mailFrom = 'from@example.com';
+$mailFrom = 'testnascor@gmail.com'; // Cambia esto a una dirección válida
 $mailFromName = 'Tu Nombre';
 $mailPort = 587;
 
@@ -54,7 +54,7 @@ try {
     $mail->Port = $mailPort;
 
     // Habilitar la depuración
-    $mail->SMTPDebug = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->SMTPDebug = 2; // Nivel de depuración
 
     $mail->setFrom($mailFrom, $mailFromName);
     $mail->addAddress($alumno['Email']);
