@@ -12,7 +12,7 @@ $apellido1 = isset($_POST['apellido1']) ? $_POST['apellido1'] : '';
 $apellido2 = isset($_POST['apellido2']) ? $_POST['apellido2'] : '';
 $email = isset($_POST['email']) ? $_POST['email'] : '';
 $actitud = isset($_POST['actitud']) ? $_POST['actitud'] : '';
-$idiomas = isset($_POST['idiomas']) ? explode(', ', $_POST['idiomas']) : [];
+$idiomas = isset($_POST['idiomas']) ? $_POST['idiomas'] : [];
 $actividades = isset($_POST['actividad']) ? $_POST['actividad'] : [];
 
 // Manejo de archivo subido
@@ -36,7 +36,7 @@ foreach ($expedientes as &$expediente) {
         $expediente['SegundoApellido'] = $apellido2;
         $expediente['Email'] = $email;
         $expediente['Actitud'] = $actitud;
-        $expediente['Idiomas'] = $idiomas;
+        $expediente['Idiomas'] = $idiomas; // No se necesita explode() aquí
         $expediente['Actividades'] = $actividades;
         if ($foto) {
             $expediente['Foto'] = $foto;
