@@ -34,8 +34,8 @@ try {
     $mail->SMTPAuth = true;
     $mail->Username = 'testnascor@gmail.com';
     $mail->Password = 'xlzd sbdg wadv lmju';
-    $mail->SMTPSecure = 'ssl';
-    $mail->Port = 465;
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
 
     $mail->setFrom('from@example.com', 'Tu Nombre');
     $mail->addAddress($alumno['Email']);
