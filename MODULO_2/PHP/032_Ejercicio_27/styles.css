@@ -151,6 +151,7 @@ textarea {
 /* Contenedor para los detalles del alumno */
 .alumno-detalle {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     width: 80%;
