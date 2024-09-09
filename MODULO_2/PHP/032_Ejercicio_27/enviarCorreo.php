@@ -4,68 +4,88 @@ require '../../../../vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+// Configuración
 $jsonFilePath = 'expedienteAlumnos.json';
-$fichero = file_exists($jsonFilePath) ? file_get_contents($jsonFilePath) : '';
-$expedientes = !empty($fichero) ? json_decode($fichero, true) : [];
+$defaultPhotoPath = 'uploads/';
+$pdfDirectory = './pdfs/';
+$mailHost = 'smtp.gmail.com';
+$mailUsername = 'testnascor@gmail.com';
+$mailPassword = 'wuzk wmxn qaxt dnpi';
+$mailFrom = 'from@example.com';
+$mailFromName = 'Tu Nombre';
+$mailPort = 587;
 
-$expedienteId = isset($_GET['id']) ? $_GET['id'] : '';
-$alumno = null;
-
-// Buscar el expediente por id
-foreach ($expedientes as $expediente) {
-    if ($expediente['id'] === $expedienteId) {
-        $alumno = $expediente;
-        break;
-    }
+// Función para obtener datos del JSON
+function getExpedientes($path) {
+    return file_exists($path) ? json_decode(file_get_contents($path), true) : [];
 }
 
+// Función para encontrar un expediente por ID
+function findExpedienteById($expedientes, $id) {
+    foreach ($expedientes as $expediente) {
+        if ($expediente['id'] === $id) {
+            return $expediente;
+        }
+    }
+    return null;
+}
+
+// Obtener datos del JSON
+$expedientes = getExpedientes($jsonFilePath);
+$expedienteId = $_GET['id'] ?? '';
+$alumno = findExpedienteById($expedientes, $expedienteId);
+
 if (!$alumno) {
-    echo "<script>alert('No se encontró el expediente del alumno.');</script>";
+    echo "<script>alert('No se encontró el expediente del alumno.'); window.location.href='index.php';</script>";
     exit;
 }
 
-// Inicializar el objeto PHPMailer antes de usarlo
+// Inicializar PHPMailer
 $mail = new PHPMailer(true);
 
 try {
-    // Configurar el correo electrónico
+    // Configuración del correo
     $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
+    $mail->Host = $mailHost;
     $mail->SMTPAuth = true;
-    $mail->Username = 'testnascor@gmail.com';
-    $mail->Password = 'wuzk wmxn qaxt dnpi';
+    $mail->Username = $mailUsername;
+    $mail->Password = $mailPassword;
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
+    $mail->Port = $mailPort;
 
-    $mail->setFrom('from@example.com', 'Tu Nombre');
+    $mail->setFrom($mailFrom, $mailFromName);
     $mail->addAddress($alumno['Email']);
     $mail->isHTML(true);
     $mail->Subject = 'Detalles del expediente';
 
-    // Cuerpo del correo con datos del alumno
+    // Cuerpo del correo
     $mail->Body = '<h1>Datos del expediente</h1>';
     $mail->Body .= '<strong>Nombre:</strong> ' . htmlspecialchars($alumno['Nombre']) . ' ' . htmlspecialchars($alumno['PrimerApellido']) . ' ' . htmlspecialchars($alumno['SegundoApellido']) . '<br>';
     $mail->Body .= '<strong>Actitud:</strong> ' . htmlspecialchars($alumno['Actitud']) . '<br>';
     $mail->Body .= '<strong>Idiomas:</strong> ' . htmlspecialchars(implode(', ', $alumno['Idiomas'])) . '<br>';
     $mail->Body .= '<strong>Actividades:</strong><br>';
+    
     foreach ($alumno['Actividades'] as $actividad) {
-        $mail->Body .= 'Nombre del Ejercicio: ' . htmlspecialchars($actividad['nombre']) . '<br>';
-        $mail->Body .= 'Nota: ' . htmlspecialchars($actividad['nota']) . '<br>';
-        $mail->Body .= 'Comentario: ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
+        $mail->Body .= '<strong>Nombre del Ejercicio:</strong> ' . htmlspecialchars($actividad['nombre']) . '<br>';
+        $mail->Body .= '<strong>Nota:</strong> ' . htmlspecialchars($actividad['nota']) . '<br>';
+        $mail->Body .= '<strong>Comentario:</strong> ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
     }
 
     // Adjuntar la imagen si existe
     if (!empty($alumno['Foto'])) {
-        $fotoPath = 'uploads/' . str_replace('\\', '/', $alumno['Foto']);
-        $localImagePath = '/var/www/vhosts/franco.104cubes.com/httpdocs/MODULO_2/PHP/032_Ejercicio_27/' . $fotoPath;
-        $mail->addEmbeddedImage($localImagePath, 'foto_alumno');
-        $mail->Body .= '<img src="cid:foto_alumno" alt="Foto del Alumno" style="max-width: 200px;"><br>';
+        $fotoPath = $defaultPhotoPath . basename($alumno['Foto']);
+        if (file_exists($fotoPath)) {
+            $mail->addEmbeddedImage($fotoPath, 'foto_alumno');
+            $mail->Body .= '<img src="cid:foto_alumno" alt="Foto del Alumno" style="max-width: 200px;"><br>';
+        } else {
+            $mail->Body .= 'Foto no disponible.<br>';
+        }
     } else {
         $mail->Body .= 'Foto no disponible.<br>';
     }
 
     // Adjuntar el PDF
-    $pdfFilePath = './pdfs/expediente_' . $expedienteId . '.pdf';
+    $pdfFilePath = $pdfDirectory . 'expediente_' . $expedienteId . '.pdf';
     if (file_exists($pdfFilePath)) {
         $mail->addAttachment($pdfFilePath);
     } else {
@@ -74,11 +94,10 @@ try {
 
     // Enviar el correo
     $mail->send();
-    echo "<script>alert('Correo enviado exitosamente.');</script>";
+    echo "<script>alert('Correo enviado exitosamente.'); window.location.href='index.php';</script>";
 } catch (Exception $e) {
-    echo "<script>alert('No se pudo enviar el correo. Mailer Error: {$mail->ErrorInfo}');</script>";
+    echo "<script>alert('No se pudo enviar el correo. Mailer Error: {$mail->ErrorInfo}'); window.location.href='index.php';</script>";
 }
 
-header('Location: index.php');
 exit;
 ?>
