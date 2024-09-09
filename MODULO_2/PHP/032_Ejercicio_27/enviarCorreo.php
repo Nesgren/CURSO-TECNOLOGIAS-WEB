@@ -53,6 +53,9 @@ try {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = $mailPort;
 
+    // Habilitar la depuración
+    $mail->SMTPDebug = PHPMailer::ENCRYPTION_STARTTLS;
+
     $mail->setFrom($mailFrom, $mailFromName);
     $mail->addAddress($alumno['Email']);
     $mail->isHTML(true);
@@ -96,7 +99,8 @@ try {
     $mail->send();
     echo "<script>alert('Correo enviado exitosamente.'); window.location.href='index.php';</script>";
 } catch (Exception $e) {
-    echo "<script>alert('No se pudo enviar el correo. Mailer Error: {$mail->ErrorInfo}'); window.location.href='index.php';</script>";
+    // Mostrar error detallado
+    echo "<script>alert('No se pudo enviar el correo. Mailer Error: " . addslashes($mail->ErrorInfo) . "'); window.location.href='index.php';</script>";
 }
 
 exit;
