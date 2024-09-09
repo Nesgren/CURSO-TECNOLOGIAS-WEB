@@ -24,14 +24,12 @@ if (!$alumno) {
     exit;
 }
 
-$options = new Options();
-$options->set('isHtml5ParserEnabled', true);
-$options->set('defaultFont', 'Arial');
-$options->set('isRemoteEnabled', true);
-
-$dompdf = new Dompdf($options);
-
-$pdfHtml = '<h1>Datos del expediente</h1>';
+// Generar el contenido del PDF
+$pdfHtml  = '<!DOCTYPE html><html><head><style>';
+$pdfHtml .= 'body { font-family: Arial, sans-serif; font-size: 10px; }';
+$pdfHtml .= 'h1 { font-size: 14px; }';
+$pdfHtml .= '</style></head><body>';
+$pdfHtml .= '<h1>Datos del expediente</h1>';
 $pdfHtml .= '<strong>Nombre:</strong> ' . htmlspecialchars($alumno['Nombre']) . ' ' . htmlspecialchars($alumno['PrimerApellido']) . ' ' . htmlspecialchars($alumno['SegundoApellido']) . '<br>';
 $pdfHtml .= '<strong>Email:</strong> ' . htmlspecialchars($alumno['Email']) . '<br>';
 $pdfHtml .= '<strong>Actitud:</strong> ' . htmlspecialchars($alumno['Actitud']) . '<br>';
@@ -43,35 +41,31 @@ foreach ($alumno['Actividades'] as $actividad) {
     $pdfHtml .= 'Comentario: ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
 }
 
-// Codificar la imagen en base64 e incrustarla
+// Incluir la foto en el PDF si existe
+$fotoUrl = 'https://franco.104cubes.com/MODULO_2/PHP/032_Ejercicio_27/' . str_replace('\\', '/', $alumno['Foto']);
+$pdfHtml .= '<strong>Foto:</strong><br>';
 if (!empty($alumno['Foto'])) {
-    $fotoPath = 'uploads/' . str_replace('\\', '/', $alumno['Foto']);
-    if (file_exists($fotoPath)) {
-        $fotoData = file_get_contents($fotoPath);
-        $base64Foto = base64_encode($fotoData);
-        $pdfHtml .= '<img src="data:image/jpeg;base64,' . $base64Foto . '" alt="Foto del Alumno" style="max-width: 200px; height: auto;" /><br>';
-    } else {
-        $pdfHtml .= 'Foto no disponible.<br>';
-    }
+    $pdfHtml .= '<img src="' . htmlspecialchars($fotoUrl) . '" alt="Foto del Alumno" style="max-width: 200px;" /><br>';
 } else {
     $pdfHtml .= 'Foto no disponible.<br>';
 }
 
+$pdfHtml .= '</body></html>';
+
+// Configuración de Dompdf
+$options = new Options();
+$options->set('isHtml5ParserEnabled', true);
+$options->set('isRemoteEnabled', true);
+
+$dompdf = new Dompdf($options);
 $dompdf->loadHtml($pdfHtml);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
+// Guardar el PDF
 $pdfOutput = $dompdf->output();
 $pdfFileName = 'expediente_' . $expedienteId . '.pdf';
-file_put_contents($pdfFileName, $pdfOutput);
+file_put_contents('./pdfs/' . $pdfFileName, $pdfOutput);
 
-// Redirigir a la descarga del archivo PDF
-header('Content-Type: application/pdf');
-header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-header('Content-Transfer-Encoding: binary');
-header('Content-Length: ' . filesize($pdfFileName));
-readfile($pdfFileName);
-
-unlink($pdfFileName);
-exit;
+echo "PDF generado: " . $pdfFileName;
 ?>

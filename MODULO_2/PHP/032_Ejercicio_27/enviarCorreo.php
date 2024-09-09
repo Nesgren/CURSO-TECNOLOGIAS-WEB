@@ -24,52 +24,52 @@ if (!$alumno) {
     exit;
 }
 
-// Crear el cuerpo del correo electrónico
-$body = '<h1>Datos del expediente</h1>';
-$body .= '<strong>Nombre:</strong> ' . htmlspecialchars($alumno['Nombre']) . ' ' . htmlspecialchars($alumno['PrimerApellido']) . ' ' . htmlspecialchars($alumno['SegundoApellido']) . '<br>';
-$body .= '<strong>Email:</strong> ' . htmlspecialchars($alumno['Email']) . '<br>';
-$body .= '<strong>Actitud:</strong> ' . htmlspecialchars($alumno['Actitud']) . '<br>';
-$body .= '<strong>Idiomas:</strong> ' . htmlspecialchars(implode(', ', $alumno['Idiomas'])) . '<br>';
-$body .= '<strong>Actividades:</strong><br>';
-foreach ($alumno['Actividades'] as $actividad) {
-    $body .= 'Nombre del Ejercicio: ' . htmlspecialchars($actividad['nombre']) . '<br>';
-    $body .= 'Nota: ' . htmlspecialchars($actividad['nota']) . '<br>';
-    $body .= 'Comentario: ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
-}
-
-// Configurar el correo electrónico
+// Configurar el correo
 $mail = new PHPMailer(true);
 try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'testnascor@gmail.com';
-    $mail->Password = 'xlzd sbdg wadv lmju'; 
+    $mail->Password = 'xlzd sbdg wadv lmju';
     $mail->SMTPSecure = 'ssl';
     $mail->Port = 465;
 
     $mail->setFrom('from@example.com', 'Tu Nombre');
-    $mail->addAddress($alumno['Email']); // Dirección de correo del alumno
+    $mail->addAddress($alumno['Email']);
     $mail->isHTML(true);
     $mail->Subject = 'Detalles del expediente';
 
-    // Adjuntar la imagen y usar CID
-    if (!empty($alumno['Foto'])) {
-        // La URL de la imagen en el servidor remoto
-        $fotoUrl = 'https://franco.104cubes.com/MODULO_2/PHP/028_Ejercicio_24/uploads/' . str_replace('\\', '/', $alumno['Foto']);
-        
-        // Descargar la imagen desde la URL
-        $localImagePath = sys_get_temp_dir() . '/' . basename($fotoUrl); 
-        file_put_contents($localImagePath, file_get_contents($fotoUrl));
-
-        // Adjuntar la imagen con un CID para usarla en el correo
-        $mail->addEmbeddedImage($localImagePath, 'foto_alumno');
-        $body .= '<img src="cid:foto_alumno" alt="Foto del Alumno" style="max-width: 200px;" /><br>';
-    } else {
-        $body .= 'Foto no disponible.<br>';
+    // Cuerpo del correo con datos del alumno
+    $mail->Body = '<h1>Datos del expediente</h1>';
+    $mail->Body .= '<strong>Nombre:</strong> ' . htmlspecialchars($alumno['Nombre']) . ' ' . htmlspecialchars($alumno['PrimerApellido']) . ' ' . htmlspecialchars($alumno['SegundoApellido']) . '<br>';
+    $mail->Body .= '<strong>Actitud:</strong> ' . htmlspecialchars($alumno['Actitud']) . '<br>';
+    $mail->Body .= '<strong>Idiomas:</strong> ' . htmlspecialchars(implode(', ', $alumno['Idiomas'])) . '<br>';
+    $mail->Body .= '<strong>Actividades:</strong><br>';
+    foreach ($alumno['Actividades'] as $actividad) {
+        $mail->Body .= 'Nombre del Ejercicio: ' . htmlspecialchars($actividad['nombre']) . '<br>';
+        $mail->Body .= 'Nota: ' . htmlspecialchars($actividad['nota']) . '<br>';
+        $mail->Body .= 'Comentario: ' . htmlspecialchars($actividad['comentario']) . '<br><br>';
     }
 
-    $mail->Body = $body;
+    // Adjuntar la imagen si existe
+    if (!empty($alumno['Foto'])) {
+        $fotoPath = 'uploads/' . str_replace('\\', '/', $alumno['Foto']);
+        $localImagePath = '/var/www/vhosts/franco.104cubes.com/httpdocs/MODULO_2/PHP/032_Ejercicio_27/' . $fotoPath;
+        $mail->addEmbeddedImage($localImagePath, 'foto_alumno');
+        $mail->Body .= '<img src="cid:foto_alumno" alt="Foto del Alumno" style="max-width: 200px;"><br>';
+    } else {
+        $mail->Body .= 'Foto no disponible.<br>';
+    }
+
+    // Adjuntar el PDF
+    $pdfFilePath = './pdfs/expediente_' . $expedienteId . '.pdf';
+    if (file_exists($pdfFilePath)) {
+        $mail->addAttachment($pdfFilePath);
+    } else {
+        throw new Exception('El archivo PDF no existe: ' . $pdfFilePath);
+    }
+
     $mail->send();
     echo "<script>alert('Correo enviado exitosamente.');</script>";
 } catch (Exception $e) {
