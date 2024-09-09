@@ -83,14 +83,6 @@ try {
         $body .= 'Foto no disponible.<br>';
     }
 
-    // Adjuntar el PDF
-    $pdfFilePath = $pdfDirectory . 'expediente_' . $expedienteId . '.pdf';
-    if (file_exists($pdfFilePath)) {
-        $mail->addAttachment($pdfFilePath);
-    } else {
-        throw new Exception('El archivo PDF no existe: ' . $pdfFilePath);
-    }
-
     $mail->Body = $body;
     $mail->send();
     echo "<script>alert('Correo enviado exitosamente.');</script>";
