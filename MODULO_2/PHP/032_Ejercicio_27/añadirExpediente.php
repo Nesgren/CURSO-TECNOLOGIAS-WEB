@@ -31,7 +31,19 @@
                 <input type="text" name="actividad[0][nombre]" required><br>
                 
                 <label>Nota:</label>
-                <input type="number" name="actividad[0][nota]" min="0" max="10" required><br>
+                <select name="actividad[0][nota]" required>
+                    <option value="">Selecciona una nota</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select><br>
                 
                 <label>Comentario:</label>
                 <textarea name="actividad[0][comentario]"></textarea><br>
@@ -41,7 +53,19 @@
                 <input type="text" name="actividad[1][nombre]" required><br>
                 
                 <label>Nota:</label>
-                <input type="number" name="actividad[1][nota]" min="0" max="10" required><br>
+                <select name="actividad[1][nota]" required>
+                    <option value="">Selecciona una nota</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select><br>
                 
                 <label>Comentario:</label>
                 <textarea name="actividad[1][comentario]"></textarea><br>
@@ -51,7 +75,19 @@
                 <input type="text" name="actividad[2][nombre]" required><br>
                 
                 <label>Nota:</label>
-                <input type="number" name="actividad[2][nota]" min="0" max="10" required><br>
+                <select name="actividad[2][nota]" required>
+                    <option value="">Selecciona una nota</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select><br>
                 
                 <label>Comentario:</label>
                 <textarea name="actividad[2][comentario]"></textarea><br>
