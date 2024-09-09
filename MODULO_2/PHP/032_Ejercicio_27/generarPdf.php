@@ -62,10 +62,6 @@ $dompdf->loadHtml($pdfHtml);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
-// Guardar el PDF
-$pdfOutput = $dompdf->output();
-$pdfFileName = 'expediente_' . $expedienteId . '.pdf';
-file_put_contents('./pdfs/' . $pdfFileName, $pdfOutput);
-
-echo "PDF generado: " . $pdfFileName;
+// Forzar la descarga del PDF
+$dompdf->stream('expediente_' . $expedienteId . '.pdf', array("Attachment" => true));
 ?>
