@@ -47,17 +47,16 @@ if (!$alumno) {
         <?php else: ?>
             <p>Foto no disponible.</p>
         <?php endif; ?>
+        <h2>Actividades</h2>
+        <?php foreach ($alumno['Actividades'] as $actividad): ?>
+            <div class="card-ejercicio">
+                <p><strong>Nombre del Ejercicio:</strong> <?php echo htmlspecialchars($actividad['nombre']); ?></p>
+                <p><strong>Nota:</strong> <?php echo htmlspecialchars($actividad['nota']); ?></p>
+                <p><strong>Comentario:</strong> <?php echo htmlspecialchars($actividad['comentario']); ?></p>
+            </div>
+        <?php endforeach; ?>
+    
+        <a href="index.php" class="btn">Volver</a>
     </div>
-
-    <h2>Actividades</h2>
-    <?php foreach ($alumno['Actividades'] as $actividad): ?>
-        <div class="card-ejercicio">
-            <p><strong>Nombre del Ejercicio:</strong> <?php echo htmlspecialchars($actividad['nombre']); ?></p>
-            <p><strong>Nota:</strong> <?php echo htmlspecialchars($actividad['nota']); ?></p>
-            <p><strong>Comentario:</strong> <?php echo htmlspecialchars($actividad['comentario']); ?></p>
-        </div>
-    <?php endforeach; ?>
-
-    <a href="index.php" class="btn">Volver</a>
 </body>
 </html>

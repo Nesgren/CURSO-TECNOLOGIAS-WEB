@@ -36,7 +36,7 @@ foreach ($expedientes as &$expediente) {
         $expediente['SegundoApellido'] = $apellido2;
         $expediente['Email'] = $email;
         $expediente['Actitud'] = $actitud;
-        $expediente['Idiomas'] = $idiomas; // No se necesita explode() aquí
+        $expediente['Idiomas'] = $idiomas;
         $expediente['Actividades'] = $actividades;
         if ($foto) {
             $expediente['Foto'] = $foto;
