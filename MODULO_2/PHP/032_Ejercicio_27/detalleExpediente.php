@@ -47,6 +47,8 @@ if (!$alumno) {
         <?php else: ?>
             <p>Foto no disponible.</p>
         <?php endif; ?>
+
+        <div>
         <h2>Actividades</h2>
         <?php foreach ($alumno['Actividades'] as $actividad): ?>
             <div class="card-ejercicio">
@@ -57,6 +59,7 @@ if (!$alumno) {
         <?php endforeach; ?>
     
         <a href="index.php" class="btn">Volver</a>
+        </div>
     </div>
 </body>
 </html>
