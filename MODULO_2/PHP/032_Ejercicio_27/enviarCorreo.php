@@ -24,22 +24,6 @@ if (!$alumno) {
     exit;
 }
 
-// Configurar el correo
-$mail = new PHPMailer(true);
-try {
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com';
-    $mail->SMTPAuth = true;
-    $mail->Username = 'testnascor@gmail.com';
-    $mail->Password = 'xlzd sbdg wadv lmju';
-    $mail->SMTPSecure = 'ssl';
-    $mail->Port = 465;
-
-    $mail->setFrom('from@example.com', 'Tu Nombre');
-    $mail->addAddress($alumno['Email']);
-    $mail->isHTML(true);
-    $mail->Subject = 'Detalles del expediente';
-
     // Cuerpo del correo con datos del alumno
     $mail->Body = '<h1>Datos del expediente</h1>';
     $mail->Body .= '<strong>Nombre:</strong> ' . htmlspecialchars($alumno['Nombre']) . ' ' . htmlspecialchars($alumno['PrimerApellido']) . ' ' . htmlspecialchars($alumno['SegundoApellido']) . '<br>';
@@ -70,6 +54,23 @@ try {
         throw new Exception('El archivo PDF no existe: ' . $pdfFilePath);
     }
 
+// Configurar el correo electrónico
+$mail = new PHPMailer(true);
+try {
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'testnascor@gmail.com';
+    $mail->Password = 'xlzd sbdg wadv lmju'; 
+    $mail->SMTPSecure = 'ssl';
+    $mail->Port = 465;
+
+    $mail->setFrom('from@example.com', 'Tu Nombre');
+    $mail->addAddress($alumno['Email']);
+    $mail->isHTML(true);
+    $mail->Subject = 'Detalles del expediente';
+
+    $mail->Body = $body;
     $mail->send();
     echo "<script>alert('Correo enviado exitosamente.');</script>";
 } catch (Exception $e) {
