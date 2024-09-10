@@ -27,6 +27,14 @@ class Persona {
     function getGenero() { 
         return $this->genero;
     }
+
+    function VerDatos() {
+        echo $this->getNombre() . " " . $this->getApellido1() . " " . $this->getApellido2() . " " . $this->getFechaNac() . " " . $this->getGenero();
+    }
+
+    function VerDatosFuncion() {
+        return 'verDatosFuncion:<br>' . $this->getNombre() . " " . $this->getApellido1() . " " . $this->getApellido2() . " " . $this->getFechaNac() . " " . $this->getGenero();
+    }
 }
 
 $franco = new Persona();
@@ -36,7 +44,9 @@ $franco->apellido2 = "Sutera";
 $franco->fechaNac = "23/11/1993";
 $franco->genero = "Masculino";
 
-echo $franco->getNombre() . " " . $franco->getApellido1() . " " . $franco->getApellido2() . " " . $franco->getFechaNac() . " " . $franco->getGenero();
+echo $franco->VerDatos();
+
+echo $franco->VerDatosFuncion();
 
 $bruno = new Persona();
 $bruno->nombre = "Bruno";
@@ -47,4 +57,5 @@ $bruno->genero = "Masculino";
 
 echo "<hr>";
 
-echo $bruno->nombre . " " . $bruno->apellido1 . " " . $bruno->apellido2 . " " . $bruno->fechaNac . " " . $bruno->genero;
+echo $bruno->VerDatos();
+
