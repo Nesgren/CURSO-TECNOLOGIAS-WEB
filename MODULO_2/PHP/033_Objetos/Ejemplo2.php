@@ -2,12 +2,34 @@
 
 class Persona {
     // Atributos
-    public $nombre;
-    public $apellido1;
-    public $apellido2;
-    public $fechaNac;
-    public $genero;
-    // Metodos
+    private $nombre;
+    private $apellido1;
+    private $apellido2;
+    private $fechaNac;
+    private $genero;
+
+    // Metodos setters
+    function setNombre($nombre) {
+        $this->nombre = $nombre;
+    }
+
+    function setApellido1($apellido1) {
+        $this->apellido1 = $apellido1;
+    }
+
+    function setApellido2($apellido2) {
+        $this->apellido2 = $apellido2;
+    }
+
+    function setFechaNac($fechaNac) {
+        $this->fechaNac = $fechaNac;
+    }
+
+    function setGenero($genero) {
+        $this->genero = $genero;
+    }
+
+    // Metodos getters
     function getNombre() {
         return $this->nombre;
     }
@@ -38,22 +60,22 @@ class Persona {
 }
 
 $franco = new Persona();
-$franco->nombre = "Franco";
-$franco->apellido1 = "Zuccorononno";
-$franco->apellido2 = "Sutera";
-$franco->fechaNac = "23/11/1993";
-$franco->genero = "Masculino";
+$franco->setNombre('Franco');
+$franco->setApellido1('Zuccorononno');
+$franco->setApellido2('Sutera');
+$franco->setFechaNac('23/11/1993');
+$franco->setGenero('Masculino');
 
 echo $franco->VerDatos();
 echo "<hr>";
 echo $franco->VerDatosFuncion();
 
 $bruno = new Persona();
-$bruno->nombre = "Bruno";
-$bruno->apellido1 = "Zuccorononno";
-$bruno->apellido2 = "Sutera";
-$bruno->fechaNac = "31/03/1995";
-$bruno->genero = "Masculino";
+$bruno->setNombre('Bruno');
+$bruno->setApellido1('Zuccorononno');
+$bruno->setApellido2('Sutera');
+$bruno->setFechaNac('31/03/1995');
+$brunoo->setGenero('Masculino');
 
 echo "<hr>";
 
