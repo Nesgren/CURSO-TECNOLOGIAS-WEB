@@ -67,7 +67,7 @@ $franco->setFechaNac('23/11/1993');
 $franco->setGenero('Masculino');
 
 echo $franco->VerDatos();
-echo "<hr>";
+echo "<br>";
 echo $franco->VerDatosFuncion();
 
 $bruno = new Persona();
@@ -80,6 +80,6 @@ $bruno->setGenero('Masculino');
 echo "<hr>";
 
 echo $bruno->VerDatos();
-echo "<hr>";
+echo "<br>";
 echo $bruno->VerDatosFuncion();
 ?>
