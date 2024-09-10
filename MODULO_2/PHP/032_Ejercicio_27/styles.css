@@ -205,7 +205,8 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 20px;
+    margin: 1rem auto;
+    padding: 1rem;
 }
 
 @media (max-width: 768px) {
