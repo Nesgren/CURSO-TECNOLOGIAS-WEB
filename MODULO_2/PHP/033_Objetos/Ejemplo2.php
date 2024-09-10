@@ -8,7 +8,7 @@ class Persona {
     private $fechaNac;
     private $genero;
 
-    // Metodos setters
+    // Métodos setters
     function setNombre($nombre) {
         $this->nombre = $nombre;
     }
@@ -29,7 +29,7 @@ class Persona {
         $this->genero = $genero;
     }
 
-    // Metodos getters
+    // Métodos getters
     function getNombre() {
         return $this->nombre;
     }
@@ -75,10 +75,11 @@ $bruno->setNombre('Bruno');
 $bruno->setApellido1('Zuccorononno');
 $bruno->setApellido2('Sutera');
 $bruno->setFechaNac('31/03/1995');
-$brunoo->setGenero('Masculino');
+$bruno->setGenero('Masculino'); 
 
 echo "<hr>";
 
 echo $bruno->VerDatos();
 echo "<hr>";
 echo $bruno->VerDatosFuncion();
+?>
