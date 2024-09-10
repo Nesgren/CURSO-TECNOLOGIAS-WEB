@@ -8,6 +8,15 @@ class Persona {
     private $fechaNac;
     private $genero;
 
+    // Constructores
+    function __construct($nombre, $apellido1, $apellido2, $fechaNac, $genero) {
+        $this->setNombre($nombre);
+        $this->setApellido1($apellido1);
+        $this->setApellido2($apellido2);
+        $this->setFechaNac($fechaNac);
+        $this->setGenero($genero);
+    }
+
     // Métodos setters
     function setNombre($nombre) {
         $this->nombre = $nombre;
@@ -59,23 +68,13 @@ class Persona {
     }
 }
 
-$franco = new Persona();
-$franco->setNombre('Franco');
-$franco->setApellido1('Zuccorononno');
-$franco->setApellido2('Sutera');
-$franco->setFechaNac('23/11/1993');
-$franco->setGenero('Masculino');
+$franco = new Persona('Franco', 'Zuccorononno', 'Sutera', '31/03/1995', 'Masculino');
 
 echo $franco->VerDatos();
 echo "<br>";
 echo $franco->VerDatosFuncion();
 
-$bruno = new Persona();
-$bruno->setNombre('Bruno');
-$bruno->setApellido1('Zuccorononno');
-$bruno->setApellido2('Sutera');
-$bruno->setFechaNac('31/03/1995');
-$bruno->setGenero('Masculino'); 
+$bruno = new Persona('Bruno', 'Zuccorononno', 'Sutera', '31/03/1995', 'Masculino');
 
 echo "<hr>";
 
