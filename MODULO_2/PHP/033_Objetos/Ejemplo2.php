@@ -29,7 +29,7 @@ class Persona {
     }
 
     function VerDatos() {
-        echo $this->getNombre() . " " . $this->getApellido1() . " " . $this->getApellido2() . " " . $this->getFechaNac() . " " . $this->getGenero();
+        echo $this->getNombre() . " " . $this->getApellido1() . " " . $this->getApellido2() . " " . $this->getFechaNac() . " " . $this->getGenero(); . "<br>";
     }
 
     function VerDatosFuncion() {
