@@ -34,3 +34,25 @@ class Usuario extends Persona {
 }
 
 $Usuario = new Usuario('Franco', 'Zuccorononno', 'Sutera', '23/11/1993', 'Masculino', '123', 'admin');
+
+echo $Usuario->getRol();
+
+echo $Usuario->getUsername();
+
+echo $Usuario->getPassword();
+
+echo $Usuario->getId();
+
+echo $Usuario->getNombre();
+
+echo $Usuario->getFechaNac();
+
+echo $Usuario->getGenero();
+
+echo $Usuario->getApellido1();
+
+echo $Usuario->getApellido2();
+
+echo $Usuario->VerDatos();
+
+echo $Usuario->VerDatosFuncion();
