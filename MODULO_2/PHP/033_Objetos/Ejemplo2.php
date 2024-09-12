@@ -56,3 +56,5 @@ echo $Usuario->getApellido2();
 echo $Usuario->VerDatos();
 
 echo $Usuario->VerDatosFuncion();
+
+?>
