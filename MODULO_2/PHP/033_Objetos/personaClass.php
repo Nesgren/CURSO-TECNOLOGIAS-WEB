@@ -81,3 +81,42 @@ $usuario = new Usuario('Franco', 'Zuccorononno', 'Sutera', '23/11/1993', 'Mascul
 // Mostrar los datos del usuario
 $usuario->VerDatos();
 ?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos del Usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .persona-datos, .usuario-datos {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            margin: 5px 0;
+            color: #555;
+        }
+        strong {
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+    <h1>Información del Usuario</h1>
+</body>
+</html>
