@@ -1,84 +1,36 @@
 <?php
+require_once 'personaClass.php';
 
-class Persona {
-    // Atributos
-    private $nombre;
-    private $apellido1;
-    private $apellido2;
-    private $fechaNac;
-    private $genero;
-
-    // Constructores
-    function __construct($nombre, $apellido1, $apellido2, $fechaNac, $genero) {
-        $this->setNombre($nombre);
-        $this->setApellido1($apellido1);
-        $this->setApellido2($apellido2);
-        $this->setFechaNac($fechaNac);
-        $this->setGenero($genero);
+class Usuario extends Persona {
+    public $id;
+    //getters y setters
+    function getId() {
+        return $this->id;
     }
-
-    // Métodos setters
-    function setNombre($nombre) {
-        $this->nombre = $nombre;
+    function setId($id) {
+        $this->id = $id;
     }
-
-    function setApellido1($apellido1) {
-        $this->apellido1 = $apellido1;
+    public $username;
+    function getUsername() {
+        return $this->username;
     }
-
-    function setApellido2($apellido2) {
-        $this->apellido2 = $apellido2;
+    function setUsername($username) {
+        $this->username = $username;
     }
-
-    function setFechaNac($fechaNac) {
-        $this->fechaNac = $fechaNac;
+    public $password;
+    function getPassword() {
+        return $this->password;
     }
-
-    function setGenero($genero) {
-        $this->genero = $genero;
+    function setPassword($password) {
+        $this->password = $password;
     }
-
-    // Métodos getters
-    function getNombre() {
-        return $this->nombre;
+    public $rol;
+    function getRol() {
+        return $this->rol;
     }
-
-    function getApellido1() {
-        return $this->apellido1;
-    }
-
-    function getApellido2() {
-        return $this->apellido2;
-    }
-
-    function getFechaNac() {
-        return $this->fechaNac;
-    }
-
-    function getGenero() { 
-        return $this->genero;
-    }
-
-    function VerDatos() {
-        echo $this->getNombre() . " " . $this->getApellido1() . " " . $this->getApellido2() . " " . $this->getFechaNac() . " " . $this->getGenero() . "<br>";
-    }
-
-    function VerDatosFuncion() {
-        return 'verDatosFuncion:<br><br> ' . $this->getNombre() . " " . $this->getApellido1() . " " . $this->getApellido2() . " " . $this->getFechaNac() . " " . $this->getGenero() . "<br>";
+    function setRol($rol) {
+        $this->rol = $rol;
     }
 }
 
-$franco = new Persona('Franco', 'Zuccorononno', 'Sutera', '31/03/1995', 'Masculino');
-
-echo $franco->VerDatos();
-echo "<br>";
-echo $franco->VerDatosFuncion();
-
-$bruno = new Persona('Bruno', 'Zuccorononno', 'Sutera', '31/03/1995', 'Masculino');
-
-echo "<hr>";
-
-echo $bruno->VerDatos();
-echo "<br>";
-echo $bruno->VerDatosFuncion();
-?>
+$Usuario = new Usuario('Franco', 'Zuccorononno', 'Sutera', '23/11/1993', 'Masculino', '123', 'admin');
