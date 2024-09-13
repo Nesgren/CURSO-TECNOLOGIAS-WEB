@@ -16,19 +16,31 @@ $expedientes = $gestor->obtenerExpedientes();
     <h1>Lista de Expedientes</h1>
     <div class="container">
         <a href="crear.php" class="btn">Crear nuevo expediente</a>
-        <ul>
-            <?php foreach ($expedientes as $expediente): ?>
-                <li class="card">
-                    <div class="card-content">
-                        <?php if ($expediente->getArchivo()): ?>
-                            <img src="../uploads/<?= htmlspecialchars($expediente->getArchivo()); ?>" alt="Archivo">
-                        <?php endif; ?>
-                        <div>
-                            <h3><?= htmlspecialchars($expediente->getNombre() . ' ' . $expediente->getApellido1() . ' ' . $expediente->getApellido2()); ?></h3>
-                            <p>Email: <?= htmlspecialchars($expediente->getEmail()); ?></p>
-                            <p>Actitud: <?= htmlspecialchars($expediente->getActitud()); ?></p>
-                            <p>Idiomas: <?= htmlspecialchars(implode(', ', $expediente->getIdiomas())); ?></p>
-                            <p>Actividades:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Actitud</th>
+                    <th>Idiomas</th>
+                    <th>Actividades</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($expedientes as $expediente): ?>
+                    <tr>
+                        <td>
+                            <?php if ($expediente->getArchivo()): ?>
+                                <img src="../uploads/<?= htmlspecialchars($expediente->getArchivo()); ?>" alt="Archivo" class="table-img">
+                            <?php endif; ?>
+                        </td>
+                        <td><?= htmlspecialchars($expediente->getNombre() . ' ' . $expediente->getApellido1() . ' ' . $expediente->getApellido2()); ?></td>
+                        <td><?= htmlspecialchars($expediente->getEmail()); ?></td>
+                        <td><?= htmlspecialchars($expediente->getActitud()); ?></td>
+                        <td><?= htmlspecialchars(implode(', ', $expediente->getIdiomas())); ?></td>
+                        <td>
                             <ul>
                                 <?php foreach ($expediente->getActividades() as $actividad): ?>
                                     <li>
@@ -37,15 +49,15 @@ $expedientes = $gestor->obtenerExpedientes();
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
-                        </div>
-                    </div>
-                    <div class="card-actions">
-                        <a href="editar.php?id=<?= htmlspecialchars($expediente->getId()); ?>">Editar</a>
-                        <a href="eliminar.php?id=<?= htmlspecialchars($expediente->getId()); ?>">Eliminar</a>
-                    </div>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+                        </td>
+                        <td>
+                            <a href="editar.php?id=<?= htmlspecialchars($expediente->getId()); ?>" class="btn">Editar</a>
+                            <a href="eliminar.php?id=<?= htmlspecialchars($expediente->getId()); ?>" class="btn">Eliminar</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
