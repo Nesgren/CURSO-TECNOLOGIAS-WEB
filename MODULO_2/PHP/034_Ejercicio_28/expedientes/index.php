@@ -32,7 +32,7 @@ $expedientes = $gestor->obtenerExpedientes();
                     <?php endforeach; ?>
                 </ul>
                 <?php if ($expediente->getArchivo()): ?>
-                    <p>Archivo: <a href="../uploads/<?= htmlspecialchars($expediente->getArchivo()); ?>">Descargar</a></p>
+                    <p>Foto: <img src="../uploads/<?= htmlspecialchars($expediente->getArchivo()); ?>" alt="Archivo"></p>
                 <?php endif; ?>
                 <a href="editar.php?id=<?= htmlspecialchars($expediente->getId()); ?>">Editar</a>
                 <a href="eliminar.php?id=<?= htmlspecialchars($expediente->getId()); ?>">Eliminar</a>
