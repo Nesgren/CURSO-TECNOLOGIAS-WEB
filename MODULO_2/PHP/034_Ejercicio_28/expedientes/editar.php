@@ -1,11 +1,18 @@
 <?php
-require_once '../clases/expediente.php';
-require_once '../clases/gestorExpedientes.php';
+// expedientes/editar.php
+require_once '../clases/Expediente.php';
+require_once '../clases/GestorExpedientes.php';
 
 $gestor = new GestorExpedientes('../data/expedientes.json');
 
 // Obtener el expediente a editar por su ID
-$expediente = $gestor->obtenerExpedientes($_GET['id']);
+$expediente = $gestor->obtenerExpedientePorId($_GET['id']);
+
+if ($expediente === null) {
+    // Manejar el caso en el que el expediente no se encuentra
+    echo "Expediente no encontrado.";
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Recoger y procesar los datos del formulario
@@ -56,26 +63,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <h1>Editar Expediente</h1>
-    <form action="editar.php?id=<?= $expediente['id']; ?>" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="<?= $expediente['id']; ?>">
+    <form action="editar.php?id=<?= htmlspecialchars($expediente['id']); ?>" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?= htmlspecialchars($expediente['id']); ?>">
 
         <!-- Datos Personales -->
         <fieldset>
             <legend>Datos Personales</legend>
             <label for="nombre">Nombre:</label>
-            <input type="text" name="nombre" value="<?= $expediente['nombre']; ?>" required>
+            <input type="text" name="nombre" value="<?= htmlspecialchars($expediente['nombre']); ?>" required>
             <br>
 
             <label for="apellido1">Primer Apellido:</label>
-            <input type="text" name="apellido1" value="<?= $expediente['apellido1']; ?>" required>
+            <input type="text" name="apellido1" value="<?= htmlspecialchars($expediente['apellido1']); ?>" required>
             <br>
 
             <label for="apellido2">Segundo Apellido:</label>
-            <input type="text" name="apellido2" value="<?= $expediente['apellido2']; ?>">
+            <input type="text" name="apellido2" value="<?= htmlspecialchars($expediente['apellido2']); ?>">
             <br>
 
             <label for="email">Correo Electrónico:</label>
-            <input type="email" name="email" value="<?= $expediente['email']; ?>" required>
+            <input type="email" name="email" value="<?= htmlspecialchars($expediente['email']); ?>" required>
             <br>
         </fieldset>
 

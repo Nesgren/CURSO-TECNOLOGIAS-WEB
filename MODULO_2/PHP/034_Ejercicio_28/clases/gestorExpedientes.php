@@ -6,7 +6,6 @@ class GestorExpedientes {
         $this->archivo = $archivo;
     }
 
-    // Obtener todos los expedientes (o un array vacío si no hay)
     public function obtenerExpedientes() {
         if (file_exists($this->archivo)) {
             return json_decode(file_get_contents($this->archivo), true) ?: [];
@@ -14,19 +13,26 @@ class GestorExpedientes {
         return [];
     }
 
-    // Guardar expedientes
     public function guardarExpedientes($expedientes) {
         file_put_contents($this->archivo, json_encode($expedientes, JSON_PRETTY_PRINT));
     }
 
-    // Agregar un nuevo expediente
     public function agregarExpediente($expediente) {
         $expedientes = $this->obtenerExpedientes();
         $expedientes[] = $expediente;
         $this->guardarExpedientes($expedientes);
     }
 
-    // Actualizar un expediente existente
+    public function obtenerExpedientePorId($id) {
+        $expedientes = $this->obtenerExpedientes();
+        foreach ($expedientes as $expediente) {
+            if ($expediente['id'] == $id) {
+                return $expediente;
+            }
+        }
+        return null;
+    }
+
     public function actualizarExpediente($id, $nuevoExpediente) {
         $expedientes = $this->obtenerExpedientes();
         foreach ($expedientes as &$expediente) {
@@ -38,10 +44,10 @@ class GestorExpedientes {
         $this->guardarExpedientes($expedientes);
     }
 
-    // Eliminar un expediente
     public function eliminarExpediente($id) {
         $expedientes = $this->obtenerExpedientes();
         $expedientes = array_filter($expedientes, fn($expediente) => $expediente['id'] != $id);
         $this->guardarExpedientes($expedientes);
     }
 }
+?>
