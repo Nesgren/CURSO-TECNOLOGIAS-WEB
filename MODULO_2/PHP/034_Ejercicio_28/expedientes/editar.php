@@ -1,7 +1,6 @@
 <?php
-// expedientes/editar.php
-require_once '../clases/Expediente.php';
-require_once '../clases/GestorExpedientes.php';
+require_once '../clases/expediente.php';
+require_once '../clases/gestorExpedientes.php';
 
 $gestor = new GestorExpedientes('../data/expedientes.json');
 
@@ -60,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Editar Expediente</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Editar Expediente</h1>

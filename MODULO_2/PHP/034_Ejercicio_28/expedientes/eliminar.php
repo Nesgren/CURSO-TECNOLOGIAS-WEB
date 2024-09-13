@@ -1,5 +1,4 @@
 <?php
-// expedientes/eliminar.php
 require_once '../clases/gestorExpedientes.php';
 
 $gestor = new GestorExpedientes('../data/expedientes.json');

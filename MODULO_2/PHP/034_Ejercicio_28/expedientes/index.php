@@ -1,5 +1,4 @@
 <?php
-// expedientes/index.php
 require_once '../clases/gestorExpedientes.php';
 
 $gestor = new GestorExpedientes('../data/expedientes.json');
@@ -11,6 +10,7 @@ $expedientes = $gestor->obtenerExpedientes();
 <head>
     <meta charset="UTF-8">
     <title>Lista de Expedientes</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Lista de Expedientes</h1>
