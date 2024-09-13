@@ -63,8 +63,8 @@ tr:nth-child(even) {
 }
 
 .table-img {
-    max-width: 30px !important;
-    max-height: 30px !important;
+    max-width: 30px;
+    max-height: 30px;
     object-fit: cover;
     border-radius: 50%;
 }
