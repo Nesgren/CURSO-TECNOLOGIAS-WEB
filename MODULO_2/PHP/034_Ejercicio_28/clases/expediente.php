@@ -22,7 +22,6 @@ class Expediente {
         $this->archivo = $archivo;
     }
 
-    // Getters y Setters
     public function getId() {
         return $this->id;
     }
@@ -93,6 +92,34 @@ class Expediente {
 
     public function setArchivo($archivo) {
         $this->archivo = $archivo;
+    }
+
+    public function toArray() {
+        return [
+            'id' => $this->id,
+            'nombre' => $this->nombre,
+            'apellido1' => $this->apellido1,
+            'apellido2' => $this->apellido2,
+            'email' => $this->email,
+            'actividades' => $this->actividades,
+            'actitud' => $this->actitud,
+            'idiomas' => $this->idiomas,
+            'archivo' => $this->archivo
+        ];
+    }
+
+    public static function fromArray($array) {
+        return new self(
+            $array['id'],
+            $array['nombre'],
+            $array['apellido1'],
+            $array['apellido2'],
+            $array['email'],
+            $array['actividades'],
+            $array['actitud'],
+            $array['idiomas'],
+            $array['archivo']
+        );
     }
 }
 ?>

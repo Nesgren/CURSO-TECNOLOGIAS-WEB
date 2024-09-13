@@ -8,36 +8,40 @@ class GestorExpedientes {
 
     public function obtenerExpedientes() {
         if (file_exists($this->archivo)) {
-            return json_decode(file_get_contents($this->archivo), true) ?: [];
+            $data = json_decode(file_get_contents($this->archivo), true) ?: [];
+            return array_map([Expediente::class, 'fromArray'], $data);
         }
         return [];
     }
 
     public function guardarExpedientes($expedientes) {
-        file_put_contents($this->archivo, json_encode($expedientes, JSON_PRETTY_PRINT));
+        $data = array_map(function($expediente) {
+            return $expediente->toArray();
+        }, $expedientes);
+        file_put_contents($this->archivo, json_encode($data, JSON_PRETTY_PRINT));
     }
 
-    public function agregarExpediente(Expediente $expediente) {
+    public function agregarExpediente($expediente) {
         $expedientes = $this->obtenerExpedientes();
-        $expedientes[] = $this->expedienteToArray($expediente);
+        $expedientes[] = $expediente;
         $this->guardarExpedientes($expedientes);
     }
 
     public function obtenerExpedientePorId($id) {
         $expedientes = $this->obtenerExpedientes();
         foreach ($expedientes as $expediente) {
-            if ($expediente['id'] == $id) {
-                return $this->arrayToExpediente($expediente);
+            if ($expediente->getId() == $id) {
+                return $expediente;
             }
         }
         return null;
     }
 
-    public function actualizarExpediente($id, Expediente $nuevoExpediente) {
+    public function actualizarExpediente($id, $nuevoExpediente) {
         $expedientes = $this->obtenerExpedientes();
         foreach ($expedientes as &$expediente) {
-            if ($expediente['id'] == $id) {
-                $expediente = $this->expedienteToArray($nuevoExpediente);
+            if ($expediente->getId() == $id) {
+                $expediente = $nuevoExpediente;
                 break;
             }
         }
@@ -46,36 +50,10 @@ class GestorExpedientes {
 
     public function eliminarExpediente($id) {
         $expedientes = $this->obtenerExpedientes();
-        $expedientes = array_filter($expedientes, fn($expediente) => $expediente['id'] != $id);
+        $expedientes = array_filter($expedientes, function($expediente) use ($id) {
+            return $expediente->getId() != $id;
+        });
         $this->guardarExpedientes($expedientes);
-    }
-
-    private function expedienteToArray(Expediente $expediente) {
-        return [
-            'id' => $expediente->getId(),
-            'nombre' => $expediente->getNombre(),
-            'apellido1' => $expediente->getApellido1(),
-            'apellido2' => $expediente->getApellido2(),
-            'email' => $expediente->getEmail(),
-            'actividades' => $expediente->getActividades(),
-            'actitud' => $expediente->getActitud(),
-            'idiomas' => $expediente->getIdiomas(),
-            'archivo' => $expediente->getArchivo()
-        ];
-    }
-
-    private function arrayToExpediente(array $data) {
-        return new Expediente(
-            $data['id'],
-            $data['nombre'],
-            $data['apellido1'],
-            $data['apellido2'],
-            $data['email'],
-            $data['actividades'],
-            $data['actitud'],
-            $data['idiomas'],
-            $data['archivo']
-        );
     }
 }
 ?>

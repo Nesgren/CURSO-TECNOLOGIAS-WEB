@@ -51,7 +51,7 @@ input[type="password"],
 input[type="file"],
 textarea,
 select {
-    width: calc(100% - 22px);
+    width: 95%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
