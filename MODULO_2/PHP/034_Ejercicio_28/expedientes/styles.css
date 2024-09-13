@@ -1,60 +1,139 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-}
-
-h1 {
-    background-color: #007BFF;
-    color: #fff;
-    padding: 20px;
-    margin: 0;
-    text-align: center;
 }
 
 .container {
     width: 80%;
     margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    background-color: #ffffff;
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Card Styles */
+.card {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    padding: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-content {
+    display: flex;
+    align-items: center;
+}
+
+.card-content img {
+    width: 1rem;
+    height: 1rem;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.card-content div {
+    max-width: calc(100% - 4rem); /* Adjust for image width and spacing */
+}
+
+.card-content h3 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+}
+
+.card-content p {
+    margin: 0.25rem 0;
+    color: #555;
+}
+
+.card-actions {
+    margin-left: auto;
+    text-align: right;
+}
+
+.card-actions a {
+    display: inline-block;
+    margin: 0 0.5rem;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.card-actions a:hover {
+    text-decoration: underline;
+}
+
+/* Form Styles */
 form {
     display: flex;
     flex-direction: column;
 }
 
 fieldset {
-    border: none;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 20px;
-    background-color: #fff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #f9f9f9;
 }
 
 legend {
     font-weight: bold;
-    margin-bottom: 10px;
+    padding: 0 10px;
 }
 
 label {
     display: block;
-    margin: 10px 0 5px;
+    margin: 0.5rem 0 0.25rem;
 }
 
 input[type="text"],
 input[type="email"],
+input[type="password"],
 input[type="file"],
 textarea,
 select {
     width: 100%;
-    padding: 10px;
+    padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
     box-sizing: border-box;
 }
 
@@ -62,12 +141,12 @@ input[type="submit"],
 button,
 a {
     display: inline-block;
-    background-color: #007BFF;
+    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
@@ -80,89 +159,8 @@ a:hover {
     background-color: #0056b3;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-li {
-    margin-bottom: 20px;
-}
-
-.card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    overflow: hidden;
-}
-
-.card img {
-    max-width: 100px;
-    height: auto;
-    border-radius: 4px;
-    margin-right: 15px;
-}
-
-.card-content {
-    display: flex;
-    align-items: center;
-}
-
-.card-content div {
-    flex: 1;
-}
-
-.card-content h3 {
-    margin: 0 0 10px;
-}
-
-.card-content p {
-    margin: 5px 0;
-}
-
-.card-actions {
-    margin-top: 15px;
-}
-
-.card-actions a {
-    display: inline-block;
-    background-color: #007BFF;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 4px;
-    text-decoration: none;
-    margin-right: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.card-actions a:hover {
-    background-color: #0056b3;
-}
-
 .upload-file-info {
     margin-top: 10px;
     font-size: 14px;
     color: #555;
-}
-
-/* Alert Styles */
-.alert {
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.alert-error {
-    background-color: #f8d7da;
-    color: #721c24;
 }
