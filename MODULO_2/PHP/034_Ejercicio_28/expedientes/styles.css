@@ -1,112 +1,137 @@
+/* Estilo general de la página */
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
 }
 
 h1 {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    margin: 0;
     text-align: center;
-    color: #333;
 }
 
-form {
-    max-width: 800px;
-    margin: 20px auto;
+/* Contenedor principal */
+.container {
+    width: 80%;
+    margin: 0 auto;
     padding: 20px;
-    background: #fff;
-    border-radius: 8px;
+    background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Formularios */
+form {
+    display: flex;
+    flex-direction: column;
 }
 
 fieldset {
     border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
 }
 
 legend {
     font-weight: bold;
-    padding: 0 5px;
+    padding: 0 10px;
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+    margin: 10px 0 5px;
 }
 
 input[type="text"],
 input[type="email"],
+input[type="password"],
+input[type="file"],
 textarea,
 select {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
 }
 
-input[type="file"] {
-    padding: 5px;
-}
-
-button,
-input[type="submit"] {
-    background-color: #5cb85c;
-    color: white;
+input[type="submit"],
+button {
+    background-color: #007BFF;
+    color: #fff;
     border: none;
-    padding: 10px 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+    border-radius: 4px;
+    padding: 10px 20px;
     font-size: 16px;
-    margin: 5px 0;
     cursor: pointer;
-    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
-button:hover,
-input[type="submit"]:hover {
-    background-color: #4cae4c;
+input[type="submit"]:hover,
+button:hover {
+    background-color: #0056b3;
 }
 
-a.btn {
-    display: inline-block;
-    background-color: #0275d8;
-    color: white;
-    padding: 10px 15px;
+/* Tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Enlaces */
+a {
+    color: #007BFF;
     text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Mensajes de error y éxito */
+.alert {
+    padding: 15px;
+    margin: 10px 0;
     border-radius: 4px;
-    margin: 5px;
 }
 
-a.btn:hover {
-    background-color: #025aa5;
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
 }
 
-textarea {
-    resize: vertical;
-    height: 100px;
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
 }
 
-.actividad {
-    margin-bottom: 20px;
-}
-
-input[type="radio"],
-input[type="checkbox"] {
-    margin-right: 5px;
-}
-
-input[type="file"] {
-    padding: 5px;
-}
-
-.error {
-    color: red;
-    font-weight: bold;
+/* Estilo para archivos cargados */
+.upload-file-info {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
 }

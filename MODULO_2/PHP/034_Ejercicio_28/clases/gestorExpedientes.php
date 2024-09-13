@@ -17,9 +17,9 @@ class GestorExpedientes {
         file_put_contents($this->archivo, json_encode($expedientes, JSON_PRETTY_PRINT));
     }
 
-    public function agregarExpediente($expediente) {
+    public function agregarExpediente(Expediente $expediente) {
         $expedientes = $this->obtenerExpedientes();
-        $expedientes[] = $expediente;
+        $expedientes[] = $this->expedienteToArray($expediente);
         $this->guardarExpedientes($expedientes);
     }
 
@@ -27,17 +27,17 @@ class GestorExpedientes {
         $expedientes = $this->obtenerExpedientes();
         foreach ($expedientes as $expediente) {
             if ($expediente['id'] == $id) {
-                return $expediente;
+                return $this->arrayToExpediente($expediente);
             }
         }
         return null;
     }
 
-    public function actualizarExpediente($id, $nuevoExpediente) {
+    public function actualizarExpediente($id, Expediente $nuevoExpediente) {
         $expedientes = $this->obtenerExpedientes();
         foreach ($expedientes as &$expediente) {
             if ($expediente['id'] == $id) {
-                $expediente = (array) $nuevoExpediente;
+                $expediente = $this->expedienteToArray($nuevoExpediente);
                 break;
             }
         }
@@ -48,6 +48,34 @@ class GestorExpedientes {
         $expedientes = $this->obtenerExpedientes();
         $expedientes = array_filter($expedientes, fn($expediente) => $expediente['id'] != $id);
         $this->guardarExpedientes($expedientes);
+    }
+
+    private function expedienteToArray(Expediente $expediente) {
+        return [
+            'id' => $expediente->getId(),
+            'nombre' => $expediente->getNombre(),
+            'apellido1' => $expediente->getApellido1(),
+            'apellido2' => $expediente->getApellido2(),
+            'email' => $expediente->getEmail(),
+            'actividades' => $expediente->getActividades(),
+            'actitud' => $expediente->getActitud(),
+            'idiomas' => $expediente->getIdiomas(),
+            'archivo' => $expediente->getArchivo()
+        ];
+    }
+
+    private function arrayToExpediente(array $data) {
+        return new Expediente(
+            $data['id'],
+            $data['nombre'],
+            $data['apellido1'],
+            $data['apellido2'],
+            $data['email'],
+            $data['actividades'],
+            $data['actitud'],
+            $data['idiomas'],
+            $data['archivo']
+        );
     }
 }
 ?>
