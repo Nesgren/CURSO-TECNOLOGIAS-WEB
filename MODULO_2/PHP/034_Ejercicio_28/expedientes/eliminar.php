@@ -1,6 +1,6 @@
 <?php
 // expedientes/eliminar.php
-require_once '../clases/GestorExpedientes.php';
+require_once '../clases/gestorExpedientes.php';
 
 $gestor = new GestorExpedientes('../data/expedientes.json');
 $gestor->eliminarExpediente($_GET['id']);

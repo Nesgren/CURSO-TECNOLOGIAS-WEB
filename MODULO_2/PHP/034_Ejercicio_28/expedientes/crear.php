@@ -1,6 +1,6 @@
 <?php
-require_once '../clases/Expediente.php';
-require_once '../clases/GestorExpedientes.php';
+require_once '../clases/expediente.php';
+require_once '../clases/gestorExpedientes.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombre = $_POST['nombre'];
