@@ -1,4 +1,6 @@
 <?php
+require_once 'expediente.php';
+
 class GestorExpedientes {
     private $archivo;
 
@@ -9,10 +11,24 @@ class GestorExpedientes {
     public function obtenerExpedientes() {
         if (file_exists($this->archivo)) {
             $data = json_decode(file_get_contents($this->archivo), true) ?: [];
-            return array_map([Expediente::class, 'fromArray'], $data);
+            
+            // Crear instancias de Expediente a partir de los datos
+            return array_map(function($item) {
+                return new Expediente(
+                    $item['id'],
+                    $item['nombre'],
+                    $item['apellido1'],
+                    $item['apellido2'],
+                    $item['email'],
+                    $item['actividades'],
+                    $item['actitud'],
+                    $item['idiomas'],
+                    $item['archivo']
+                );
+            }, $data);
         }
         return [];
-    }
+    }    
 
     public function guardarExpedientes($expedientes) {
         $data = array_map(function($expediente) {

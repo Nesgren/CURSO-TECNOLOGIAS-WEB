@@ -1,5 +1,6 @@
 <?php
 require_once '../clases/gestorExpedientes.php';
+require_once '../clases/expediente.php';
 
 $gestor = new GestorExpedientes('../data/expedientes.json');
 $expedientes = $gestor->obtenerExpedientes();
