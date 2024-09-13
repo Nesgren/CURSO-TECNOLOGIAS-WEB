@@ -104,13 +104,22 @@ tr:nth-child(even) {
 
 /* Enlaces */
 a {
-    color: #007BFF;
+    display: inline-block;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
     text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
 a:hover {
-    text-decoration: underline;
+    background-color: #0056b3;
 }
+
 
 /* Mensajes de error y éxito */
 .alert {
