@@ -7,10 +7,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $apellido1 = $_POST['apellido1'];
     $apellido2 = $_POST['apellido2'];
     $email = $_POST['email'];
-    $actividades = $_POST['actividad'];
+    $actividades = isset($_POST['actividad']) ? $_POST['actividad'] : [];
     $actitud = $_POST['actitud'];
     $idiomas = isset($_POST['idiomas']) ? $_POST['idiomas'] : [];
     
+    // Manejo del archivo subido
     $archivo = null;
     if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
         $nombreArchivo = basename($_FILES['uploadedFile']['name']);
@@ -21,9 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
+    // Crear un nuevo expediente
     $gestor = new GestorExpedientes('../data/expedientes.json');
     $nuevoExpediente = new Expediente(
-        uniqid(),
+        uniqid(),  // Genera un ID único
         $nombre,
         $apellido1,
         $apellido2,
@@ -61,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <label for="apellido2">Segundo Apellido:</label>
             <input type="text" id="apellido2" name="apellido2"><br>
 
-            <label for="email">Enviar Correo Electrónico:</label>
+            <label for="email">Correo Electrónico:</label>
             <input type="email" id="email" name="email" required><br>
         </fieldset>
 
@@ -120,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="file" id="uploadedFile" name="uploadedFile"><br>
         </fieldset>
 
-        <input type="submit" name="uploadBtn" value="Enviar">
+        <input type="submit" value="Enviar">
         <a href="index.php">Ver Expedientes</a>
     </form>
 </body>

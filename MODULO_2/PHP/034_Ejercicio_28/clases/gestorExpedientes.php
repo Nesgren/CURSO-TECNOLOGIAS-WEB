@@ -12,7 +12,7 @@ class GestorExpedientes {
         if (file_exists($this->archivo)) {
             $data = json_decode(file_get_contents($this->archivo), true) ?: [];
             
-            // Crear instancias de Expediente a partir de los datos
+            // Convertir arrays a objetos Expediente
             return array_map(function($item) {
                 return new Expediente(
                     $item['id'],
@@ -28,12 +28,23 @@ class GestorExpedientes {
             }, $data);
         }
         return [];
-    }    
+    }
 
     public function guardarExpedientes($expedientes) {
         $data = array_map(function($expediente) {
-            return $expediente->toArray();
+            return [
+                'id' => $expediente->getId(),
+                'nombre' => $expediente->getNombre(),
+                'apellido1' => $expediente->getApellido1(),
+                'apellido2' => $expediente->getApellido2(),
+                'email' => $expediente->getEmail(),
+                'actividades' => $expediente->getActividades(),
+                'actitud' => $expediente->getActitud(),
+                'idiomas' => $expediente->getIdiomas(),
+                'archivo' => $expediente->getArchivo()
+            ];
         }, $expedientes);
+
         file_put_contents($this->archivo, json_encode($data, JSON_PRETTY_PRINT));
     }
 
@@ -72,4 +83,3 @@ class GestorExpedientes {
         $this->guardarExpedientes($expedientes);
     }
 }
-?>

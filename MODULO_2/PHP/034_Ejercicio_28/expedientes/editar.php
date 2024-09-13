@@ -16,10 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $apellido1 = $_POST['apellido1'];
     $apellido2 = $_POST['apellido2'];
     $email = $_POST['email'];
-    $actividades = $_POST['actividad'];
+    $actividades = isset($_POST['actividad']) ? $_POST['actividad'] : [];
     $actitud = $_POST['actitud'];
     $idiomas = isset($_POST['idiomas']) ? $_POST['idiomas'] : [];
     
+    // Manejo del archivo subido
     $archivo = $expediente->getArchivo();
     if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
         $nombreArchivo = basename($_FILES['uploadedFile']['name']);
@@ -60,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <form action="editar.php?id=<?= htmlspecialchars($expediente->getId()); ?>" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= htmlspecialchars($expediente->getId()); ?>">
 
-        <!-- Datos Personales -->
         <fieldset>
             <legend>Datos Personales</legend>
             <label for="nombre">Nombre:</label>
@@ -80,7 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <br>
         </fieldset>
 
-        <!-- Actividades -->
         <fieldset>
             <legend>Actividades</legend>
             <?php foreach ($expediente->getActividades() as $index => $actividad): ?>
@@ -105,7 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php endforeach; ?>
         </fieldset>
 
-        <!-- Actitud -->
         <fieldset>
             <legend>Actitud del Alumno en Clase</legend>
             <label>
@@ -119,7 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </label>
         </fieldset>
 
-        <!-- Idiomas -->
         <fieldset>
             <legend>Idiomas que Habla</legend>
             <label>
@@ -136,7 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </label>
         </fieldset>
 
-        <!-- Subida de Archivos -->
         <fieldset>
             <legend>Subida de Archivos</legend>
             <label for="uploadedFile">Sube un Archivo:</label>

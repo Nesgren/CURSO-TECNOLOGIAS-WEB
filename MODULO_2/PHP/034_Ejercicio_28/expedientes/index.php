@@ -1,6 +1,5 @@
 <?php
 require_once '../clases/gestorExpedientes.php';
-require_once '../clases/expediente.php';
 
 $gestor = new GestorExpedientes('../data/expedientes.json');
 $expedientes = $gestor->obtenerExpedientes();
@@ -19,24 +18,24 @@ $expedientes = $gestor->obtenerExpedientes();
     <ul>
         <?php foreach ($expedientes as $expediente): ?>
             <li>
-                <h3><?= $expediente['nombre'] . ' ' . $expediente['apellido1'] . ' ' . $expediente['apellido2']; ?></h3>
-                <p>Email: <?= $expediente['email']; ?></p>
-                <p>Actitud: <?= $expediente['actitud']; ?></p>
-                <p>Idiomas: <?= implode(', ', $expediente['idiomas']); ?></p>
+                <h3><?= htmlspecialchars($expediente->getNombre() . ' ' . $expediente->getApellido1() . ' ' . $expediente->getApellido2()); ?></h3>
+                <p>Email: <?= htmlspecialchars($expediente->getEmail()); ?></p>
+                <p>Actitud: <?= htmlspecialchars($expediente->getActitud()); ?></p>
+                <p>Idiomas: <?= htmlspecialchars(implode(', ', $expediente->getIdiomas())); ?></p>
                 <p>Actividades:</p>
                 <ul>
-                    <?php foreach ($expediente['actividades'] as $actividad): ?>
+                    <?php foreach ($expediente->getActividades() as $actividad): ?>
                         <li>
-                            <?= $actividad['nombre']; ?> - Nota: <?= $actividad['nota']; ?><br>
-                            Comentario: <?= $actividad['comentario']; ?>
+                            <?= htmlspecialchars($actividad['nombre']); ?> - Nota: <?= htmlspecialchars($actividad['nota']); ?><br>
+                            Comentario: <?= htmlspecialchars($actividad['comentario']); ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>
-                <?php if ($expediente['archivo']): ?>
-                    <p>Archivo: <a href="../uploads/<?= $expediente['archivo']; ?>">Descargar</a></p>
+                <?php if ($expediente->getArchivo()): ?>
+                    <p>Archivo: <a href="../uploads/<?= htmlspecialchars($expediente->getArchivo()); ?>">Descargar</a></p>
                 <?php endif; ?>
-                <a href="editar.php?id=<?= $expediente['id']; ?>">Editar</a>
-                <a href="eliminar.php?id=<?= $expediente['id']; ?>">Eliminar</a>
+                <a href="editar.php?id=<?= htmlspecialchars($expediente->getId()); ?>">Editar</a>
+                <a href="eliminar.php?id=<?= htmlspecialchars($expediente->getId()); ?>">Eliminar</a>
             </li>
         <?php endforeach; ?>
     </ul>
