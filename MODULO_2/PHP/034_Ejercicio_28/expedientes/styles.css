@@ -133,3 +133,10 @@ a:hover {
     font-size: 14px;
     color: #555;
 }
+
+.foto-alumno {
+    max-width: 100px;
+    height: auto;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}

@@ -134,11 +134,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </fieldset>
 
             <fieldset>
-                <legend>Subida de Archivos</legend>
-                <label for="uploadedFile">Sube un Archivo:</label>
+                <legend>Foto</legend>
+                <label for="uploadedFile">Foto del Alumno:</label>
                 <input type="file" id="uploadedFile" name="uploadedFile">
                 <?php if ($expediente->getArchivo()): ?>
-                    <p>Foto <img src="../uploads/<?= htmlspecialchars($expediente->getArchivo()); ?>" alt="Archivo"></p>
+                    <p>Foto <img src="../uploads/<?= htmlspecialchars($expediente->getArchivo()); ?>" class="foto-alumno" alt="Archivo"></p>
                 <?php endif; ?>
             </fieldset>
 
