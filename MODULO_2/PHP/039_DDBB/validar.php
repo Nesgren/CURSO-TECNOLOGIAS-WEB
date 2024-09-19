@@ -1,60 +1,36 @@
-<html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="estilos.css">
-	</head>
-	<body>
-
 <?php
 session_start();
- 
+
 if (isset($_POST['login'])) {
- 
+
+    // Obtener el nombre de usuario y la contraseña del formulario
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $mysqli = new mysqli('localhost:3306', 'franco', 'Nascor2020!', 'franco_ddbb1');
+
+    // Conectarse a la base de datos MySQL
+    $mysqli = new mysqli('localhost', 'franco', 'Nascor2020!', 'franco_ddbb1');
+
+    // Verificar si hubo un error al conectarse
     if ($mysqli->connect_errno) {
-        echo "Error: Fallo al conectarse a MySQL debido a: \n";
-        echo "Errno: " . $mysqli->connect_errno . "\n";
-        echo "Error: " . $mysqli->connect_error . "\n";
+        echo "Error al conectarse a MySQL: " . $mysqli->connect_error;
         exit;
     }
- 
+
+    // Realizar la consulta SQL para verificar usuario y contraseña
     $sql = "SELECT * FROM usuarios WHERE username = '$username' AND password = '$password'";
+    $result = $mysqli->query($sql);
 
-    if (!$result = $mysqli->query($sql)) {
-        echo "Ups hubo un problema";
+    // Si no se encuentra el usuario, mostrar un mensaje de error
+    if ($result->num_rows == 0) {
+        echo '<p>Usuario o contraseña incorrectos</p>';
+    } else {
+        // Usuario encontrado, iniciar la sesión
+        $_SESSION['username'] = $username;
+        echo '<p>¡Bienvenido, ' . $username . '!</p>';
+        
+        // Redirigir a otra página
+        header("Location: inicio.php");
         exit;
     }
-
-    if ($result -> num_rows == 0) {
-        echo '<p class="error">Usuario y password no válidos</p>';
-    }
-    else {
-        echo '<p class="success">¡¡Felicidades, está identificado!!</p>';
-    }
-
-    $usuario = $result->fetch_assoc();
-    echo "<pre>$usuario</pre>";
-    
-
-
-
-
-    if (!((strtoupper($username)=="BORJA") && $password=="Nascor2020!")) {
-        echo '<p class="error">Usuario y password no válidos</p>';
-       } 
-	else {
-            $_SESSION['user_id'] = hash('MD5',$username);
-            $_SESSION['username'] = $username;	
-		    $_SESSION["timeout"] = time();
-
-			header("Location: inicio.php");
-            //echo '<p class="success">¡¡Felicidades, está identificado!!</p>';
-        }
-
 }
- 
 ?>
-	</body>
-</html>		
