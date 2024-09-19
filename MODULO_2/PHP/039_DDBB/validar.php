@@ -1,29 +1,44 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="estilos.css">
+	</head>
+	<body>
+
 <?php
 session_start();
-
+ 
 if (isset($_POST['login'])) {
-
+ 
     $username = $_POST['username'];
     $password = $_POST['password'];
-
     $mysqli = new mysqli('localhost', 'franco', 'Nascor2020!', 'franco_bbdd1');
-
     if ($mysqli->connect_errno) {
-        echo "Error al conectarse a MySQL: " . $mysqli->connect_error;
+        echo "Error: Fallo al conectarse a MySQL debido a: \n";
+        echo "Errno: " . $mysqli->connect_errno . "\n";
+        echo "Error: " . $mysqli->connect_error . "\n";
         exit;
     }
-
+ 
     $sql = "SELECT * FROM usuarios WHERE username = '$username' AND password = '$password'";
-    $result = $mysqli->query($sql);
 
-    if ($result->num_rows == 0) {
-        echo '<p>Usuario o contraseña incorrectos</p>';
-    } else {
-        $_SESSION['username'] = $username;
-        echo '<p>¡Bienvenido, ' . $username . '!</p>';
-        
-        header("Location: inicio.php");
+    if (!$result = $mysqli->query($sql)) {
+        echo "Ups hubo un problema";
         exit;
     }
+
+    if ($result -> num_rows == 0) {
+        echo '<p class="error">Usuario y password no válidos</p>';
+    }
+    else {
+        echo '<p class="success">¡¡Felicidades, está identificado!!</p>';
+    }
+
+    $usuario = $result->fetch_assoc();
+    echo "<pre>$usuario</pre>";
+
 }
+ 
 ?>
+	</body>
+</html>		
