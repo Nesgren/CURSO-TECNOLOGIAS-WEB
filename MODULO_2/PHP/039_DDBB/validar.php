@@ -21,11 +21,25 @@ if (isset($_POST['login'])) {
     }
  
     $sql = "SELECT * FROM usuarios WHERE username = '$username' AND password = '$password'";
+
     if (!$result = $mysqli->query($sql)) {
         echo "Ups hubo un problema";
+        exit;
     }
 
+    if ($result -> num_rows == 0) {
+        echo '<p class="error">Usuario y password no válidos</p>';
+    }
+    else {
+        echo '<p class="success">¡¡Felicidades, está identificado!!</p>';
+    }
+
+    $usuario = $result->fetch_assoc();
+    echo "<pre>$usuario</pre>";
     
+
+
+
 
     if (!((strtoupper($username)=="BORJA") && $password=="Nascor2020!")) {
         echo '<p class="error">Usuario y password no válidos</p>';
