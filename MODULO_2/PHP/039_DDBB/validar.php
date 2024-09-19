@@ -32,7 +32,7 @@ if (isset($_POST['login'])) {
     }
     else {
         $usuario = $result->fetch_assoc();
-        echo "<pre>$usuario</pre>";
+        echo "<p class='exito'>Bienvenido $username</p>";
     }
 
 
