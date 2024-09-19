@@ -6,7 +6,7 @@ if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $mysqli = new mysqli('localhost:3306', 'Nascor2020!', 'franco', 'franco_ddbb1');
+    $mysqli = new mysqli('localhost:3306', 'franco', 'Nascor2020!', 'franco_ddbb1');
 
     if ($mysqli->connect_errno) {
         echo "Error al conectarse a MySQL: " . $mysqli->connect_error;
