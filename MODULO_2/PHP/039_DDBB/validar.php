@@ -31,13 +31,15 @@ if (isset($_POST['login'])) {
         echo '<p class="error">Usuario y password no válidos</p>';
     }
     else {
-        echo '<p class="success">¡¡Felicidades, está identificado!!</p>';
+        $usuario = $result->fetch_assoc();
+        echo "<pre>$usuario</pre>";
     }
 
-    $usuario = $result->fetch_assoc();
-    echo "<pre>$usuario</pre>";
+
+    $mysqli->close();
 
 }
+
  
 ?>
 	</body>
