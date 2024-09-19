@@ -1,0 +1,24 @@
+[
+    {
+        "id": "66e408a1c9a19",
+        "nombre": "Franco",
+        "apellido1": "Zuccorononno",
+        "apellido2": "Sutera",
+        "email": "francozuccorononno@gmail.com",
+        "actividades": [
+            {
+                "nombre": "Matematica",
+                "nota": "8",
+                "comentario": "Bien"
+            }
+        ],
+        "actitud": "Normal",
+        "idiomas": [
+            "Catalan",
+            "Castellano",
+            "Frances",
+            "Ingles"
+        ],
+        "archivo": "FrancoZuccorononno.jpeg"
+    }
+]
