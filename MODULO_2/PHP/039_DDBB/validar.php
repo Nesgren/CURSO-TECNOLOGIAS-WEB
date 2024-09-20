@@ -7,7 +7,7 @@
 
 <?php
 session_start();
- 
+
 if (isset($_POST['login'])) {
 
     $username = $_POST['username'];
@@ -21,13 +21,11 @@ if (isset($_POST['login'])) {
         exit;
     }
 
-    // Consulta para verificar el usuario y contraseña
-    $sql = "SELECT * FROM usuarios WHERE username = '$username' AND password = '$password'";
-
-    if (!$result = $mysqli->query($sql)) {
-        echo "Ups hubo un problema con la consulta";
-        exit;
-    }
+    // Uso de prepared statements para evitar inyección SQL
+    $stmt = $mysqli->prepare("SELECT * FROM usuarios WHERE username = ? AND password = ?");
+    $stmt->bind_param("ss", $username, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows == 0) {
         echo '<p class="error">Usuario y/o contraseña no válidos.</p>';
@@ -40,20 +38,17 @@ if (isset($_POST['login'])) {
         echo "Fecha y hora actuales: " . date("Y-m-d H:i:s") . "\n";
 
         // Verificar si el usuario ha estado conectado antes
-        if (isset($usuario['fecha_conexion'])) {
-            $fecha_conexion = strtotime($usuario['fecha_conexion']);
-            $ahora = time();
-            $diferencia_segundos = $ahora - $fecha_conexion;
-            $diferencia_horas = $diferencia_segundos / 3600;
-            $diferencia_minutos = ($diferencia_segundos % 3600) / 60;
-            $diferencia_segundos_restantes = $diferencia_segundos % 60;
+        if (!empty($usuario['fecha_conexion'])) {
+            $fecha_conexion = new DateTime($usuario['fecha_conexion']);
+            $ahora = new DateTime();
+            $diferencia = $ahora->diff($fecha_conexion);
 
-            echo "Última conexión: " . date("Y-m-d H:i:s", $fecha_conexion) . "\n";
+            echo "Última conexión: " . $fecha_conexion->format('Y-m-d H:i:s') . "\n";
             echo "Tiempo transcurrido desde la última conexión: ";
-            echo floor($diferencia_horas) . " horas, " . floor($diferencia_minutos) . " minutos y " . $diferencia_segundos_restantes . " segundos.\n";
+            echo $diferencia->h . " horas, " . $diferencia->i . " minutos y " . $diferencia->s . " segundos.\n";
 
             // Si el usuario ha estado conectado por más de una hora, cerrar sesión
-            if ($diferencia_horas >= 1) {
+            if ($diferencia->h >= 1) {
                 echo "Estado: Sesión expirada. Has estado conectado por más de 1 hora.\n";
                 session_unset();
                 session_destroy();
@@ -61,13 +56,14 @@ if (isset($_POST['login'])) {
                 exit;
             } else {
                 echo "Estado: Sesión válida.\n";
-                echo "Has estado conectado por " . round($diferencia_horas, 2) . " horas.\n";
+                echo "Has estado conectado por " . $diferencia->h . " horas y " . $diferencia->i . " minutos.\n";
             }
         } else {
             // Guardar la hora de conexión si es la primera vez que inicia sesión
             $_SESSION['fecha_conexion'] = date("Y-m-d H:i:s");
-            $sql_update = "UPDATE usuarios SET fecha_conexion = NOW() WHERE username = '$username'";
-            $mysqli->query($sql_update);
+            $sql_update = $mysqli->prepare("UPDATE usuarios SET fecha_conexion = NOW() WHERE username = ?");
+            $sql_update->bind_param("s", $username);
+            $sql_update->execute();
 
             echo "Estado: Primera conexión en esta sesión.\n";
             echo "Se ha guardado la hora de conexión: " . date("Y-m-d H:i:s") . "\n";
@@ -77,6 +73,8 @@ if (isset($_POST['login'])) {
         echo "</pre>";
     }
 
+    // Cerrar la conexión y la declaración preparada
+    $stmt->close();
     $mysqli->close();
 }
 ?>
