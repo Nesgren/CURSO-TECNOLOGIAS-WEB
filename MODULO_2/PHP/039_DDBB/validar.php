@@ -46,8 +46,13 @@ if (isset($_POST['login'])) {
             echo $diferencia->h . " horas, " . $diferencia->i . " minutos y " . $diferencia->s . " segundos.\n";
 
             // Si el usuario ha estado conectado por más de una hora, cerrar sesión
-            if ($diferencia->h >= 1) {
+            if ($diferencia->h >= 4) {
                 echo "Estado: Sesión expirada. Has estado conectado por más de 1 hora.\n";
+                
+                // Actualizar la última hora de conexión antes de cerrar sesión
+                $sql_update = "UPDATE usuarios SET fecha_conexion = NOW() WHERE username = '$username'";
+                $mysqli->query($sql_update);
+                
                 session_unset();
                 session_destroy();
                 echo "</pre>";
@@ -61,17 +66,12 @@ if (isset($_POST['login'])) {
             $_SESSION['fecha_conexion'] = date("Y-m-d H:i:s");
             $sql_update = "UPDATE usuarios SET fecha_conexion = NOW() WHERE username = '$username'";
             
-            // Ejecutar la consulta de actualización y verificar el resultado
+            // Ejecutar la consulta de actualización
             if ($mysqli->query($sql_update)) {
                 echo "Hora de conexión actualizada correctamente.\n";
             } else {
                 echo "Error al actualizar la hora de conexión: " . $mysqli->error . "\n";
             }
-
-            // Verificar que se ha actualizado correctamente
-            $result = $mysqli->query("SELECT fecha_conexion FROM usuarios WHERE username = '$username'");
-            $usuario_actualizado = $result->fetch_assoc();
-            echo "Nueva hora de conexión: " . $usuario_actualizado['fecha_conexion'] . "\n";
 
             echo "Estado: Primera conexión en esta sesión.\n";
             echo "Se ha guardado la hora de conexión: " . date("Y-m-d H:i:s") . "\n";
