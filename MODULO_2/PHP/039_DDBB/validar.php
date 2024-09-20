@@ -8,6 +8,9 @@
 <?php
 session_start();
 
+// Establecer la zona horaria a Madrid
+date_default_timezone_set('Europe/Madrid');
+
 if (isset($_POST['login'])) {
 
     $username = $_POST['username'];
@@ -46,7 +49,7 @@ if (isset($_POST['login'])) {
             echo $diferencia->h . " horas, " . $diferencia->i . " minutos y " . $diferencia->s . " segundos.\n";
 
             // Si el usuario ha estado conectado por más de una hora, cerrar sesión
-            if ($diferencia->h >= 4) {
+            if ($diferencia->h >= 1) {
                 echo "Estado: Sesión expirada. Has estado conectado por más de 1 hora.\n";
                 
                 // Actualizar la última hora de conexión antes de cerrar sesión
