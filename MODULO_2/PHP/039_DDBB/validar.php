@@ -21,11 +21,9 @@ if (isset($_POST['login'])) {
         exit;
     }
 
-    // Uso de prepared statements para evitar inyección SQL
-    $stmt = $mysqli->prepare("SELECT * FROM usuarios WHERE username = ? AND password = ?");
-    $stmt->bind_param("ss", $username, $password);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // Consulta para verificar el usuario y contraseña (sin protección contra inyecciones SQL)
+    $sql = "SELECT * FROM usuarios WHERE username = '$username' AND password = '$password'";
+    $result = $mysqli->query($sql);
 
     if ($result->num_rows == 0) {
         echo '<p class="error">Usuario y/o contraseña no válidos.</p>';
@@ -61,9 +59,14 @@ if (isset($_POST['login'])) {
         } else {
             // Guardar la hora de conexión si es la primera vez que inicia sesión
             $_SESSION['fecha_conexion'] = date("Y-m-d H:i:s");
-            $sql_update = $mysqli->prepare("UPDATE usuarios SET fecha_conexion = NOW() WHERE username = ?");
-            $sql_update->bind_param("s", $username);
-            $sql_update->execute();
+            $sql_update = "UPDATE usuarios SET fecha_conexion = NOW() WHERE username = '$username'";
+            
+            // Ejecutar la consulta de actualización
+            if ($mysqli->query($sql_update)) {
+                echo "Hora de conexión actualizada correctamente.\n";
+            } else {
+                echo "Error al actualizar la hora de conexión: " . $mysqli->error . "\n";
+            }
 
             echo "Estado: Primera conexión en esta sesión.\n";
             echo "Se ha guardado la hora de conexión: " . date("Y-m-d H:i:s") . "\n";
@@ -73,8 +76,6 @@ if (isset($_POST['login'])) {
         echo "</pre>";
     }
 
-    // Cerrar la conexión y la declaración preparada
-    $stmt->close();
     $mysqli->close();
 }
 ?>
