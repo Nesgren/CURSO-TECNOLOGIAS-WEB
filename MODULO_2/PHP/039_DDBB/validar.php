@@ -21,7 +21,7 @@ if (isset($_POST['login'])) {
         exit;
     }
 
-    // Consulta para verificar el usuario y contraseña (sin protección contra inyecciones SQL)
+    // Consulta para verificar el usuario y contraseña
     $sql = "SELECT * FROM usuarios WHERE username = '$username' AND password = '$password'";
     $result = $mysqli->query($sql);
 
@@ -61,12 +61,17 @@ if (isset($_POST['login'])) {
             $_SESSION['fecha_conexion'] = date("Y-m-d H:i:s");
             $sql_update = "UPDATE usuarios SET fecha_conexion = NOW() WHERE username = '$username'";
             
-            // Ejecutar la consulta de actualización
+            // Ejecutar la consulta de actualización y verificar el resultado
             if ($mysqli->query($sql_update)) {
                 echo "Hora de conexión actualizada correctamente.\n";
             } else {
                 echo "Error al actualizar la hora de conexión: " . $mysqli->error . "\n";
             }
+
+            // Verificar que se ha actualizado correctamente
+            $result = $mysqli->query("SELECT fecha_conexion FROM usuarios WHERE username = '$username'");
+            $usuario_actualizado = $result->fetch_assoc();
+            echo "Nueva hora de conexión: " . $usuario_actualizado['fecha_conexion'] . "\n";
 
             echo "Estado: Primera conexión en esta sesión.\n";
             echo "Se ha guardado la hora de conexión: " . date("Y-m-d H:i:s") . "\n";
