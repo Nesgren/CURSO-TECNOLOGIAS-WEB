@@ -30,8 +30,8 @@ class Expediente {
             ':email' => $this->email,
             ':actitud' => $this->actitud,
             ':archivo' => $this->archivo,
-            ':idiomas' => json_encode($this->idiomas),  // Asegúrate de que esto sea lo que quieres almacenar
-            ':actividades' => json_encode($this->actividades),  // Asegúrate de que esto sea lo que quieres almacenar
+            ':idiomas' => json_encode($this->idiomas),
+            ':actividades' => json_encode($this->actividades),
         ];
     }
 }
