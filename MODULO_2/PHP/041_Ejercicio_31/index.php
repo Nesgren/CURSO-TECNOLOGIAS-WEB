@@ -1,5 +1,5 @@
 <?php
-require_once '../app/controllers/ExpedienteController.php';
+require_once 'controllers/ExpedienteController.php';
 
 $controller = new ExpedienteController();
 
