@@ -18,8 +18,8 @@ class Expediente {
         $this->email = $data['email'];
         $this->actitud = $data['actitud'];
         $this->archivo = $data['archivo'] ?? null;
-        $this->idiomas = json_decode($data['idiomas'], true);
-        $this->actividades = json_decode($data['actividades'], true);
+        $this->idiomas = is_array($data['idiomas']) ? $data['idiomas'] : json_decode($data['idiomas'], true);
+        $this->actividades = is_array($data['actividades']) ? $data['actividades'] : json_decode($data['actividades'], true);
     }
 
     public function toArray() {
