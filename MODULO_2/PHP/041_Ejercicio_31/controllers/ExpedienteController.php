@@ -1,5 +1,5 @@
 <?php
-require_once '../models/GestorExpedientes.php';
+require_once 'models/GestorExpedientes.php';
 
 class ExpedienteController {
     private $gestor;
