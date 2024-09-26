@@ -24,15 +24,16 @@ class Expediente {
 
     public function toArray() {
         return [
-            ':nombre' => $this->nombre,
-            ':apellido1' => $this->apellido1,
-            ':apellido2' => $this->apellido2,
-            ':email' => $this->email,
-            ':actitud' => $this->actitud,
-            ':archivo' => $this->archivo,
-            ':idiomas' => json_encode($this->idiomas),
-            ':actividades' => json_encode($this->actividades),
+            'id' => $this->id,
+            'nombre' => $this->nombre,
+            'apellido1' => $this->apellido1,
+            'apellido2' => $this->apellido2,
+            'email' => $this->email,
+            'actitud' => $this->actitud,
+            'archivo' => $this->archivo,
+            'idiomas' => json_encode($this->idiomas),
+            'actividades' => json_encode($this->actividades),
         ];
-    }
+    }    
 }
 ?>
