@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Editar Expediente</title>
     <link rel="stylesheet" href="../../css/styles.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Editar Expediente</h1>
@@ -34,13 +36,17 @@
             <fieldset>
                 <legend>Idiomas y Actividades</legend>
                 <label for="idiomas">Idiomas:</label>
-                <?php foreach (json_decode($expediente->idiomas) as $idioma): ?>
+                <?php
+                $idiomas = is_array($expediente->idiomas) ? $expediente->idiomas : json_decode($expediente->idiomas, true);
+                foreach ($idiomas as $idioma): ?>
                     <input type="text" name="idiomas[]" value="<?= htmlspecialchars($idioma) ?>">
                 <?php endforeach; ?>
                 <input type="text" name="idiomas[]" placeholder="Agregar idioma extra">
 
                 <label for="actividad">Actividades:</label>
-                <?php foreach (json_decode($expediente->actividades, true) as $actividad): ?>
+                <?php
+                $actividades = is_array($expediente->actividades) ? $expediente->actividades : json_decode($expediente->actividades, true);
+                foreach ($actividades as $actividad): ?>
                     <input type="text" name="actividad[]" value="<?= htmlspecialchars($actividad['nombre']) ?>">
                 <?php endforeach; ?>
                 <input type="text" name="actividad[]" placeholder="Agregar actividad extra">
@@ -58,4 +64,5 @@
         </form>
     </div>
 </body>
+
 </html>
