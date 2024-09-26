@@ -8,7 +8,7 @@
 <body>
     <h1>Crear Expediente</h1>
     <div class="container">
-        <form action="crear.php" method="POST" enctype="multipart/form-data">
+        <form action="index.php?action=crear" method="POST" enctype="multipart/form-data">
             <fieldset>
                 <legend>Datos Personales</legend>
                 <label for="nombre">Nombre:</label>

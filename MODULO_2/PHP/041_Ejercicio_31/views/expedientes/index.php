@@ -44,8 +44,8 @@
                             </ul>
                         </td>
                         <td>
-                            <a href="editar.php?id=<?= htmlspecialchars($expediente->getId()); ?>" class="btn">Editar</a>
-                            <a href="eliminar.php?id=<?= htmlspecialchars($expediente->getId()); ?>" class="btn">Eliminar</a>
+                            <a href="index.php?action=editar&id=<?= $expediente->id; ?>">Editar</a>
+                            <a href="index.php?action=eliminar&id=<?= $expediente->id; ?>">Eliminar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
