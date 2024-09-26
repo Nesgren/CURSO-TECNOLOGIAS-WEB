@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Expediente</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <h1>Editar Expediente</h1>
+    <form action="index.php?action=editar&id=<?= $expediente->id ?>" method="POST" enctype="multipart/form-data">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($expediente->nombre) ?>" required>
+
+        <label for="apellido1">Primer Apellido:</label>
+        <input type="text" id="apellido1" name="apellido1" value="<?= htmlspecialchars($expediente->apellido1) ?>" required>
+
+        <label for="apellido2">Segundo Apellido:</label>
+        <input type="text" id="apellido2" name="apellido2" value="<?= htmlspecialchars($expediente->apellido2) ?>">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="<?= htmlspecialchars($expediente->email) ?>" required>
+
+        <label for="actitud">Actitud:</label>
+        <select id="actitud" name="actitud" required>
+            <option value="positiva" <?= $expediente->actitud == 'positiva' ? 'selected' : '' ?>>Positiva</option>
+            <option value="neutral" <?= $expediente->actitud == 'neutral' ? 'selected' : '' ?>>Neutral</option>
+            <option value="negativa" <?= $expediente->actitud == 'negativa' ? 'selected' : '' ?>>Negativa</option>
+        </select>
+
+        <label for="idiomas">Idiomas:</label>
+        <?php foreach (json_decode($expediente->idiomas) as $idioma): ?>
+            <input type="text" name="idiomas[]" value="<?= htmlspecialchars($idioma) ?>">
+        <?php endforeach; ?>
+        <input type="text" name="idiomas[]" placeholder="Agregar idioma extra">
+
+        <label for="actividad">Actividades:</label>
+        <?php foreach (json_decode($expediente->actividades, true) as $actividad): ?>
+            <input type="text" name="actividad[]" value="<?= htmlspecialchars($actividad['nombre']) ?>">
+        <?php endforeach; ?>
+        <input type="text" name="actividad[]" placeholder="Agregar actividad extra">
+
+        <label for="archivo">Subir Nuevo Archivo (Opcional):</label>
+        <input type="file" id="archivo" name="uploadedFile" accept=".pdf,.doc,.docx">
+
+        <button type="submit">Guardar Cambios</button>
+        <a href="index.php">Cancelar</a>
+    </form>
+</body>
+</html>
