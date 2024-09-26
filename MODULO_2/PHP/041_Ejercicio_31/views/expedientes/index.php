@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Asegúrate de que esta línea está aquí -->
     <title>Lista de Expedientes</title>
     <link rel="stylesheet" href="../../css/styles.css">
 </head>
@@ -25,8 +26,8 @@
                     <td><?= htmlspecialchars($expediente->nombre . ' ' . $expediente->apellido1 . ' ' . $expediente->apellido2); ?></td>
                     <td><?= htmlspecialchars($expediente->email); ?></td>
                     <td><?= htmlspecialchars($expediente->actitud); ?></td>
-                    <td><?= implode(', ', $expediente->idiomas); ?></td>
-                    <td><?= implode(', ', array_column($expediente->actividades, 'nombre')); ?></td>
+                    <td><?= implode(', ', json_decode($expediente->idiomas)); ?></td>
+                    <td><?= implode(', ', array_column(json_decode($expediente->actividades), 'nombre')); ?></td>
                     <td>
                         <a href="index.php?action=editar&id=<?= $expediente->id; ?>">Editar</a>
                         <a href="index.php?action=eliminar&id=<?= $expediente->id; ?>">Eliminar</a>
