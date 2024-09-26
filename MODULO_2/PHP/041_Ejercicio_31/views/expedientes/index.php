@@ -8,7 +8,7 @@
 <body>
     <h1>Lista de Expedientes</h1>
     <div class="container">
-        <a href="crear.php" class="btn">Crear nuevo expediente</a>
+        <a href="index.php?action=crear" class="btn">Crear nuevo expediente</a>
         <table>
             <thead>
                 <tr>
@@ -54,3 +54,4 @@
     </div>
 </body>
 </html>
+
