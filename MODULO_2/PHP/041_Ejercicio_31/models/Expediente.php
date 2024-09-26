@@ -34,6 +34,6 @@ class Expediente {
             'idiomas' => json_encode($this->idiomas),
             'actividades' => json_encode($this->actividades),
         ];
-    }    
+    }
 }
 ?>

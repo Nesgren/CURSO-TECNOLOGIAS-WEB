@@ -25,8 +25,8 @@
                     <td><?= htmlspecialchars($expediente->nombre . ' ' . $expediente->apellido1 . ' ' . $expediente->apellido2); ?></td>
                     <td><?= htmlspecialchars($expediente->email); ?></td>
                     <td><?= htmlspecialchars($expediente->actitud); ?></td>
-                    <td><?= is_array($expediente->idiomas) ? implode(', ', $expediente->idiomas) : ''; ?></td>
-                    <td><?= is_array($expediente->actividades) ? implode(', ', array_column($expediente->actividades, 'nombre')) : ''; ?></td>
+                    <td><?= implode(', ', $expediente->idiomas); ?></td>
+                    <td><?= implode(', ', array_column($expediente->actividades, 'nombre')); ?></td>
                     <td>
                         <a href="index.php?action=editar&id=<?= $expediente->id; ?>">Editar</a>
                         <a href="index.php?action=eliminar&id=<?= $expediente->id; ?>">Eliminar</a>
