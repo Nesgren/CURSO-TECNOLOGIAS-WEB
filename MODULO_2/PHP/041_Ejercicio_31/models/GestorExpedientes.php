@@ -40,10 +40,21 @@ class GestorExpedientes {
                   VALUES (:nombre, :apellido1, :apellido2, :email, :actitud, :archivo, :idiomas, :actividades)";
         $stmt = $this->conn->prepare($query);
         
-        // Agregar depuración
-        var_dump($expediente->toArray()); // Mostrar valores para depuración
+        // Debugging output
+        $data = $expediente->toArray();
+        var_dump($data); // Verificar qué datos se están enviando
 
-        $stmt->execute($expediente->toArray());
+        // Asegurarse de que todos los datos sean válidos
+        $stmt->execute([
+            ':nombre' => $data['nombre'],
+            ':apellido1' => $data['apellido1'],
+            ':apellido2' => $data['apellido2'],
+            ':email' => $data['email'],
+            ':actitud' => $data['actitud'],
+            ':archivo' => $data['archivo'],
+            ':idiomas' => $data['idiomas'], // Este debe ser una cadena JSON
+            ':actividades' => $data['actividades'], // Este debe ser una cadena JSON
+        ]);
     }
 
     public function actualizarExpediente($expediente) {
@@ -52,7 +63,15 @@ class GestorExpedientes {
                       actitud = :actitud, archivo = :archivo, idiomas = :idiomas, actividades = :actividades 
                   WHERE id = :id";
         $stmt = $this->conn->prepare($query);
-        $stmt->execute($expediente->toArray());
+        
+        // Asegúrate de que 'id' esté presente en el array
+        $data = $expediente->toArray();
+        $data[':id'] = $data['id'];
+
+        // Debugging output
+        var_dump($data); // Verificar qué datos se están enviando
+
+        $stmt->execute($data);
     }
 
     public function eliminarExpediente($id) {
