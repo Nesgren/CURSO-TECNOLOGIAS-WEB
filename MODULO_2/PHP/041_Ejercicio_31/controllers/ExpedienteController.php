@@ -10,7 +10,7 @@ class ExpedienteController {
 
     public function index() {
         $expedientes = $this->gestor->obtenerExpedientes();
-        require_once '../views/expedientes/index.php';
+        require_once 'views/expedientes/index.php';
     }
 
     public function crear() {
@@ -29,7 +29,7 @@ class ExpedienteController {
             $this->gestor->crearExpediente($expediente);
             header('Location: index.php');
         } else {
-            require_once '../views/expedientes/crear.php';
+            require_once 'views/expedientes/crear.php';
         }
     }
 
@@ -52,7 +52,7 @@ class ExpedienteController {
             $this->gestor->actualizarExpediente($expediente);
             header('Location: index.php');
         } else {
-            require_once '../views/expedientes/editar.php';
+            require_once 'views/expedientes/editar.php';
         }
     }
 
