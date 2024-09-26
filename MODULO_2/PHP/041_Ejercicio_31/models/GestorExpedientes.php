@@ -41,7 +41,7 @@ class GestorExpedientes {
         $stmt = $this->conn->prepare($query);
         
         // Agregar depuración
-        var_dump($expediente->toArray());
+        var_dump($expediente->toArray()); // Mostrar valores para depuración
 
         $stmt->execute($expediente->toArray());
     }
