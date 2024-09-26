@@ -64,7 +64,7 @@ class ExpedienteController {
     private function manejarArchivoSubido() {
         if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
             $nombreArchivo = basename($_FILES['uploadedFile']['name']);
-            $rutaArchivo = "../uploads/" . $nombreArchivo;
+            $rutaArchivo = "uploads/" . $nombreArchivo;
 
             if (move_uploaded_file($_FILES['uploadedFile']['tmp_name'], $rutaArchivo)) {
                 return $nombreArchivo;
