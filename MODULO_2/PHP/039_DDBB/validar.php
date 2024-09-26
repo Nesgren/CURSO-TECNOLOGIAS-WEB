@@ -8,7 +8,7 @@
 <?php
 session_start();
 
-// Establecer la zona horaria a Madrid
+// Establecer la zona horaria
 date_default_timezone_set('Europe/Madrid');
 
 if (isset($_POST['login'])) {
