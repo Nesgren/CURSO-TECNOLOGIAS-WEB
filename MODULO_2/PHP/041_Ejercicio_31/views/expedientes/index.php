@@ -8,7 +8,7 @@
 <body>
     <h1>Lista de Expedientes</h1>
     <div class="container">
-        <a href="../expedientes/crear.php" class="btn">Crear nuevo expediente</a>
+        <a href="https://franco.104cubes.com/MODULO_2/PHP/expedientes/crear.php" class="btn">Crear nuevo expediente</a>
         <table>
             <thead>
                 <tr>
