@@ -10,6 +10,7 @@ class GestorExpedientes {
         $this->conn = $database->getConnection();
     }
 
+    // Método para obtener todos los expedientes
     public function obtenerExpedientes() {
         $query = "SELECT * FROM expedientes";
         $stmt = $this->conn->prepare($query);
@@ -23,6 +24,7 @@ class GestorExpedientes {
         return $expedientes;
     }
 
+    // Método para obtener un expediente por ID
     public function obtenerExpedientePorId($id) {
         $query = "SELECT * FROM expedientes WHERE id = ?";
         $stmt = $this->conn->prepare($query);
@@ -35,6 +37,7 @@ class GestorExpedientes {
         return null;
     }
 
+    // Método para crear un nuevo expediente
     public function crearExpediente($expediente) {
         $query = "INSERT INTO expedientes (nombre, apellido1, apellido2, email, actitud, archivo, idiomas, actividades) 
                   VALUES (:nombre, :apellido1, :apellido2, :email, :actitud, :archivo, :idiomas, :actividades)";
@@ -42,6 +45,7 @@ class GestorExpedientes {
         $stmt->execute($expediente->toArray());
     }
 
+    // Método para actualizar un expediente
     public function actualizarExpediente($expediente) {
         $query = "UPDATE expedientes 
                   SET nombre = :nombre, apellido1 = :apellido1, apellido2 = :apellido2, email = :email, 
@@ -51,6 +55,7 @@ class GestorExpedientes {
         $stmt->execute($expediente->toArray());
     }
 
+    // Método para eliminar un expediente
     public function eliminarExpediente($id) {
         $query = "DELETE FROM expedientes WHERE id = ?";
         $stmt = $this->conn->prepare($query);
