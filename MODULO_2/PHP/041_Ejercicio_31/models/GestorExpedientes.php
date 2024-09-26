@@ -39,6 +39,10 @@ class GestorExpedientes {
         $query = "INSERT INTO expedientes (nombre, apellido1, apellido2, email, actitud, archivo, idiomas, actividades) 
                   VALUES (:nombre, :apellido1, :apellido2, :email, :actitud, :archivo, :idiomas, :actividades)";
         $stmt = $this->conn->prepare($query);
+        
+        // Agregar depuración
+        var_dump($expediente->toArray());
+
         $stmt->execute($expediente->toArray());
     }
 
