@@ -3,62 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <title>Editar Expediente</title>
-    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <h1>Editar Expediente</h1>
     <div class="container">
-        <h1>Editar Expediente</h1>
-        <form action="index.php?action=editar&id=<?= $expediente->id ?>" method="POST" enctype="multipart/form-data">
+        <form action="editar.php?id=<?= htmlspecialchars($expediente->getId()); ?>" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<?= htmlspecialchars($expediente->getId()); ?>">
+
             <fieldset>
-                <legend>Información Personal</legend>
+                <legend>Datos Personales</legend>
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($expediente->nombre) ?>" required>
+                <input type="text" name="nombre" value="<?= htmlspecialchars($expediente->getNombre()); ?>" required>
+                <br>
 
                 <label for="apellido1">Primer Apellido:</label>
-                <input type="text" id="apellido1" name="apellido1" value="<?= htmlspecialchars($expediente->apellido1) ?>" required>
+                <input type="text" name="apellido1" value="<?= htmlspecialchars($expediente->getApellido1()); ?>" required>
+                <br>
 
                 <label for="apellido2">Segundo Apellido:</label>
-                <input type="text" id="apellido2" name="apellido2" value="<?= htmlspecialchars($expediente->apellido2) ?>">
+                <input type="text" name="apellido2" value="<?= htmlspecialchars($expediente->getApellido2()); ?>">
+                <br>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="<?= htmlspecialchars($expediente->email) ?>" required>
-
-                <label for="actitud">Actitud:</label>
-                <select id="actitud" name="actitud" required>
-                    <option value="positiva" <?= $expediente->actitud == 'positiva' ? 'selected' : '' ?>>Positiva</option>
-                    <option value="neutral" <?= $expediente->actitud == 'neutral' ? 'selected' : '' ?>>Neutral</option>
-                    <option value="negativa" <?= $expediente->actitud == 'negativa' ? 'selected' : '' ?>>Negativa</option>
-                </select>
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" name="email" value="<?= htmlspecialchars($expediente->getEmail()); ?>" required>
+                <br>
             </fieldset>
 
             <fieldset>
-                <legend>Idiomas y Actividades</legend>
-                <label for="idiomas">Idiomas:</label>
-                <?php 
-                $idiomas = is_array($expediente->idiomas) ? $expediente->idiomas : json_decode($expediente->idiomas, true);
-                foreach ($idiomas as $idioma): ?>
-                    <input type="text" name="idiomas[]" value="<?= htmlspecialchars($idioma) ?>">
-                <?php endforeach; ?>
-                <input type="text" name="idiomas[]" placeholder="Agregar idioma extra">
+                <legend>Actividades</legend>
+                <?php foreach ($expediente->getActividades() as $index => $actividad): ?>
+                    <div class="actividad">
+                        <label>Nombre del Ejercicio:</label>
+                        <input type="text" name="actividad[<?= $index; ?>][nombre]" value="<?= htmlspecialchars($actividad['nombre']); ?>" required>
+                        <br>
 
-                <label for="actividad">Actividades:</label>
-                <?php 
-                $actividades = is_array($expediente->actividades) ? $expediente->actividades : json_decode($expediente->actividades, true);
-                foreach ($actividades as $actividad): ?>
-                    <input type="text" name="actividad[]" value="<?= htmlspecialchars($actividad['nombre']) ?>">
+                        <label>Nota:</label>
+                        <select name="actividad[<?= $index; ?>][nota]" required>
+                            <option value="">Selecciona una nota</option>
+                            <?php for ($i = 1; $i <= 10; $i++): ?>
+                                <option value="<?= $i; ?>" <?= $actividad['nota'] == $i ? 'selected' : ''; ?>><?= $i; ?></option>
+                            <?php endfor; ?>
+                        </select>
+                        <br>
+
+                        <label>Comentario:</label>
+                        <textarea name="actividad[<?= $index; ?>][comentario]"><?= htmlspecialchars($actividad['comentario']); ?></textarea>
+                        <br>
+                    </div>
                 <?php endforeach; ?>
-                <input type="text" name="actividad[]" placeholder="Agregar actividad extra">
             </fieldset>
 
             <fieldset>
-                <legend>Subir Nuevo Archivo</legend>
-                <label for="archivo">Archivo (opcional):</label>
-                <input type="file" id="archivo" name="uploadedFile" accept=".pdf,.doc,.docx">
-                <div class="upload-file-info">Formato permitido: PDF, DOC, DOCX</div>
+                <legend>Actitud del Alumno en Clase</legend>
+                <label>
+                    <input type="radio" name="actitud" value="Buena" <?= $expediente->getActitud() == 'Buena' ? 'checked' : ''; ?> required> Buena
+                </label>
+                <label>
+                    <input type="radio" name="actitud" value="Normal" <?= $expediente->getActitud() == 'Normal' ? 'checked' : ''; ?> required> Normal
+                </label>
+                <label>
+                    <input type="radio" name="actitud" value="Mala" <?= $expediente->getActitud() == 'Mala' ? 'checked' : ''; ?> required> Mala
+                </label>
             </fieldset>
 
-            <button type="submit" class="btn">Guardar Cambios</button>
-            <a href="index.php" class="btn">Cancelar</a>
+            <fieldset>
+                <legend>Idiomas que Habla</legend>
+                <label>
+                    <input type="checkbox" name="idiomas[]" value="Catalan" <?= in_array('Catalan', $expediente->getIdiomas()) ? 'checked' : ''; ?>> Catalán
+                </label>
+                <label>
+                    <input type="checkbox" name="idiomas[]" value="Castellano" <?= in_array('Castellano', $expediente->getIdiomas()) ? 'checked' : ''; ?>> Castellano
+                </label>
+                <label>
+                    <input type="checkbox" name="idiomas[]" value="Frances" <?= in_array('Frances', $expediente->getIdiomas()) ? 'checked' : ''; ?>> Francés
+                </label>
+                <label>
+                    <input type="checkbox" name="idiomas[]" value="Ingles" <?= in_array('Ingles', $expediente->getIdiomas()) ? 'checked' : ''; ?>> Inglés
+                </label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Foto</legend>
+                <label for="uploadedFile">Foto del Alumno:</label>
+                <input type="file" id="uploadedFile" name="uploadedFile">
+                <?php if ($expediente->getArchivo()): ?>
+                    <p>Foto <img src="../uploads/<?= htmlspecialchars($expediente->getArchivo()); ?>" class="foto-alumno" alt="Archivo"></p>
+                <?php endif; ?>
+            </fieldset>
+
+            <button type="submit">Guardar cambios</button>
+            <a href="index.php" class="btn">Volver a la lista</a>
         </form>
     </div>
 </body>

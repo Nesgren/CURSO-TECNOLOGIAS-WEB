@@ -2,39 +2,55 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Asegúrate de que esta línea está aquí -->
     <title>Lista de Expedientes</title>
-    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Lista de Expedientes</h1>
-    <a href="index.php?action=crear" class="btn">Crear nuevo expediente</a>
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Actitud</th>
-                <th>Idiomas</th>
-                <th>Actividades</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($expedientes as $expediente): ?>
+    <div class="container">
+        <a href="crear.php" class="btn">Crear nuevo expediente</a>
+        <table>
+            <thead>
                 <tr>
-                    <td><?= htmlspecialchars($expediente->nombre . ' ' . $expediente->apellido1 . ' ' . $expediente->apellido2); ?></td>
-                    <td><?= htmlspecialchars($expediente->email); ?></td>
-                    <td><?= htmlspecialchars($expediente->actitud); ?></td>
-                    <td><?= implode(', ', json_decode($expediente->idiomas)); ?></td>
-                    <td><?= implode(', ', array_column(json_decode($expediente->actividades), 'nombre')); ?></td>
-                    <td>
-                        <a href="index.php?action=editar&id=<?= $expediente->id; ?>">Editar</a>
-                        <a href="index.php?action=eliminar&id=<?= $expediente->id; ?>">Eliminar</a>
-                    </td>
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Actitud</th>
+                    <th>Idiomas</th>
+                    <th>Actividades</th>
+                    <th>Acciones</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($expedientes as $expediente): ?>
+                    <tr>
+                        <td>
+                            <?php if ($expediente->getArchivo()): ?>
+                                <img src="../uploads/<?= htmlspecialchars($expediente->getArchivo()); ?>" alt="Archivo" class="table-img">
+                            <?php endif; ?>
+                        </td>
+                        <td><?= htmlspecialchars($expediente->getNombre() . ' ' . $expediente->getApellido1() . ' ' . $expediente->getApellido2()); ?></td>
+                        <td><?= htmlspecialchars($expediente->getEmail()); ?></td>
+                        <td><?= htmlspecialchars($expediente->getActitud()); ?></td>
+                        <td><?= htmlspecialchars(implode(', ', $expediente->getIdiomas())); ?></td>
+                        <td>
+                            <ul>
+                                <?php foreach ($expediente->getActividades() as $actividad): ?>
+                                    <li>
+                                        <?= htmlspecialchars($actividad['nombre']); ?> - Nota: <?= htmlspecialchars($actividad['nota']); ?><br>
+                                        Comentario: <?= htmlspecialchars($actividad['comentario']); ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="editar.php?id=<?= htmlspecialchars($expediente->getId()); ?>" class="btn">Editar</a>
+                            <a href="eliminar.php?id=<?= htmlspecialchars($expediente->getId()); ?>" class="btn">Eliminar</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

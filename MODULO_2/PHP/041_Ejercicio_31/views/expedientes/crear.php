@@ -3,56 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <title>Crear Expediente</title>
-    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <h1>Crear Expediente</h1>
     <div class="container">
-        <h1>Crear Nuevo Expediente</h1>
-        <form action="index.php?action=crear" method="POST" enctype="multipart/form-data">
+        <form action="crear.php" method="POST" enctype="multipart/form-data">
             <fieldset>
-                <legend>Información Personal</legend>
+                <legend>Datos Personales</legend>
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <input type="text" name="nombre" required>
+                <br>
 
                 <label for="apellido1">Primer Apellido:</label>
-                <input type="text" id="apellido1" name="apellido1" required>
+                <input type="text" name="apellido1" required>
+                <br>
 
                 <label for="apellido2">Segundo Apellido:</label>
-                <input type="text" id="apellido2" name="apellido2">
+                <input type="text" name="apellido2">
+                <br>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="actitud">Actitud:</label>
-                <select id="actitud" name="actitud" required>
-                    <option value="positiva">Positiva</option>
-                    <option value="neutral">Neutral</option>
-                    <option value="negativa">Negativa</option>
-                </select>
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" name="email" required>
+                <br>
             </fieldset>
 
             <fieldset>
-                <legend>Idiomas y Actividades</legend>
-                <label for="idiomas">Idiomas:</label>
-                <input type="text" id="idiomas" name="idiomas[]" placeholder="Idioma 1">
-                <input type="text" id="idiomas" name="idiomas[]" placeholder="Idioma 2">
-                <input type="text" id="idiomas" name="idiomas[]" placeholder="Idioma 3">
+                <legend>Actividades</legend>
+                <div class="actividad">
+                    <label>Nombre del Ejercicio:</label>
+                    <input type="text" name="actividad[0][nombre]" required>
+                    <br>
 
-                <label for="actividad">Actividades:</label>
-                <input type="text" name="actividad[]" placeholder="Actividad 1">
-                <input type="text" name="actividad[]" placeholder="Actividad 2">
-                <input type="text" name="actividad[]" placeholder="Actividad 3">
+                    <label>Nota:</label>
+                    <select name="actividad[0][nota]" required>
+                        <option value="">Selecciona una nota</option>
+                        <?php for ($i = 1; $i <= 10; $i++): ?>
+                            <option value="<?= $i; ?>"><?= $i; ?></option>
+                        <?php endfor; ?>
+                    </select>
+                    <br>
+
+                    <label>Comentario:</label>
+                    <textarea name="actividad[0][comentario]"></textarea>
+                    <br>
+                </div>
+                <!-- Puedes agregar más bloques de actividad si es necesario -->
             </fieldset>
 
             <fieldset>
-                <legend>Subir Archivo</legend>
-                <label for="archivo">Archivo (opcional):</label>
-                <input type="file" id="archivo" name="uploadedFile" accept=".pdf,.doc,.docx">
-                <div class="upload-file-info">Formato permitido: PDF, DOC, DOCX</div>
+                <legend>Actitud del Alumno en Clase</legend>
+                <label>
+                    <input type="radio" name="actitud" value="Buena" required> Buena
+                </label>
+                <label>
+                    <input type="radio" name="actitud" value="Normal" required> Normal
+                </label>
+                <label>
+                    <input type="radio" name="actitud" value="Mala" required> Mala
+                </label>
             </fieldset>
 
-            <button type="submit" class="btn">Crear Expediente</button>
-            <a href="index.php" class="btn">Cancelar</a>
+            <fieldset>
+                <legend>Idiomas que Habla</legend>
+                <label>
+                    <input type="checkbox" name="idiomas[]" value="Catalan"> Catalán
+                </label>
+                <label>
+                    <input type="checkbox" name="idiomas[]" value="Castellano"> Castellano
+                </label>
+                <label>
+                    <input type="checkbox" name="idiomas[]" value="Frances"> Francés
+                </label>
+                <label>
+                    <input type="checkbox" name="idiomas[]" value="Ingles"> Inglés
+                </label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Subida de Archivos</legend>
+                <label for="uploadedFile">Sube un Archivo:</label>
+                <input type="file" id="uploadedFile" name="uploadedFile">
+            </fieldset>
+
+            <button type="submit">Crear Expediente</button>
+            <a href="index.php" class="btn">Volver a la lista</a>
         </form>
     </div>
 </body>
