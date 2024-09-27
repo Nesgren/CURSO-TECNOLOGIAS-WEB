@@ -8,25 +8,25 @@
 <body>
     <h1>Editar Expediente</h1>
     <div class="container">
-        <form action="index.php?action=editar&id=<?= $expediente->id ?>" method="PATCH" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?= htmlspecialchars($expediente->getId()); ?>">
+        <form action="index.php?action=editar&id=<?= $expediente->id ?>" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<?= htmlspecialchars($expediente->id); ?>">
 
             <fieldset>
                 <legend>Datos Personales</legend>
                 <label for="nombre">Nombre:</label>
-                <input type="text" name="nombre" value="<?= htmlspecialchars($expediente->getNombre()); ?>" required>
+                <input type="text" name="nombre" value="<?= htmlspecialchars($expediente->nombre); ?>" required>
                 <br>
 
                 <label for="apellido1">Primer Apellido:</label>
-                <input type="text" name="apellido1" value="<?= htmlspecialchars($expediente->getApellido1()); ?>" required>
+                <input type="text" name="apellido1" value="<?= htmlspecialchars($expediente->apellido1); ?>" required>
                 <br>
 
                 <label for="apellido2">Segundo Apellido:</label>
-                <input type="text" name="apellido2" value="<?= htmlspecialchars($expediente->getApellido2()); ?>">
+                <input type="text" name="apellido2" value="<?= htmlspecialchars($expediente->apellido2); ?>">
                 <br>
 
                 <label for="email">Correo Electrónico:</label>
-                <input type="email" name="email" value="<?= htmlspecialchars($expediente->getEmail()); ?>" required>
+                <input type="email" name="email" value="<?= htmlspecialchars($expediente->email); ?>" required>
                 <br>
             </fieldset>
 

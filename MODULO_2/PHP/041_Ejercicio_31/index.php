@@ -9,10 +9,22 @@ if (isset($_GET['action'])) {
             $controller->crear();
             break;
         case 'editar':
-            $controller->editar($_GET['id']);
+            if (isset($_GET['id'])) {
+                $controller->editar((int)$_GET['id']);
+            } else {
+                // Manejar error: ID no proporcionado
+                header('Location: index.php');
+                exit();
+            }
             break;
         case 'eliminar':
-            $controller->eliminar($_GET['id']);
+            if (isset($_GET['id'])) {
+                $controller->eliminar((int)$_GET['id']);
+            } else {
+                // Manejar error: ID no proporcionado
+                header('Location: index.php');
+                exit();
+            }
             break;
         default:
             $controller->index();

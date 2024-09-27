@@ -83,7 +83,7 @@
             <fieldset>
                 <legend>Subida de Archivos</legend>
                 <label for="uploadedFile">Sube un Archivo:</label>
-                <input type="file" id="uploadedFile" name="uploadedFile">
+                <input type="file" id="uploadedFile" name="uploadedFile" accept="image/*">
             </fieldset>
 
             <button type="submit">Crear Expediente</button>
