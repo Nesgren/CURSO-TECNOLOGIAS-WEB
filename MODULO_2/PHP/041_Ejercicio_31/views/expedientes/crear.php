@@ -47,38 +47,6 @@
                     <label>Comentario:</label>
                     <textarea name="actividad[0][comentario]"></textarea>
                     <br>
-                    <label>Nombre del Ejercicio:</label>
-                    <input type="text" name="actividad[0][nombre]" required>
-                    <br>
-
-                    <label>Nota:</label>
-                    <select name="actividad[0][nota]" required>
-                        <option value="">Selecciona una nota</option>
-                        <?php for ($i = 1; $i <= 10; $i++): ?>
-                            <option value="<?= $i; ?>"><?= $i; ?></option>
-                        <?php endfor; ?>
-                    </select>
-                    <br>
-
-                    <label>Comentario:</label>
-                    <textarea name="actividad[0][comentario]"></textarea>
-                    <br>
-                    <label>Nombre del Ejercicio:</label>
-                    <input type="text" name="actividad[0][nombre]" required>
-                    <br>
-
-                    <label>Nota:</label>
-                    <select name="actividad[0][nota]" required>
-                        <option value="">Selecciona una nota</option>
-                        <?php for ($i = 1; $i <= 10; $i++): ?>
-                            <option value="<?= $i; ?>"><?= $i; ?></option>
-                        <?php endfor; ?>
-                    </select>
-                    <br>
-
-                    <label>Comentario:</label>
-                    <textarea name="actividad[0][comentario]"></textarea>
-                    <br>
                 </div>
                 <!-- Puedes agregar más bloques de actividad si es necesario -->
             </fieldset>
