@@ -26,7 +26,7 @@
                     <tr>
                         <td>
                             <?php if ($expediente->archivo): ?>
-                                <img src="../uploads/<?= htmlspecialchars($expediente->archivo); ?>" alt="Archivo" class="table-img">
+                                <img src="https://franco.104cubes.com/MODULO_2/PHP/041_Ejercicio_31/uploads/<?= htmlspecialchars($expediente->archivo); ?>" alt="Archivo" class="table-img">
                             <?php endif; ?>
                         </td>
                         <td><?= htmlspecialchars($expediente->nombre . ' ' . $expediente->apellido1 . ' ' . $expediente->apellido2); ?></td>
