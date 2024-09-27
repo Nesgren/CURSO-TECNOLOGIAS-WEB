@@ -29,7 +29,7 @@
             </fieldset>
 
             <fieldset>
-                <legend>Actividades</legend>
+                <legend>Actividad 1</legend>
                 <div class="actividad">
                     <label>Nombre del Ejercicio:</label>
                     <input type="text" name="actividad[0][nombre]" required>
@@ -50,6 +50,7 @@
                 </div>
             </fieldset>
             <fieldset>
+                <legend>Actividad 2</legend>
                 <div class="actividad">
                     <label>Nombre del Ejercicio:</label>
                     <input type="text" name="actividad[1][nombre]" required>
@@ -70,6 +71,7 @@
                 </div>
             </fieldset>    
             <fieldset>
+                <legend>Actividad 3</legend>
                 <div class="actividad">
                     <label>Nombre del Ejercicio:</label>
                     <input type="text" name="actividad[2][nombre]" required>
