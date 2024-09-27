@@ -30,25 +30,35 @@
 
             <fieldset>
                 <legend>Actividades</legend>
-                <div class="actividad">
-                    <label>Nombre del Ejercicio:</label>
-                    <input type="text" name="actividad[0][nombre]" required>
-                    <br>
+                <div id="activity-container">
+                    <?php 
+                    // Definir el número de actividades iniciales
+                    $num_actividades = isset($_POST['num_actividades']) ? (int)$_POST['num_actividades'] : 1;
 
-                    <label>Nota:</label>
-                    <select name="actividad[0][nota]" required>
-                        <option value="">Selecciona una nota</option>
-                        <?php for ($i = 1; $i <= 10; $i++): ?>
-                            <option value="<?= $i; ?>"><?= $i; ?></option>
-                        <?php endfor; ?>
-                    </select>
-                    <br>
+                    // Generar campos de actividades
+                    for ($i = 0; $i < $num_actividades; $i++): ?>
+                        <div class="actividad">
+                            <label>Nombre del Ejercicio:</label>
+                            <input type="text" name="actividad[<?php echo $i; ?>][nombre]" required>
+                            <br>
 
-                    <label>Comentario:</label>
-                    <textarea name="actividad[0][comentario]"></textarea>
-                    <br>
+                            <label>Nota:</label>
+                            <select name="actividad[<?php echo $i; ?>][nota]" required>
+                                <option value="">Selecciona una nota</option>
+                                <?php for ($j = 1; $j <= 10; $j++): ?>
+                                    <option value="<?= $j; ?>"><?= $j; ?></option>
+                                <?php endfor; ?>
+                            </select>
+                            <br>
+
+                            <label>Comentario:</label>
+                            <textarea name="actividad[<?php echo $i; ?>][comentario]"></textarea>
+                            <br>
+                        </div>
+                    <?php endfor; ?>
                 </div>
-                <!-- Puedes agregar más bloques de actividad si es necesario -->
+                <input type="hidden" name="num_actividades" value="<?php echo $num_actividades; ?>">
+                <button type="submit" name="add_activity">Agregar otra actividad</button>
             </fieldset>
 
             <fieldset>
@@ -89,6 +99,17 @@
             <button type="submit">Crear Expediente</button>
             <a href="index.php" class="btn">Volver a la lista</a>
         </form>
+
+        <?php
+        // Manejo de la solicitud para agregar una nueva actividad
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_activity'])) {
+            // Incrementar el número de actividades
+            $num_actividades++;
+            // Puedes redirigir para que el formulario se refresque
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
+        }
+        ?>
     </div>
 </body>
 </html>

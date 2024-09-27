@@ -2,8 +2,8 @@
 class Database {
     private $host = 'localhost';
     private $db_name = 'franco_bbdd1';
-    private $username = 'franco'; // Cambia a tu usuario
-    private $password = 'Nascor2020!'; // Cambia a tu contraseña
+    private $username = 'franco';
+    private $password = 'Nascor2020!';
     public $conn;
 
     public function getConnection() {
