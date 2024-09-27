@@ -29,13 +29,13 @@
                                 <img src="../uploads/<?= htmlspecialchars($expediente->archivo); ?>" alt="Archivo" class="table-img">
                             <?php endif; ?>
                         </td>
-                        <td><?= htmlspecialchars($expediente->getNombre() . ' ' . $expediente->getApellido1() . ' ' . $expediente->getApellido2()); ?></td>
-                        <td><?= htmlspecialchars($expediente->getEmail()); ?></td>
-                        <td><?= htmlspecialchars($expediente->getActitud()); ?></td>
-                        <td><?= htmlspecialchars(implode(', ', $expediente->getIdiomas())); ?></td>
+                        <td><?= htmlspecialchars($expediente->nombre . ' ' . $expediente->apellido1 . ' ' . $expediente->apellido2); ?></td>
+                        <td><?= htmlspecialchars($expediente->email); ?></td>
+                        <td><?= htmlspecialchars($expediente->actitud); ?></td>
+                        <td><?= htmlspecialchars(implode(', ', $expediente->idiomas)); ?></td>
                         <td>
                             <ul>
-                                <?php foreach ($expediente->getActividades() as $actividad): ?>
+                                <?php foreach ($expediente->actividades as $actividad): ?>
                                     <li>
                                         <?= htmlspecialchars($actividad['nombre']); ?> - Nota: <?= htmlspecialchars($actividad['nota']); ?><br>
                                         Comentario: <?= htmlspecialchars($actividad['comentario']); ?>
