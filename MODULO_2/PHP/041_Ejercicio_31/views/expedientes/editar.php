@@ -32,7 +32,7 @@
 
             <fieldset>
                 <legend>Actividades</legend>
-                <?php foreach ($expediente->getActividades() as $index => $actividad): ?>
+                <?php foreach ($expediente->actividades as $index => $actividad): ?>
                     <div class="actividad">
                         <label>Nombre del Ejercicio:</label>
                         <input type="text" name="actividad[<?= $index; ?>][nombre]" value="<?= htmlspecialchars($actividad['nombre']); ?>" required>
@@ -57,29 +57,29 @@
             <fieldset>
                 <legend>Actitud del Alumno en Clase</legend>
                 <label>
-                    <input type="radio" name="actitud" value="Buena" <?= $expediente->getActitud() == 'Buena' ? 'checked' : ''; ?> required> Buena
+                    <input type="radio" name="actitud" value="Buena" <?= $expediente->actitud == 'Buena' ? 'checked' : ''; ?> required> Buena
                 </label>
                 <label>
-                    <input type="radio" name="actitud" value="Normal" <?= $expediente->getActitud() == 'Normal' ? 'checked' : ''; ?> required> Normal
+                    <input type="radio" name="actitud" value="Normal" <?= $expediente->actitud == 'Normal' ? 'checked' : ''; ?> required> Normal
                 </label>
                 <label>
-                    <input type="radio" name="actitud" value="Mala" <?= $expediente->getActitud() == 'Mala' ? 'checked' : ''; ?> required> Mala
+                    <input type="radio" name="actitud" value="Mala" <?= $expediente->actitud == 'Mala' ? 'checked' : ''; ?> required> Mala
                 </label>
             </fieldset>
 
             <fieldset>
                 <legend>Idiomas que Habla</legend>
                 <label>
-                    <input type="checkbox" name="idiomas[]" value="Catalan" <?= in_array('Catalan', $expediente->getIdiomas()) ? 'checked' : ''; ?>> Catalán
+                    <input type="checkbox" name="idiomas[]" value="Catalan" <?= in_array('Catalan', $expediente->idiomas) ? 'checked' : ''; ?>> Catalán
                 </label>
                 <label>
-                    <input type="checkbox" name="idiomas[]" value="Castellano" <?= in_array('Castellano', $expediente->getIdiomas()) ? 'checked' : ''; ?>> Castellano
+                    <input type="checkbox" name="idiomas[]" value="Castellano" <?= in_array('Castellano', $expediente->idiomas) ? 'checked' : ''; ?>> Castellano
                 </label>
                 <label>
-                    <input type="checkbox" name="idiomas[]" value="Frances" <?= in_array('Frances', $expediente->getIdiomas()) ? 'checked' : ''; ?>> Francés
+                    <input type="checkbox" name="idiomas[]" value="Frances" <?= in_array('Frances', $expediente->idiomas) ? 'checked' : ''; ?>> Francés
                 </label>
                 <label>
-                    <input type="checkbox" name="idiomas[]" value="Ingles" <?= in_array('Ingles', $expediente->getIdiomas()) ? 'checked' : ''; ?>> Inglés
+                    <input type="checkbox" name="idiomas[]" value="Ingles" <?= in_array('Ingles', $expediente->idiomas) ? 'checked' : ''; ?>> Inglés
                 </label>
             </fieldset>
 
@@ -87,8 +87,8 @@
                 <legend>Foto</legend>
                 <label for="uploadedFile">Foto del Alumno:</label>
                 <input type="file" id="uploadedFile" name="uploadedFile">
-                <?php if ($expediente->getArchivo()): ?>
-                    <p>Foto <img src="../uploads/<?= htmlspecialchars($expediente->getArchivo()); ?>" class="foto-alumno" alt="Archivo"></p>
+                <?php if ($expediente->archivo): ?>
+                    <p>Foto <img src="../uploads/<?= htmlspecialchars($expediente->archivo); ?>" class="foto-alumno" alt="Archivo"></p>
                 <?php endif; ?>
             </fieldset>
 
