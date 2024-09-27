@@ -88,7 +88,7 @@
                 <label for="uploadedFile">Foto del Alumno:</label>
                 <input type="file" id="uploadedFile" name="uploadedFile">
                 <?php if ($expediente->archivo): ?>
-                    <p>Foto <img src="../uploads/<?= htmlspecialchars($expediente->archivo); ?>" class="foto-alumno" alt="Archivo"></p>
+                    <p>Foto <img src="../../uploads/<?= htmlspecialchars($expediente->archivo); ?>" class="foto-alumno" alt="Foto Alumno"></p>
                 <?php endif; ?>
             </fieldset>
 
