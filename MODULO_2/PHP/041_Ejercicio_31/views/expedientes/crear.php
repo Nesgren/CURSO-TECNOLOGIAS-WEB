@@ -48,6 +48,8 @@
                     <textarea name="actividad[0][comentario]"></textarea>
                     <br>
                 </div>
+            </fieldset>
+            <fieldset>
                 <div class="actividad">
                     <label>Nombre del Ejercicio:</label>
                     <input type="text" name="actividad[1][nombre]" required>
@@ -66,6 +68,8 @@
                     <textarea name="actividad[1][comentario]"></textarea>
                     <br>
                 </div>
+            </fieldset>    
+            <fieldset>
                 <div class="actividad">
                     <label>Nombre del Ejercicio:</label>
                     <input type="text" name="actividad[2][nombre]" required>
