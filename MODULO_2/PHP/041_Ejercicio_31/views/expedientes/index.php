@@ -25,8 +25,8 @@
                 <?php foreach ($expedientes as $expediente): ?>
                     <tr>
                         <td>
-                            <?php if ($expediente->getArchivo()): ?>
-                                <img src="../uploads/<?= htmlspecialchars($expediente->getArchivo()); ?>" alt="Archivo" class="table-img">
+                            <?php if ($expediente->archivo): ?>
+                                <img src="../uploads/<?= htmlspecialchars($expediente->archivo); ?>" alt="Archivo" class="table-img">
                             <?php endif; ?>
                         </td>
                         <td><?= htmlspecialchars($expediente->getNombre() . ' ' . $expediente->getApellido1() . ' ' . $expediente->getApellido2()); ?></td>
