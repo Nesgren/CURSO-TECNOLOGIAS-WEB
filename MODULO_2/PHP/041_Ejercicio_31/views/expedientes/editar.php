@@ -8,7 +8,7 @@
 <body>
     <h1>Editar Expediente</h1>
     <div class="container">
-        <form action="index.php?action=editar&id=<?= $expediente->id ?>" method="POST" enctype="multipart/form-data">
+        <form action="index.php?action=editar&id=<?= $expediente->id ?>" method="PATCH" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?= htmlspecialchars($expediente->getId()); ?>">
 
             <fieldset>
