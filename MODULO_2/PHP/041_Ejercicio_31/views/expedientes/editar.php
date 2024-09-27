@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Editar Expediente</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../css/styles.css">
 </head>
 <body>
     <h1>Editar Expediente</h1>
