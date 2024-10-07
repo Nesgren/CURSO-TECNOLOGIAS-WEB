@@ -55,7 +55,7 @@ class CompanyController extends Controller
         if (!$company) {
             return redirect()->route('home')->with('error', 'No se encontró la compañía asociada.');
         }
-
+    
         // Obtener el último TipPool distribuido
         $latestTipPool = TipPool::latest()->first();
     
@@ -72,9 +72,6 @@ class CompanyController extends Controller
     
         $employeeCount = $employees->count();
         $areaCount = $company->areas()->count();
-    
-        // Obtener el último TipPool distribuido
-        $latestTipPool = TipPool::latest()->first();
     
         // Calcular el total de propinas distribuidas solo del último TipPool distribuido
         $recentTipsTotal = $latestTipPool ? TipDistribution::where('tip_pool_id', $latestTipPool->id)->sum('amount') : 0;
@@ -123,7 +120,7 @@ class CompanyController extends Controller
             'topAreas',
             'employeeTipTotals'
         ));
-    }
+    }    
     
     public function calculateTips()
     {
