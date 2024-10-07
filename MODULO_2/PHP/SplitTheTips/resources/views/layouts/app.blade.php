@@ -77,9 +77,10 @@
     @endif
 
     @php
+        $user = Auth::user();
         $employee = null;
-        if (Auth::check() && Auth::user()->role === 'employee') {
-            $employee = Auth::user()->employee; // Obtener el empleado relacionado
+        if ($user && $user->role === 'employee') {
+            $employee = $user->employee; // Obtener el empleado relacionado
         }
     @endphp
 
@@ -95,7 +96,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto">
                     @auth
-                        @if(Auth::user()->role === 'company')
+                        @if($user->role === 'company')
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('company.dashboard') ? 'active' : '' }}" href="{{ route('company.dashboard') }}">Dashboard</a>
                             </li>
@@ -108,10 +109,7 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('company.calculate-tips') ? 'active' : '' }}" href="{{ route('company.tip_pools.index') }}">Propinas</a>
                             </li>
-                        @elseif(Auth::user()->role === 'employee')
-                            @php
-                                $employee = Auth::user()->employee; // Obtener el empleado relacionado
-                            @endphp
+                        @elseif($user->role === 'employee')
                             @if($employee && $employee->company)
                                 <li class="nav-item">
                                     <a class="nav-link {{ request()->routeIs('employee.dashboard') ? 'active' : '' }}" href="{{ route('employee.dashboard') }}">Dashboard</a>
@@ -144,23 +142,20 @@
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
+                                {{ $user->name }}
                                 @if($employee && $employee->company)
                                     ({{ $employee->company->name }})
                                 @endif
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                @if(Auth::user()->role === 'company')
-                                    @if(Auth::user()->company)
-                                        <a class="dropdown-item" href="{{ route('company.profile') }}">Perfil de la Empresa</a>
-                                    @endif
-                                @elseif(Auth::user()->role === 'employee')
+                                @if($user->role === 'company' && $user->company)
+                                    <a class="dropdown-item" href="{{ route('company.profile') }}">Perfil de la Empresa</a>
+                                @elseif($user->role === 'employee')
                                     <a class="dropdown-item" href="{{ route('employee.profile') }}">Mi Perfil</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
