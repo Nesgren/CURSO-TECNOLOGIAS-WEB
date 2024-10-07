@@ -57,12 +57,15 @@ class WorkShiftController extends Controller
         $validatedData = $request->validate([
             'date' => 'required|date',
             'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
             'employee_id' => 'required|exists:employees,id',
             'send_notification' => 'nullable|boolean',
             'frequency' => 'required|in:once,weekly,monthly,always',
             'repeat_count' => 'required_unless:frequency,always|integer|min:1|max:12',
         ]);
+    
+        // Obtener el company_id del usuario autenticado
+        $companyId = Auth::user()->company->id;
     
         $startDate = \Carbon\Carbon::parse($validatedData['date']);
         $frequency = $validatedData['frequency'];
@@ -71,25 +74,26 @@ class WorkShiftController extends Controller
         // Calcular las horas trabajadas
         $startTime = \Carbon\Carbon::parse($validatedData['date'] . ' ' . $validatedData['start_time']);
         $endTime = \Carbon\Carbon::parse($validatedData['date'] . ' ' . $validatedData['end_time']);
-
+    
         if ($endTime->lt($startTime)) {
             $endTime->addDay(); // Si la hora de fin es menor, asumimos que es del día siguiente
         }
-
+    
         $hoursWorked = $startTime->floatDiffInHours($endTime);
     
         // Crear turnos según la frecuencia
         for ($i = 0; $i < $repeatCount; $i++) {
             $shiftDate = $startDate->copy();
-            
+    
             if ($frequency === 'weekly') {
                 $shiftDate->addWeeks($i);
             } elseif ($frequency === 'monthly') {
                 $shiftDate->addMonths($i);
             }
-
+    
             WorkShift::create([
                 'employee_id' => $validatedData['employee_id'],
+                'company_id' => $companyId, // Aquí se añade el company_id
                 'date' => $shiftDate->toDateString(),
                 'start_time' => $validatedData['start_time'],
                 'end_time' => $validatedData['end_time'],
@@ -105,7 +109,7 @@ class WorkShiftController extends Controller
     
         return redirect()->route('company.work_shifts.index')
                          ->with('success', 'Turno(s) de trabajo creado(s) exitosamente.');
-    }
+    }    
 
     public function destroy(WorkShift $workShift)
     {
