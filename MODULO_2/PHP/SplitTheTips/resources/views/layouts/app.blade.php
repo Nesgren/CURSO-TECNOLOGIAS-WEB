@@ -73,14 +73,14 @@
 
 <body>
     @if(session('pending_invitation'))
-    @include('partials.pending_invitation')
+        @include('partials.pending_invitation')
     @endif
 
     @php
-    $employee = null;
-    if (Auth::check() && Auth::user()->role === 'employee') {
-    $employee = Auth::user()->employee; // Obtener el empleado relacionado
-    }
+        $employee = null;
+        if (Auth::check() && Auth::user()->role === 'employee') {
+            $employee = Auth::user()->employee; // Obtener el empleado relacionado
+        }
     @endphp
 
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -93,86 +93,82 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
                     @auth
-                    @if(Auth::user()->role === 'company')
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('company.dashboard') ? 'active' : '' }}" href="{{ route('company.dashboard') }}">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('company.areas.*') ? 'active' : '' }}" href="{{ route('company.areas.index') }}">Áreas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('company.employees.*') ? 'active' : '' }}" href="{{ route('company.employees.index') }}">Empleados</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('company.calculate-tips') ? 'active' : '' }}" href="{{ route('company.tip_pools.index') }}">Propinas</a>
-                    </li>
-                    @elseif(Auth::user()->role === 'employee')
-                    @php
-                    $employee = Auth::user()->employee; // Obtener el empleado relacionado
-                    @endphp
-                    @if($employee && $employee->company)
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('employee.dashboard') ? 'active' : '' }}" href="{{ route('employee.dashboard') }}">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('employee.my-tips') ? 'active' : '' }}" href="{{ route('employee.my-tips') }}">Mis Propinas</a>
-                    </li>
-                    @else
-                    <li class="nav-item">
-                        <span class="nav-link text-danger">Rol de usuario no válido</span>
-                    </li>
-                    @endif
-                    @endif
+                        @if(Auth::user()->role === 'company')
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('company.dashboard') ? 'active' : '' }}" href="{{ route('company.dashboard') }}">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('company.areas.*') ? 'active' : '' }}" href="{{ route('company.areas.index') }}">Áreas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('company.employees.*') ? 'active' : '' }}" href="{{ route('company.employees.index') }}">Empleados</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('company.calculate-tips') ? 'active' : '' }}" href="{{ route('company.tip_pools.index') }}">Propinas</a>
+                            </li>
+                        @elseif(Auth::user()->role === 'employee')
+                            @php
+                                $employee = Auth::user()->employee; // Obtener el empleado relacionado
+                            @endphp
+                            @if($employee && $employee->company)
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->routeIs('employee.dashboard') ? 'active' : '' }}" href="{{ route('employee.dashboard') }}">Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->routeIs('employee.my-tips') ? 'active' : '' }}" href="{{ route('employee.my-tips') }}">Mis Propinas</a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <span class="nav-link text-danger">Rol de usuario no válido</span>
+                                </li>
+                            @endif
+                        @endif
                     @endauth
                 </ul>
 
-
-
-                <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
                     @guest
-                    @if (Route::has('login'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                    </li>
-                    @endif
+                        @if (Route::has('login'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                        @endif
 
-                    @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                    </li>
-                    @endif
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
                     @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
-                            @if($employee && $employee->company)
-                            ({{ $employee->company->name }})
-                            @endif
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            @if(Auth::user()->role === 'company')
-                            @if(Auth::user()->company)
-                            <a class="dropdown-item" href="{{ route('company.profile') }}">Perfil de la Empresa</a>
-                            @endif
-                            @elseif(Auth::user()->role === 'employee')
-                            <a class="dropdown-item" href="{{ route('employee.profile') }}">Mi Perfil</a>
-                            @endif
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                                @if($employee && $employee->company)
+                                    ({{ $employee->company->name }})
+                                @endif
                             </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                @if(Auth::user()->role === 'company')
+                                    @if(Auth::user()->company)
+                                        <a class="dropdown-item" href="{{ route('company.profile') }}">Perfil de la Empresa</a>
+                                    @endif
+                                @elseif(Auth::user()->role === 'employee')
+                                    <a class="dropdown-item" href="{{ route('employee.profile') }}">Mi Perfil</a>
+                                @endif
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                  document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                     @endguest
                 </ul>
             </div>
@@ -181,43 +177,43 @@
 
     <main class="container mt-4">
         @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
         @endif
         @yield('content')
 
         @if(session('pending_invitation'))
-        <div class="modal fade" id="invitationModal" tabindex="-1" role="dialog" aria-labelledby="invitationModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="invitationModalLabel">Invitación Pendiente</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Has sido invitado a unirte al área "{{ session('pending_invitation')->area->name ?? 'desconocida' }}" en la empresa "{{ session('pending_invitation')->company->name ?? 'desconocida' }}".
-                    </div>
-                    <div class="modal-footer">
-                        <form action="{{ route('employee.accept-invitation', session('pending_invitation')) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-primary">Aceptar</button>
-                        </form>
-                        <form action="{{ route('employee.reject-invitation', session('pending_invitation')) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-secondary">Rechazar</button>
-                        </form>
+            <div class="modal fade" id="invitationModal" tabindex="-1" role="dialog" aria-labelledby="invitationModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="invitationModalLabel">Invitación Pendiente</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Has sido invitado a unirte al área "{{ session('pending_invitation')->area->name ?? 'desconocida' }}" en la empresa "{{ session('pending_invitation')->company->name ?? 'desconocida' }}".
+                        </div>
+                        <div class="modal-footer">
+                            <form action="{{ route('employee.accept-invitation', session('pending_invitation')) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                            </form>
+                            <form action="{{ route('employee.reject-invitation', session('pending_invitation')) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-secondary">Rechazar</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var myModal = new bootstrap.Modal(document.getElementById('invitationModal'));
-                myModal.show();
-            });
-        </script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var myModal = new bootstrap.Modal(document.getElementById('invitationModal'));
+                    myModal.show();
+                });
+            </script>
         @endif
     </main>
 
