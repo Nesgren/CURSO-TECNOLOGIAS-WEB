@@ -45,7 +45,6 @@ class RegisterController extends Controller
         if ($data['role'] === 'employee') {
             Employee::create([
                 'name' => $data['name'],
-                'email' => $data['email'],
                 'user_id' => $user->id,
             ]);
         } elseif ($data['role'] === 'company') {
