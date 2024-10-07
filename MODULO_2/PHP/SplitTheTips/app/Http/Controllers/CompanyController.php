@@ -52,13 +52,22 @@ class CompanyController extends Controller
     {
         $company = Auth::user()->company;
     
+        if (!$company) {
+            return redirect()->route('home')->with('error', 'No se encontró la compañía asociada.');
+        }
+    
         // Cargar empleados y turnos de trabajo relacionados con la compañía
-        $employees = Employee::with('tipDistributions')->where('company_id', $company->id)->get();
+        $employees = Employee::with(['tipDistributions' => function ($query) use ($latestTipPool) {
+            if ($latestTipPool) {
+                $query->where('tip_pool_id', $latestTipPool->id);
+            }
+        }])->where('company_id', $company->id)->get();
+    
         $workShifts = WorkShift::where('company_id', $company->id)
             ->orderBy('date', 'desc')
             ->paginate(10);
     
-        $employeeCount = $employees->count(); // Ahora ya no necesitas contar la relación de nuevo
+        $employeeCount = $employees->count();
         $areaCount = $company->areas()->count();
     
         // Obtener el último TipPool distribuido
@@ -69,14 +78,9 @@ class CompanyController extends Controller
     
         // Calcular el total de propinas de los empleados solo del último TipPool distribuido
         $employeeTipTotals = [];
-        if ($latestTipPool) {
-            foreach ($employees as $employee) {
-                $tipDistribution = TipDistribution::where('employee_id', $employee->id)
-                    ->where('tip_pool_id', $latestTipPool->id)
-                    ->sum('amount');
-    
-                $employeeTipTotals[$employee->id] = $tipDistribution;
-            }
+        foreach ($employees as $employee) {
+            $tipDistribution = $employee->tipDistributions->sum('amount');
+            $employeeTipTotals[$employee->id] = $tipDistribution;
         }
     
         // Obtener el TipPool actual pendiente
@@ -117,7 +121,6 @@ class CompanyController extends Controller
             'employeeTipTotals'
         ));
     }
-    
     
     public function calculateTips()
     {
