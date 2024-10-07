@@ -55,6 +55,9 @@ class CompanyController extends Controller
         if (!$company) {
             return redirect()->route('home')->with('error', 'No se encontró la compañía asociada.');
         }
+
+        // Obtener el último TipPool distribuido
+        $latestTipPool = TipPool::latest()->first();
     
         // Cargar empleados y turnos de trabajo relacionados con la compañía
         $employees = Employee::with(['tipDistributions' => function ($query) use ($latestTipPool) {
