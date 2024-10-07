@@ -159,8 +159,8 @@
                                     <a class="dropdown-item" href="{{ route('employee.profile') }}">Mi Perfil</a>
                                 @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                  document.getElementById('logout-form').submit();">
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
