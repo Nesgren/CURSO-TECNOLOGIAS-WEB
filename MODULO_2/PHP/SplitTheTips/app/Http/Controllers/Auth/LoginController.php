@@ -68,18 +68,32 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        // Valida las credenciales de entrada
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
+    
+        // Intenta autenticar al usuario
         if (Auth::attempt($credentials)) {
-            // Regresar a la pantalla de inicio o dashboard
-            return redirect()->intended('dashboard');
+            // Obtiene el usuario autenticado
+            $user = Auth::user();
+    
+            // Redirecciona según el rol del usuario
+            if ($user->isEmployee()) {
+                return redirect()->route('employee.dashboard'); // Redirige al dashboard del empleado
+            } elseif ($user->isCompany()) {
+                return redirect()->route('company.dashboard'); // Redirige al dashboard de la empresa
+            }
+    
+            // Si no es ni empresa ni empleado, redirige a una ruta por defecto
+            return redirect('/'); 
         }
-
+    
+        // Si la autenticación falla, regresa con un error
         return back()->withErrors([
             'email' => 'Las credenciales son incorrectas.',
         ]);
     }
+    
 }
