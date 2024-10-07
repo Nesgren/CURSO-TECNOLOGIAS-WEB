@@ -52,28 +52,28 @@ class CompanyController extends Controller
     {
         $company = Auth::user()->company;
     
-        $employees = Employee::where('company_id', Auth::user()->company_id)->get();
-        $workShifts = WorkShift::where('company_id', Auth::user()->company_id)
+        // Cargar empleados y turnos de trabajo relacionados con la compañía
+        $employees = Employee::with('tipDistributions')->where('company_id', $company->id)->get();
+        $workShifts = WorkShift::where('company_id', $company->id)
             ->orderBy('date', 'desc')
             ->paginate(10);
     
-        $employeeCount = $company->employees()->count();
+        $employeeCount = $employees->count(); // Ahora ya no necesitas contar la relación de nuevo
         $areaCount = $company->areas()->count();
     
         // Obtener el último TipPool distribuido
-        $latestTipPool = TipPool::latest()->first(); // Último TipPool creado
-
+        $latestTipPool = TipPool::latest()->first();
+    
         // Calcular el total de propinas distribuidas solo del último TipPool distribuido
         $recentTipsTotal = $latestTipPool ? TipDistribution::where('tip_pool_id', $latestTipPool->id)->sum('amount') : 0;
     
         // Calcular el total de propinas de los empleados solo del último TipPool distribuido
         $employeeTipTotals = [];
         if ($latestTipPool) {
-            // Obtener la distribución de propinas del último fondo
             foreach ($employees as $employee) {
                 $tipDistribution = TipDistribution::where('employee_id', $employee->id)
-                                    ->where('tip_pool_id', $latestTipPool->id) // Solo la distribución del último fondo
-                                    ->sum('amount');
+                    ->where('tip_pool_id', $latestTipPool->id)
+                    ->sum('amount');
     
                 $employeeTipTotals[$employee->id] = $tipDistribution;
             }
@@ -85,7 +85,7 @@ class CompanyController extends Controller
             ->orderBy('date', 'desc')
             ->first();
     
-        // Obtener empleados con sus propinas distribuidas en el fondo de propinas actual
+        // Obtener empleados y áreas con sus propinas distribuidas
         $topEmployees = Employee::where('company_id', $company->id)
             ->withSum(['tipDistributions' => function ($query) use ($currentTipPool) {
                 if ($currentTipPool) {
@@ -96,7 +96,6 @@ class CompanyController extends Controller
             ->take(5)
             ->get();
     
-        // Obtener áreas con sus propinas distribuidas en el fondo de propinas actual
         $topAreas = Area::where('company_id', $company->id)
             ->withSum(['tipDistributions' => function ($query) use ($currentTipPool) {
                 if ($currentTipPool) {
@@ -111,13 +110,14 @@ class CompanyController extends Controller
             'employees',
             'employeeCount',
             'areaCount',
-            'recentTipsTotal', // Ahora refleja el total de propinas distribuidas
+            'recentTipsTotal',
             'workShifts',
             'topEmployees',
             'topAreas',
             'employeeTipTotals'
         ));
     }
+    
     
     public function calculateTips()
     {

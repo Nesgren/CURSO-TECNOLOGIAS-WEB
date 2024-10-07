@@ -94,7 +94,7 @@
                 <tbody>
                     @foreach($workShifts as $shift)
                     <tr>
-                        <td>{{ $shift->employee->name }}</td>
+                        <td>{{ $shift->employee->name : 'Empleados no asignados' }}</td>
                         <td>{{ $shift->date }}</td>
                         <td>{{ $shift->start_time }}</td>
                         <td>{{ $shift->end_time }}</td>
