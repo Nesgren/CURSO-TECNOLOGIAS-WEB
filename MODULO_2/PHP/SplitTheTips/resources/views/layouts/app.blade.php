@@ -79,8 +79,11 @@
     @php
         $user = Auth::user();
         $employee = null;
-        if ($user && $user->role === 'employee') {
-            $employee = $user->employee; // Obtener el empleado relacionado
+
+        if ($user) {
+            if ($user->role === 'employee') {
+                $employee = $user->employee; // Obtener el empleado relacionado
+            }
         }
     @endphp
 
@@ -110,7 +113,7 @@
                                 <a class="nav-link {{ request()->routeIs('company.calculate-tips') ? 'active' : '' }}" href="{{ route('company.tip_pools.index') }}">Propinas</a>
                             </li>
                         @elseif($user->role === 'employee')
-                            @if($employee && $employee->company)
+                            @if($employee)
                                 <li class="nav-item">
                                     <a class="nav-link {{ request()->routeIs('employee.dashboard') ? 'active' : '' }}" href="{{ route('employee.dashboard') }}">Dashboard</a>
                                 </li>
@@ -122,6 +125,10 @@
                                     <span class="nav-link text-danger">Rol de usuario no válido</span>
                                 </li>
                             @endif
+                        @else
+                            <li class="nav-item">
+                                <span class="nav-link text-danger">Rol de usuario no válido</span>
+                            </li>
                         @endif
                     @endauth
                 </ul>
