@@ -2,8 +2,8 @@
 class Database {
     private $host = 'localhost';
     private $db_name = 'library';
-    private $username = 'root';
-    private $password = '';
+    private $username = 'Franco3';
+    private $password = 'Nascor2020!';
     public $conn;
 
     public function getConnection() {
